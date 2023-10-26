@@ -1,6 +1,6 @@
 package com.amzi.mastercellusv2.AllScreens.authScreens
 
-import androidx.compose.foundation.BorderStroke
+    import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -38,10 +38,10 @@ import com.amzi.mastercellusv2.R
 import com.android.updatedsoftstarter.components.LoginInputText
 
 
+
 @Composable
-fun LoginScreen() {
+fun forgotPasswordScreen() {
     var mobNum by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -60,7 +60,7 @@ fun LoginScreen() {
         )
         Spacer(modifier = Modifier.height(35.dp))
         Text(
-            text = "Login",
+            text = "Verify",
             style = TextStyle(
                 fontSize = 39.sp,
                 fontWeight = FontWeight.Bold,
@@ -79,47 +79,36 @@ fun LoginScreen() {
             onTextChange = { mobNum = it },
             maxLength = 10
         )
-        Text(
-            text = "0/10",
-            modifier = Modifier.padding(start = 200.dp),
-            style = TextStyle(
-                color = Color.Gray,
-                fontSize = 15.sp
+        Row(modifier = Modifier.padding(top = 8.dp)) {
+            Text(
+                text = "Required*",
+                style = TextStyle(fontSize = 14.sp,
+                    fontWeight = FontWeight.Bold),
+                color = Color(0xFF7E8385)
             )
-        )
-        Spacer(modifier = Modifier.height(10.dp))
-        LoginInputText(
-            modifier = Modifier.padding(
-                top = 9.dp,
-                bottom = 8.dp
-            ),
-            text = password,
-            color = Color.Black,
-            label = "Password",
-            iconResId = R.drawable.lock,
-            onTextChange = { password = it },
-            maxLength = 20,
-            keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Text)
-        )
-        Text(
-            text = "0/20",
-            modifier = Modifier.padding(start = 200.dp),
-            style = TextStyle(
-                color = Color.Gray,
-                fontSize = 15.sp
+            Text(
+                text = "0/10",
+                modifier = Modifier.padding(start = 170.dp),
+                style = TextStyle(
+                    color = Color(0xFF7E8385),
+                    fontSize = 15.sp
+                )
             )
-        )
-        Spacer(modifier = Modifier.height(30.dp))
+        }
+
+        Spacer(modifier = Modifier.height(35.dp))
+
         Surface(
             modifier = Modifier
-                .padding(start = 50.dp, end = 50.dp),
+                .padding(start = 50.dp, end = 50.dp)
+                .align(Alignment.CenterHorizontally),
 //            color = Color(0xFF0E86BD),
             color = Color.Blue,
             shape = RoundedCornerShape(corner = CornerSize(6.dp)),
             border = BorderStroke(width = 1.dp, color = Color.LightGray)
         ) {
             ClickableText(
-                text = AnnotatedString("LOGIN"),
+                text = AnnotatedString("GET OTP"),
                 style = TextStyle(
                     color = Color.White,
                     fontSize = 15.sp,
@@ -133,27 +122,10 @@ fun LoginScreen() {
                 onClick = {}
             )
         }
-        Row(modifier = Modifier.padding(top = 15.dp, start = 100.dp)){
+
+        Row(modifier = Modifier.padding(top = 185.dp)){
             Text(
-                text = "Forgot your password? ",
-                style = TextStyle(fontSize = 12.sp),
-                color = Color(0xFF7E8385)
-            )
-            Text(
-                text = "Reset Now",
-                style = TextStyle(fontSize = 12.sp,
-                    fontWeight = FontWeight.Bold),
-                color = Color(0xFF7E8385)
-            )
-        }
-        Row(modifier = Modifier.padding(top = 105.dp)){
-            Text(
-                text = "Don't have an account? ",
-                style = TextStyle(fontSize = 12.sp),
-                color = Color(0xFF7E8385)
-            )
-            Text(
-                text = "Register Now",
+                text = "Cancel",
                 style = TextStyle(fontSize = 12.sp,
                     fontWeight = FontWeight.Bold),
                 color = Color(0xFF7E8385)
@@ -162,12 +134,11 @@ fun LoginScreen() {
         }
     }
 }
-
 @Composable
 @Preview(showBackground = true, showSystemUi = true)
-fun LoginScreenPreview(){
+fun ForgotPasswordScreenPreview(){
 
-    LoginScreen(
+    forgotPasswordScreen(
 //        navHostController = rememberNavController()
     )
 

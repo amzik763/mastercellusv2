@@ -1,5 +1,6 @@
 package com.amzi.mastercellusv2.navgraphs
 
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -32,7 +33,7 @@ fun NavGraphBuilder.authNavGraph(
         }
 
         composable(route = Screens.Signup.route){
-            SignupScreen()
+            SignupScreen(viewModel = viewModel())
         }
     }
 }

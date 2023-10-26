@@ -15,6 +15,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Icon
+import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -38,9 +39,10 @@ import com.amzi.mastercellusv2.R
 import com.android.updatedsoftstarter.components.LoginInputText
 
 
+
 @Composable
-fun LoginScreen() {
-    var mobNum by remember { mutableStateOf("") }
+fun setPasswordScreen() {
+    var otp by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     Column(
         modifier = Modifier
@@ -60,33 +62,39 @@ fun LoginScreen() {
         )
         Spacer(modifier = Modifier.height(35.dp))
         Text(
-            text = "Login",
+            text = "Set Password",
             style = TextStyle(
                 fontSize = 39.sp,
                 fontWeight = FontWeight.Bold,
                 color = Color.Gray
             )
         )
-        Spacer(modifier = Modifier.height(20.dp))
-        LoginInputText(
-            modifier = Modifier
-                .padding(top = 9.dp, bottom = 8.dp),
-            text = mobNum,
-            color = Color.Black,
-            label = "Mobile Number",
-            iconResId = R.drawable.phone,
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-            onTextChange = { mobNum = it },
-            maxLength = 10
-        )
-        Text(
-            text = "0/10",
-            modifier = Modifier.padding(start = 200.dp),
-            style = TextStyle(
-                color = Color.Gray,
-                fontSize = 15.sp
+        Spacer(modifier = Modifier.height(12.dp))
+        OutlinedTextField(
+            value = otp,
+            onValueChange = { otp = it },
+            label = { Text(text = "Enter OTP") },
+            maxLines = 1,
+
             )
-        )
+        Spacer(modifier = Modifier.height(8.dp))
+        Row{
+            Text(
+                text = "4 digit OTP sent to your mobile no*",
+                modifier = Modifier.padding(start = 9.dp),
+                style = TextStyle(
+                    color = Color(0xFF7E8385),
+                    fontSize = 12.sp)
+            )
+            Text(
+                text = "0/4",
+                modifier = Modifier.padding(start = 44.dp),
+                style = TextStyle(
+                    color = Color(0xFF7E8385),
+                    fontSize = 13.sp)
+            )
+        }
+
         Spacer(modifier = Modifier.height(10.dp))
         LoginInputText(
             modifier = Modifier.padding(
@@ -95,20 +103,59 @@ fun LoginScreen() {
             ),
             text = password,
             color = Color.Black,
-            label = "Password",
+            label = "New Password",
             iconResId = R.drawable.lock,
             onTextChange = { password = it },
             maxLength = 20,
             keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Text)
         )
-        Text(
-            text = "0/20",
-            modifier = Modifier.padding(start = 200.dp),
-            style = TextStyle(
-                color = Color.Gray,
-                fontSize = 15.sp
+        Spacer(modifier = Modifier.height(8.dp))
+        Row{
+            Text(
+                text = "Min 8 characters are required*",
+                style = TextStyle(
+                    color = Color(0xFF7E8385),
+                    fontSize = 12.sp)
             )
+            Text(
+                text = "0/20",
+                modifier = Modifier.padding(start = 70.dp),
+                style = TextStyle(
+                    color = Color(0xFF7E8385),
+                    fontSize = 13.sp)
+            )
+        }
+        Spacer(modifier = Modifier.height(10.dp))
+        LoginInputText(
+            modifier = Modifier.padding(
+                top = 9.dp,
+                bottom = 8.dp
+            ),
+            text = password,
+            color = Color.Black,
+            label = "Confirm Password",
+            iconResId = R.drawable.lock,
+            onTextChange = { password = it },
+            maxLength = 20,
+            keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Text)
         )
+        Spacer(modifier = Modifier.height(8.dp))
+        Row{
+            Text(
+                text = "Required*",
+                style = TextStyle(
+                    color = Color(0xFF7E8385),
+                    fontSize = 12.sp)
+            )
+            Text(
+                text = "0/20",
+                modifier = Modifier.padding(start = 179.dp),
+                style = TextStyle(
+                    color = Color(0xFF7E8385),
+                    fontSize = 13.sp)
+            )
+        }
+
         Spacer(modifier = Modifier.height(30.dp))
         Surface(
             modifier = Modifier
@@ -119,7 +166,7 @@ fun LoginScreen() {
             border = BorderStroke(width = 1.dp, color = Color.LightGray)
         ) {
             ClickableText(
-                text = AnnotatedString("LOGIN"),
+                text = AnnotatedString("SET"),
                 style = TextStyle(
                     color = Color.White,
                     fontSize = 15.sp,
@@ -133,41 +180,32 @@ fun LoginScreen() {
                 onClick = {}
             )
         }
-        Row(modifier = Modifier.padding(top = 15.dp, start = 100.dp)){
+        Row(modifier = Modifier.padding(top = 15.dp, start = 155.dp)) {
             Text(
-                text = "Forgot your password? ",
+                text = "Resend OTP in 30 sec",
                 style = TextStyle(fontSize = 12.sp),
-                color = Color(0xFF7E8385)
-            )
-            Text(
-                text = "Reset Now",
-                style = TextStyle(fontSize = 12.sp,
-                    fontWeight = FontWeight.Bold),
-                color = Color(0xFF7E8385)
-            )
-        }
-        Row(modifier = Modifier.padding(top = 105.dp)){
-            Text(
-                text = "Don't have an account? ",
-                style = TextStyle(fontSize = 12.sp),
-                color = Color(0xFF7E8385)
-            )
-            Text(
-                text = "Register Now",
-                style = TextStyle(fontSize = 12.sp,
-                    fontWeight = FontWeight.Bold),
                 color = Color(0xFF7E8385)
             )
 
         }
+
+        Text(
+            modifier = Modifier.padding(top = 60.dp),
+            text = "Cancel",
+            style = TextStyle(
+                fontSize = 12.sp,
+            ),
+            color = Color(0xFF7E8385)
+        )
+
+
     }
 }
-
 @Composable
 @Preview(showBackground = true, showSystemUi = true)
-fun LoginScreenPreview(){
+fun setPasswordScreenPreview(){
 
-    LoginScreen(
+    setPasswordScreen(
 //        navHostController = rememberNavController()
     )
 
