@@ -5,9 +5,10 @@ import androidx.lifecycle.viewModelScope
 import com.amzi.mastercellusv2.Networks.AuthAPIs
 import com.amzi.mastercellusv2.Networks.RetrofitBuilder.instance
 import com.amzi.mastercellusv2.Repository.AuthRepo
+import com.amzi.mastercellusv2.utility.showLogs
 import kotlinx.coroutines.launch
 
-class RegisterViewModel : ViewModel() {
+class RegisterViewModel(authRepo: AuthRepo) : ViewModel() {
 
 
 //    var mobNum = MutableStateFlow("")
@@ -15,12 +16,13 @@ class RegisterViewModel : ViewModel() {
 //    var name =  mutableStateOf("")
 //    var dob =  mutableStateOf("")
 
-    val authAPI: AuthAPIs by lazy {
-        instance.create(AuthAPIs::class.java)
-    }
 
+init {
+    showLogs("ViewModel:","Created")
 
-    var authRepo:AuthRepo = AuthRepo(this,authAPI)
+}
+
+    var authRepo:AuthRepo = authRepo
 
     fun getUser(){
         viewModelScope.launch {

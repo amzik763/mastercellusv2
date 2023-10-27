@@ -1,5 +1,6 @@
 package com.amzi.mastercellusv2.navgraphs
 
+import androidx.compose.runtime.LaunchedEffect
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
@@ -10,11 +11,20 @@ import androidx.navigation.navigation
 import com.amzi.mastercellusv2.AllScreens.authScreens.LoginScreen
 import com.amzi.mastercellusv2.AllScreens.authScreens.SignupScreen
 import com.amzi.mastercellusv2.AllScreens.authScreens.SplashScreen
+import com.amzi.mastercellusv2.AllViewModels.Factories.RegisterViewModelFactory
+import com.amzi.mastercellusv2.AllViewModels.RegisterViewModel
+import com.amzi.mastercellusv2.Repository.AuthRepo
 import com.amzi.mastercellusv2.utility.mGraph
 
 fun NavGraphBuilder.authNavGraph(
     navController: NavHostController
 ){
+
+    val authRepo:AuthRepo = AuthRepo()
+    val viewModelFactory = RegisterViewModelFactory(authRepo)
+    val mRegisterViewModel: RegisterViewModel = viewModelFactory.create(RegisterViewModel::class.java)
+
+
     navigation(
         startDestination = Screens.Splash.route,
         route = mGraph.AUTH
@@ -33,7 +43,8 @@ fun NavGraphBuilder.authNavGraph(
         }
 
         composable(route = Screens.Signup.route){
-            SignupScreen(viewModel = viewModel())
+
+            SignupScreen(viewModel = mRegisterViewModel)
         }
     }
 }

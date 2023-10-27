@@ -2,17 +2,22 @@ package com.amzi.mastercellusv2.Repository
 
 import com.amzi.mastercellusv2.AllViewModels.RegisterViewModel
 import com.amzi.mastercellusv2.Networks.AuthAPIs
+import com.amzi.mastercellusv2.Networks.RetrofitBuilder
 import com.amzi.mastercellusv2.utility.showLogs
 
-class AuthRepo(registerViewModel: RegisterViewModel, authAPI: AuthAPIs) {
+class AuthRepo() {
 
-    var registerViewModel = registerViewModel
-    var authAPI = authAPI
+    init {
+        showLogs("Repo:","Created")
+    }
+
+
+    val authAPI: AuthAPIs by lazy {
+        RetrofitBuilder.instance.create(AuthAPIs::class.java)
+    }
+
 
     suspend fun getUser() {
-
-
-
 
         // TODO: later
         //IF CONNECTED
