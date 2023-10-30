@@ -34,12 +34,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.amzi.mastercellusv2.AllViewModels.RegisterViewModel
 import com.amzi.mastercellusv2.R
 import com.android.updatedsoftstarter.components.LoginInputText
 
 
 @Composable
-fun LoginScreen() {
+fun LoginScreen(viewModel: RegisterViewModel) {
     var mobNum by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     Column(
@@ -167,8 +168,6 @@ fun LoginScreen() {
 @Preview(showBackground = true, showSystemUi = true)
 fun LoginScreenPreview(){
 
-    LoginScreen(
-//        navHostController = rememberNavController()
-    )
+//    LoginScreen()
 
 }

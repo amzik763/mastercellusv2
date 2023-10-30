@@ -5,16 +5,14 @@ import com.amzi.mastercellusv2.Networks.AuthAPIs
 import com.amzi.mastercellusv2.Networks.RetrofitBuilder
 import com.amzi.mastercellusv2.utility.showLogs
 
-class AuthRepo() {
+class AuthRepo(private val authAPIs: AuthAPIs) {
 
     init {
         showLogs("Repo:","Created")
     }
 
 
-    val authAPI: AuthAPIs by lazy {
-        RetrofitBuilder.instance.create(AuthAPIs::class.java)
-    }
+    val authAPI = authAPIs
 
 
     suspend fun getUser() {
@@ -36,7 +34,7 @@ class AuthRepo() {
         showLogs("auth","Registering")
 
         try{
-            val registerResponse = authAPI.registerUser(name,mobNum,dob)
+            val registerResponse = authAPI.registerUser(name,mobNum,dob,dob)
             if(registerResponse.isSuccessful){
                 showLogs("auth","Successfull")
 

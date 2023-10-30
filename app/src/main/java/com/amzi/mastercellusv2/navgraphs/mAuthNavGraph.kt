@@ -13,6 +13,8 @@ import com.amzi.mastercellusv2.AllScreens.authScreens.SignupScreen
 import com.amzi.mastercellusv2.AllScreens.authScreens.SplashScreen
 import com.amzi.mastercellusv2.AllViewModels.Factories.RegisterViewModelFactory
 import com.amzi.mastercellusv2.AllViewModels.RegisterViewModel
+import com.amzi.mastercellusv2.Networks.AuthAPIs
+import com.amzi.mastercellusv2.Networks.RetrofitBuilder
 import com.amzi.mastercellusv2.Repository.AuthRepo
 import com.amzi.mastercellusv2.utility.mGraph
 
@@ -20,7 +22,10 @@ fun NavGraphBuilder.authNavGraph(
     navController: NavHostController
 ){
 
-    val authRepo:AuthRepo = AuthRepo()
+    val authAPI: AuthAPIs by lazy {
+        RetrofitBuilder.instance.create(AuthAPIs::class.java)
+    }
+       val authRepo:AuthRepo = AuthRepo(authAPI)
     val viewModelFactory = RegisterViewModelFactory(authRepo)
     val mRegisterViewModel: RegisterViewModel = viewModelFactory.create(RegisterViewModel::class.java)
 
@@ -39,7 +44,7 @@ fun NavGraphBuilder.authNavGraph(
         }
 
         composable(route = Screens.Login.route){
-            LoginScreen()
+            LoginScreen(viewModel = mRegisterViewModel)
         }
 
         composable(route = Screens.Signup.route){

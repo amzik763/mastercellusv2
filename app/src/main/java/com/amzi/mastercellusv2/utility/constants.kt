@@ -1,5 +1,7 @@
 package com.amzi.mastercellusv2.utility
 
+//NETWORKS
+const val BASE_URL = "http://13.235.215.173:5000"
 
     //Constants for ROUTING
     const val HOME_ROUTE = "home_screen"
