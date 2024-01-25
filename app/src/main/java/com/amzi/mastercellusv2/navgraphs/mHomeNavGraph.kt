@@ -25,7 +25,7 @@ fun NavGraphBuilder.homeNavGraph(
 //        }
 
         composable(route = mGraph.STARTER){
-                MainStarterScreen()
+            MainStarterScreen()
         }
 
         composable(route = Screens.Home.route){
