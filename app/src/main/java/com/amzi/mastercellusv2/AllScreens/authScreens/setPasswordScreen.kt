@@ -35,15 +35,23 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.amzi.mastercellusv2.AllViewModels.RegisterViewModel
 import com.amzi.mastercellusv2.R
+import com.amzi.mastercellusv2.utility.showLogs
 import com.android.updatedsoftstarter.components.LoginInputText
 
 
 
 @Composable
-fun setPasswordScreen() {
-    var otp by remember { mutableStateOf("") }
+fun setPasswordScreen(viewModel: RegisterViewModel) {
+    val registerViewModel = viewModel
+
+    showLogs("SetPassword: ", registerViewModel.mobNum)
+
+    var mobNum by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    var otp by remember { mutableStateOf("") }
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -177,7 +185,11 @@ fun setPasswordScreen() {
                     .fillMaxWidth()
                     .padding(9.dp)
                     .align(Alignment.CenterHorizontally),
-                onClick = {}
+                onClick = {
+
+                    registerViewModel.setPassword(password, otp.toInt())
+
+                }
             )
         }
         Row(modifier = Modifier.padding(top = 15.dp, start = 155.dp)) {
@@ -205,8 +217,8 @@ fun setPasswordScreen() {
 @Preview(showBackground = true, showSystemUi = true)
 fun setPasswordScreenPreview(){
 
-    setPasswordScreen(
-//        navHostController = rememberNavController()
-    )
+//    setPasswordScreen(
+////        navHostController = rememberNavController()
+//    )
 
 }

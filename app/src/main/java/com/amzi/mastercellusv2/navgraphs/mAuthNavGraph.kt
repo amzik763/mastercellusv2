@@ -11,6 +11,8 @@ import androidx.navigation.navigation
 import com.amzi.mastercellusv2.AllScreens.authScreens.LoginScreen
 import com.amzi.mastercellusv2.AllScreens.authScreens.SignupScreen
 import com.amzi.mastercellusv2.AllScreens.authScreens.SplashScreen
+import com.amzi.mastercellusv2.AllScreens.authScreens.forgotPasswordScreen
+import com.amzi.mastercellusv2.AllScreens.authScreens.setPasswordScreen
 import com.amzi.mastercellusv2.AllViewModels.Factories.RegisterViewModelFactory
 import com.amzi.mastercellusv2.AllViewModels.RegisterViewModel
 import com.amzi.mastercellusv2.Networks.AuthAPIs
@@ -50,6 +52,16 @@ fun NavGraphBuilder.authNavGraph(
         composable(route = Screens.Signup.route){
 
             SignupScreen(viewModel = mRegisterViewModel)
+        }
+
+        composable(route = Screens.SetPassword.route){
+
+            setPasswordScreen(viewModel = mRegisterViewModel)
+        }
+
+        composable(route = Screens.forgotPassword.route){
+
+            forgotPasswordScreen(viewModel = mRegisterViewModel)
         }
     }
 }

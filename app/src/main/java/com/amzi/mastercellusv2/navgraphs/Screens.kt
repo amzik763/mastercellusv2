@@ -25,6 +25,9 @@ sealed class Screens(val route:String) {
     object Login: Screens("login")
     object Signup: Screens("signup")
 
+    object SetPassword: Screens("setPassword")
+    object forgotPassword: Screens("forgotPassword")
+
     object Detail: Screens("ds/{$DETAILS_ARGUMENT_KEY}/{$DETAILS_ARGUMENT_NAME}"){
         fun passStringID(id:String):String{
 //            return "ds/$id"

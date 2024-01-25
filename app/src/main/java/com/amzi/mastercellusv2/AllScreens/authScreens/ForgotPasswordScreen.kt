@@ -34,15 +34,23 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.amzi.mastercellusv2.R
-import com.android.updatedsoftstarter.components.LoginInputText
-
+    import com.amzi.mastercellusv2.AllViewModels.RegisterViewModel
+    import com.amzi.mastercellusv2.R
+    import com.amzi.mastercellusv2.utility.showLogs
+    import com.android.updatedsoftstarter.components.LoginInputText
 
 
 @Composable
-fun forgotPasswordScreen() {
+fun forgotPasswordScreen(viewModel: RegisterViewModel) {
+
+
+    val registerViewModel = viewModel
+
+    showLogs("forgotPassword: ", registerViewModel.mobNum)
+
     var mobNum by remember { mutableStateOf("") }
     Column(
+
         modifier = Modifier
             .fillMaxWidth()
             .fillMaxSize()
@@ -119,7 +127,9 @@ fun forgotPasswordScreen() {
                     .fillMaxWidth()
                     .padding(9.dp)
                     .align(Alignment.CenterHorizontally),
-                onClick = {}
+                onClick = {
+                    registerViewModel.forgotPassword(mobNum)
+                }
             )
         }
 
@@ -137,9 +147,9 @@ fun forgotPasswordScreen() {
 @Composable
 @Preview(showBackground = true, showSystemUi = true)
 fun ForgotPasswordScreenPreview(){
-
-    forgotPasswordScreen(
-//        navHostController = rememberNavController()
-    )
+//
+//    forgotPasswordScreen(
+////        navHostController = rememberNavController()
+//    )
 
 }

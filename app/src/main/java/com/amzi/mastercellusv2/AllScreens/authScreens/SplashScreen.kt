@@ -1,15 +1,12 @@
 package com.amzi.mastercellusv2.AllScreens.authScreens
 
-import android.util.Log
 import android.view.animation.OvershootInterpolator
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
@@ -17,15 +14,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.amzi.mastercellusv2.R
 import com.amzi.mastercellusv2.navgraphs.Screens
 import com.amzi.mastercellusv2.navgraphs.mNavigator
-import com.amzi.mastercellusv2.ui.theme.Purple40
-import com.amzi.mastercellusv2.utility.NetworkMonitor
 import com.amzi.mastercellusv2.utility.showLogs
 import kotlinx.coroutines.delay
 
@@ -54,11 +48,12 @@ fun SplashScreen(
     showLogs()
 
     Box(contentAlignment = Alignment.Center,
-        modifier = Modifier.background(color = Color(0xFF3262DF)).fillMaxSize()) {
-        Image(painter = painterResource(id = R.drawable.ic_logo),
+        modifier = Modifier.background(color = Color(0xFFFFFFFF)).fillMaxSize()) {
+        Image(painter = painterResource(id = R.drawable.skaio),
             contentDescription = "Logo",
-            colorFilter = ColorFilter.tint(Color(0xFFFFFFFF)),
-            modifier = Modifier.scale(scale.value))
+//            colorFilter = ColorFilter.tint(Color(0xFFFFFFFF)),
+            modifier = Modifier.scale(scale.value)
+                .size(width = 190.dp, height = 100.dp))
     }
 }
 

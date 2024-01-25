@@ -1,8 +1,6 @@
 package com.amzi.mastercellusv2.Repository
 
-import com.amzi.mastercellusv2.AllViewModels.RegisterViewModel
 import com.amzi.mastercellusv2.Networks.AuthAPIs
-import com.amzi.mastercellusv2.Networks.RetrofitBuilder
 import com.amzi.mastercellusv2.utility.showLogs
 
 class AuthRepo(private val authAPIs: AuthAPIs) {
@@ -26,7 +24,7 @@ class AuthRepo(private val authAPIs: AuthAPIs) {
         }else{
 
         }
-        }
+    }
 
 
     suspend fun registerUser(mobNum: String, name: String, dob: String){
@@ -35,6 +33,7 @@ class AuthRepo(private val authAPIs: AuthAPIs) {
 
         try{
             val registerResponse = authAPI.registerUser(name,mobNum,dob,dob)
+
             if(registerResponse.isSuccessful){
                 showLogs("auth","Successfull")
 
@@ -46,7 +45,50 @@ class AuthRepo(private val authAPIs: AuthAPIs) {
         catch (e:Exception){
             showLogs("Error: ",e.toString())
         }
+    }
 
+    suspend fun setPassword(password: String, otp: Int, mobNum: String) {
+        try {
+            val setPasswordResponse = authAPI.setPassword(mobNum,password,otp)
+            if (setPasswordResponse.isSuccessful){
+
+                showLogs("auth", "PasswordSuccessful")
+            }else{
+                showLogs("auth", "Failed" + setPasswordResponse.errorBody().toString())
+            }
+        }
+        catch (e:Exception){
+            showLogs("Error:",e.toString())
+        }
 
     }
+
+    suspend fun loginUser(mobNum: String,password: String,fcm_token :String){
+        try {
+            showLogs("mob is", mobNum)
+            val loginResponse = authAPI.login(mobNum,password,fcm_token)
+            if (loginResponse.isSuccessful){
+                showLogs("auth", "loginSuccessful")
+            }else{
+                showLogs("auth", "Failed" + loginResponse.errorBody().toString())
+            }
+        }
+        catch (e:Exception){
+            showLogs("Error:",e.toString())
+        }
     }
+    suspend fun forgetPassword(mobNum: String){
+        try {
+            showLogs("mob is", mobNum)
+            val forgetResponse = authAPI.forgotPassword(mobNum)
+            if (forgetResponse.isSuccessful){
+                showLogs("auth", "forgetSuccessful")
+            }else{
+                showLogs("auth", "Failed" + forgetResponse.errorBody().toString())
+            }
+        }
+        catch (e:Exception){
+            showLogs("Error:",e.toString())
+        }
+    }
+}

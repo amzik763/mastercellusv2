@@ -2,6 +2,7 @@ package com.amzi.mastercellusv2.AllScreens.authScreens
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -36,13 +37,21 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.amzi.mastercellusv2.AllViewModels.RegisterViewModel
 import com.amzi.mastercellusv2.R
+import com.amzi.mastercellusv2.navgraphs.Screens
+import com.amzi.mastercellusv2.navgraphs.mNavigator
+import com.amzi.mastercellusv2.utility.showLogs
 import com.android.updatedsoftstarter.components.LoginInputText
 
 
 @Composable
 fun LoginScreen(viewModel: RegisterViewModel) {
+    val registerViewModel = viewModel
+
+    showLogs("login: ", registerViewModel.mobNum)
+
     var mobNum by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    var fcm_token by remember { mutableStateOf("") }
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -131,7 +140,9 @@ fun LoginScreen(viewModel: RegisterViewModel) {
                     .fillMaxWidth()
                     .padding(9.dp)
                     .align(Alignment.CenterHorizontally),
-                onClick = {}
+                onClick = {
+                    registerViewModel.loginUser(mobNum,password,fcm_token)
+                }
             )
         }
         Row(modifier = Modifier.padding(top = 15.dp, start = 100.dp)){
@@ -142,6 +153,7 @@ fun LoginScreen(viewModel: RegisterViewModel) {
             )
             Text(
                 text = "Reset Now",
+                modifier = Modifier.clickable { mNavigator.navigateTo(Screens.forgotPassword.route) },
                 style = TextStyle(fontSize = 12.sp,
                     fontWeight = FontWeight.Bold),
                 color = Color(0xFF7E8385)
@@ -163,7 +175,6 @@ fun LoginScreen(viewModel: RegisterViewModel) {
         }
     }
 }
-
 @Composable
 @Preview(showBackground = true, showSystemUi = true)
 fun LoginScreenPreview(){

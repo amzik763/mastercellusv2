@@ -2,6 +2,7 @@ package com.amzi.mastercellusv2.AllScreens.authScreens
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -36,15 +37,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.amzi.mastercellusv2.AllViewModels.RegisterViewModel
 import com.amzi.mastercellusv2.R
+import com.amzi.mastercellusv2.navgraphs.Screens
+import com.amzi.mastercellusv2.navgraphs.mNavigator
 import com.amzi.mastercellusv2.utility.showLogs
 import com.android.updatedsoftstarter.components.LoginInputText
 
 @Composable
 fun SignupScreen(viewModel: RegisterViewModel) {
-
-    // Lock the screen orientation to portrait mode
-//    val activity = LocalContext.current as Activity
-//    activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
     //temporary
     showLogs("signup","called")
@@ -192,18 +191,32 @@ fun SignupScreen(viewModel: RegisterViewModel) {
                     .align(Alignment.CenterHorizontally),
                 onClick = {
                     registerViewModel.registerUser(mobNum,name,dob)
+                    mNavigator.navigateTo(Screens.SetPassword.route)
                 }
             )
         }
 
-        Text(
-            modifier = Modifier.padding(top = 60.dp),
-            text = "Cancel",
-            style = TextStyle(
-                fontSize = 12.sp,
-            ),
-            color = Color(0xFF7E8385)
-        )
+        Row {
+            Text(
+                modifier = Modifier.padding(top = 60.dp),
+                text = "Already have an account?",
+                style = TextStyle(
+                    fontSize = 12.sp,
+                ),
+                color = Color(0xFF7E8385)
+            )
+            Text(
+                modifier = Modifier.padding(top = 60.dp)
+                    .clickable { mNavigator.navigateTo(Screens.Login.route)},
+                text = "Login now",
+                style = TextStyle(
+                    fontSize = 12.sp,
+                    fontWeight = FontWeight.Bold
+                ),
+                color = Color(0xFF7E8385)
+            )
+        }
+
     }
 }
 @Composable
