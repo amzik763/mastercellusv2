@@ -23,6 +23,7 @@ import com.amzi.mastercellusv2.utility.NetworkMonitor
 import com.amzi.mastercellusv2.utility.showLogs
 import com.amzi.mastercellusv2.utility.showSnackBarNow
 import com.amzi.mastercellusv2.utility.snacks
+import com.android.homeapplication.Test
 
 class MainActivity : ComponentActivity() {
 
@@ -73,6 +74,7 @@ fun DisplayContent(){
 
         navController = rememberNavController()
         setUpNavGraph(navController = navController)
+        Test()
 //        Button(onClick = {
 //         showSnackBarNow("Connected", )
 //        }) {
