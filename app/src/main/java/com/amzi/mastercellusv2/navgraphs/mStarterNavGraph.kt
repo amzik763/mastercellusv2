@@ -21,10 +21,7 @@ class mStarterNavigator(){
             Log.d("Amzi: ","will do strt")
             navcontroller.navigate(passID)
         }
-
     }
-
-
 }
 
 @Composable
@@ -37,7 +34,6 @@ fun starterNavGraph(
     ){
 
         mStarterNavigator.navcontroller = navController
-
 
         composable(route = BottomBarStarterScreens.Starter.route){
             StarterScreen()

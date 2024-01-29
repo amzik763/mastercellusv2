@@ -43,15 +43,9 @@ class MainActivity : ComponentActivity() {
             showSnackBarNow("No Network",applicationContext)
 
         }
-
-
     }
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContent {
             Mastercellusv2Theme {
                 showLogs("MAIN: ","Initialized")
@@ -60,12 +54,6 @@ class MainActivity : ComponentActivity() {
                 val networkMonitor = NetworkMonitor(applicationContext)
                 showLogs("temp",networkMonitor.checkNowForInternet().toString())
                 networkMonitor.registerNetworkCallback(networkCallback)
-
-                // A surface container using the 'background' color from the theme
-//                navController = rememberNavController()
-//                setUpNavGraph(navController = navController)
-
-
 
 
             }
@@ -90,19 +78,5 @@ fun DisplayContent(){
         }) {
             Text(text = "Click me")
         }
-    }
-}
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    Mastercellusv2Theme {
-        Greeting("Android")
     }
 }

@@ -16,9 +16,6 @@ class NetworkMonitor(context: Context) {
         return networkInfo != null && networkInfo.isConnected
     }
 
-
-
-
     fun registerNetworkCallback(networkCallback: ConnectivityManager.NetworkCallback) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             connectivityManager.registerDefaultNetworkCallback(networkCallback)

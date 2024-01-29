@@ -1,6 +1,6 @@
 package com.amzi.mastercellusv2.AllScreens.authScreens
 
-    import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -34,15 +34,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-    import com.amzi.mastercellusv2.AllViewModels.RegisterViewModel
-    import com.amzi.mastercellusv2.R
-    import com.amzi.mastercellusv2.utility.showLogs
-    import com.android.updatedsoftstarter.components.LoginInputText
-
-
+import com.amzi.mastercellusv2.AllViewModels.RegisterViewModel
+import com.amzi.mastercellusv2.R
+import com.amzi.mastercellusv2.utility.showLogs
+import com.android.updatedsoftstarter.components.LoginInputText
 @Composable
 fun forgotPasswordScreen(viewModel: RegisterViewModel) {
-
 
     val registerViewModel = viewModel
 
@@ -50,11 +47,9 @@ fun forgotPasswordScreen(viewModel: RegisterViewModel) {
 
     var mobNum by remember { mutableStateOf("") }
     Column(
-
         modifier = Modifier
             .fillMaxWidth()
             .fillMaxSize()
-//            .padding(10.dp)
             .background(color = Color.White),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -63,12 +58,11 @@ fun forgotPasswordScreen(viewModel: RegisterViewModel) {
             painter = painterResource(id = R.drawable.skaio),
             contentDescription = "Skaio Icon",
             tint = Color.Unspecified,
-
             modifier = Modifier.size(width = 220.dp, height = 55.dp)
         )
         Spacer(modifier = Modifier.height(35.dp))
         Text(
-            text = "Verify",
+           text = "Verify",
             style = TextStyle(
                 fontSize = 39.sp,
                 fontWeight = FontWeight.Bold,
@@ -103,7 +97,6 @@ fun forgotPasswordScreen(viewModel: RegisterViewModel) {
                 )
             )
         }
-
         Spacer(modifier = Modifier.height(35.dp))
 
         Surface(
@@ -137,19 +130,17 @@ fun forgotPasswordScreen(viewModel: RegisterViewModel) {
             Text(
                 text = "Cancel",
                 style = TextStyle(fontSize = 12.sp,
-                    fontWeight = FontWeight.Bold),
+                fontWeight = FontWeight.Bold),
                 color = Color(0xFF7E8385)
             )
-
         }
     }
 }
+
 @Composable
 @Preview(showBackground = true, showSystemUi = true)
 fun ForgotPasswordScreenPreview(){
-//
 //    forgotPasswordScreen(
 ////        navHostController = rememberNavController()
-//    )
-
+// )
 }

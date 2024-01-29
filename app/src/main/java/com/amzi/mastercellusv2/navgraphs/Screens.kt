@@ -37,16 +37,10 @@ sealed class Screens(val route:String) {
             return "ds/$DETAILS_ARGUMENT_KEY/$DETAILS_ARGUMENT_NAME"
         }
     }
-
-
-
 }
-
-
-
 sealed class BottomBarStarterScreens(val route:String, val title:String, val icon:ImageVector ){
     object Starter: BottomBarStarterScreens("starter_home","starter", Icons.Default.Home)
     object Starter_Details: BottomBarStarterScreens("starter_details","starter details", Icons.Default.Menu)
     object Starter_Dashboard: BottomBarStarterScreens("starter_dashboard","starter home", Icons.Default.AccountCircle)
-
 }
+
