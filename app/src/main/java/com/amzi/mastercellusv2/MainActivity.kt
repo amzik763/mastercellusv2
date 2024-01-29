@@ -73,10 +73,10 @@ fun DisplayContent(){
 
         navController = rememberNavController()
         setUpNavGraph(navController = navController)
-        Button(onClick = {
-//            showSnackBarNow("Connected", )
-        }) {
-            Text(text = "Click me")
-        }
+//        Button(onClick = {
+//         showSnackBarNow("Connected", )
+//        }) {
+//            Text(text = "Click me")
+//        }
     }
 }

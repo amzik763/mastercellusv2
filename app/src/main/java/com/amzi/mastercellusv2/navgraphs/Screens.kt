@@ -12,11 +12,10 @@ const val DETAILS_ARGUMENT_NAME = "name"
 const val AUTH_ARGUMENT_ID = "id"
 
 sealed class Screens(val route:String) {
-
     object Home: Screens(HOME_ROUTE)
     object Starter: Screens("starter2")
 
- //AUTH SCREENS
+    //AUTH SCREENS
     object Splash: Screens("splash?id={id}"){
         fun passID(id:Int = 0):String{
             return "splash?id=$id"
@@ -27,7 +26,6 @@ sealed class Screens(val route:String) {
 
     object SetPassword: Screens("setPassword")
     object forgotPassword: Screens("forgotPassword")
-
     object Detail: Screens("ds/{$DETAILS_ARGUMENT_KEY}/{$DETAILS_ARGUMENT_NAME}"){
         fun passStringID(id:String):String{
 //            return "ds/$id"
@@ -38,9 +36,8 @@ sealed class Screens(val route:String) {
         }
     }
 }
-sealed class BottomBarStarterScreens(val route:String, val title:String, val icon:ImageVector ){
+    sealed class BottomBarStarterScreens(val route:String, val title:String, val icon:ImageVector ){
     object Starter: BottomBarStarterScreens("starter_home","starter", Icons.Default.Home)
     object Starter_Details: BottomBarStarterScreens("starter_details","starter details", Icons.Default.Menu)
     object Starter_Dashboard: BottomBarStarterScreens("starter_dashboard","starter home", Icons.Default.AccountCircle)
 }
-

@@ -39,6 +39,7 @@ import com.amzi.mastercellusv2.AllViewModels.RegisterViewModel
 import com.amzi.mastercellusv2.R
 import com.amzi.mastercellusv2.navgraphs.Screens
 import com.amzi.mastercellusv2.navgraphs.mNavigator
+import com.amzi.mastercellusv2.utility.mGraph
 import com.amzi.mastercellusv2.utility.showLogs
 import com.android.updatedsoftstarter.components.LoginInputText
 
@@ -141,7 +142,8 @@ fun LoginScreen(viewModel: RegisterViewModel) {
                     .padding(9.dp)
                     .align(Alignment.CenterHorizontally),
                 onClick = {
-                    registerViewModel.loginUser(mobNum,password,fcm_token)
+                    mNavigator.navigateTo(mGraph.STARTER)
+//                    registerViewModel.loginUser(mobNum,password,fcm_token)
                 }
             )
         }
