@@ -105,4 +105,10 @@ android {
 
     //systemUI
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.30.1")
+
+        //MQTT
+        implementation("org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.2.5")
+//        implementation("project(path: ':mqtt')")
+        implementation(project(":mqtt"))
+
 }
