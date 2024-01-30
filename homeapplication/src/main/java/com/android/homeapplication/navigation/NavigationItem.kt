@@ -1,7 +1,6 @@
 package com.example.homeapplication.navigation
 
-import com.example.homeapplication.R
-
+import com.android.homeapplication.R
 
 sealed class NavigationItem(val route: String, val label: String, val icons: Int){
 

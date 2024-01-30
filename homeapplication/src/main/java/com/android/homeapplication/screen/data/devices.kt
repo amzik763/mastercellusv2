@@ -2,7 +2,7 @@ package com.example.homeapplication.screen.data
 
 import androidx.annotation.DrawableRes
 import androidx.compose.ui.graphics.Color
-import com.example.homeapplication.R
+import com.android.homeapplication.R
 import com.example.homeapplication.ui.theme.DeviceOne
 import com.example.homeapplication.ui.theme.DeviceTwo
 

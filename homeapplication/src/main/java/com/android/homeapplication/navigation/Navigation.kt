@@ -27,7 +27,6 @@ import com.example.homeapplication.screen.HomeScreen
 import com.example.homeapplication.screen.LedBulbScreen
 import com.example.homeapplication.viewModel.HomeAppViewModel
 
-
 @Composable
 fun NavigationController (navController: NavHostController, context: Context){
 
