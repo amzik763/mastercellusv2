@@ -64,13 +64,11 @@ fun Navigation (context: Context) {
         NavigationItem.FanAcScreen
     )
     Scaffold (
-
         bottomBar = {
             BottomNavigation(backgroundColor = MaterialTheme.colors.background) {
 
                 val navBackStackEntry by navController.currentBackStackEntryAsState()
                 val currentRoute = navBackStackEntry?.destination?.route
-
 
                 screenList.forEach {
                     BottomNavigationItem(selected = currentRoute == it.route,

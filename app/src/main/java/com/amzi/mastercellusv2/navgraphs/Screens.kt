@@ -5,6 +5,7 @@ import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.ui.graphics.vector.ImageVector
+import com.amzi.mastercellusv2.utility.HOMEAUTOMATION_ROUTE
 import com.amzi.mastercellusv2.utility.HOME_ROUTE
 
 const val DETAILS_ARGUMENT_KEY = "id"
@@ -13,6 +14,7 @@ const val AUTH_ARGUMENT_ID = "id"
 
 sealed class Screens(val route:String) {
     object Home: Screens(HOME_ROUTE)
+    object HomeAutomation: Screens(HOMEAUTOMATION_ROUTE)
     object Starter: Screens("starter2")
 
     //AUTH SCREENS

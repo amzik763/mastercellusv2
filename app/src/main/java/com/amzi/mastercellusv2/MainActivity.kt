@@ -24,11 +24,9 @@ import com.amzi.mastercellusv2.utility.showLogs
 import com.amzi.mastercellusv2.utility.showSnackBarNow
 import com.amzi.mastercellusv2.utility.snacks
 import com.android.homeapplication.Test
+import com.example.homeapplication.navigation.Navigation
 
 class MainActivity : ComponentActivity() {
-
-//    lateinit var navController: NavHostController
-
 
     val networkCallback = object : ConnectivityManager.NetworkCallback() {
 
@@ -62,9 +60,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 @Composable
-fun DisplayContent(){
-//    val scaffoldState:ScaffoldState = rememberScaffoldState()
-//    val coroutineScope:CoroutineScope = rememberCoroutineScope()
+fun DisplayContent(){3
     snacks.scaffoldState  = rememberScaffoldState()
     snacks.coroutineScope = rememberCoroutineScope()
     Scaffold(
@@ -74,11 +70,6 @@ fun DisplayContent(){
 
         navController = rememberNavController()
         setUpNavGraph(navController = navController)
-        Test()
-//        Button(onClick = {
-//         showSnackBarNow("Connected", )
-//        }) {
-//            Text(text = "Click me")
-//        }
+//        Navigation(LocalContext.current)
     }
 }

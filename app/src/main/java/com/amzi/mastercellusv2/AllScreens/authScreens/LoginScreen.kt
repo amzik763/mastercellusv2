@@ -142,7 +142,8 @@ fun LoginScreen(viewModel: RegisterViewModel) {
                     .padding(9.dp)
                     .align(Alignment.CenterHorizontally),
                 onClick = {
-                    mNavigator.navigateTo(mGraph.STARTER)
+//                    mNavigator.navigateTo(mGraph.STARTER)
+                    mNavigator.navigateTo(Screens.Home.route)
 //                    registerViewModel.loginUser(mobNum,password,fcm_token)
                 }
             )

@@ -1,6 +1,7 @@
 package com.amzi.mastercellusv2.navgraphs
 
 import android.util.Log
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -11,6 +12,7 @@ import com.amzi.mastercellusv2.AllScreens.Home.DetailsScreen
 import com.amzi.mastercellusv2.AllScreens.Home.HomeScreen
 import com.amzi.mastercellusv2.AllScreens.starterScreens.MainStarterScreen
 import com.amzi.mastercellusv2.utility.mGraph
+import com.example.homeapplication.navigation.Navigation
 
 fun NavGraphBuilder.homeNavGraph(
     navController: NavHostController
@@ -30,15 +32,11 @@ fun NavGraphBuilder.homeNavGraph(
 
         composable(route = Screens.Home.route){
             HomeScreen()
+        }
 
-//            HomeScreen{
-//                if(){
-//
-//                }else{
-//
-//                }
-//
-//            }
+        composable(route = Screens.HomeAutomation.route){
+            Navigation(LocalContext.current)
+
         }
 
 

@@ -5,6 +5,8 @@ const val BASE_URL = "http://13.235.215.173:5000"
 
     //Constants for ROUTING
     const val HOME_ROUTE = "home_screen"
+    const val HOMEAUTOMATION_ROUTE = "home_automation_screen"
+
     const val DETAILS_ROUTE = "details_screen"
 
 //Routes
