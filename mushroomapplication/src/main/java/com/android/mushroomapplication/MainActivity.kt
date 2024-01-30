@@ -1,4 +1,4 @@
-package com.amzi.mastercellusv2
+package com.android.mushroomapplication
 
 import android.Manifest
 import android.app.Activity
@@ -6,8 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.LocationManager
-import android.net.ConnectivityManager
-import android.net.Network
 import android.net.wifi.WifiManager
 import android.os.Build
 import android.os.Bundle
@@ -21,137 +19,142 @@ import androidx.activity.compose.setContent
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.material.Button
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.material.rememberScaffoldState
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Button
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ListItem
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.amzi.mastercellusv2.navgraphs.setUpNavGraph
-import com.amzi.mastercellusv2.ui.theme.Mastercellusv2Theme
-import com.amzi.mastercellusv2.utility.NetworkMonitor
-import com.amzi.mastercellusv2.utility.showLogs
-import com.amzi.mastercellusv2.utility.showSnackBarNow
-import com.amzi.mastercellusv2.utility.snacks
-import com.android.homeapplication.Test
+import com.example.demo.wifi.StringList
 import com.example.demo.dialogBox.CustomDialog
 import com.example.demo.dialogBox.networkDialog
 import com.example.demo.ui.mushroom.Energy
 import com.example.demo.ui.mushroom.Title
 import com.example.demo.ui.mushroom.Title2
 import com.example.demo.viewmodels.SecondViewModel
-import com.example.demo.wifi.StringList
-import com.example.homeapplication.navigation.Navigation
+
+@RequiresApi(Build.VERSION_CODES.TIRAMISU)
+@Composable
+fun WifiList(
+    wifiManager: WifiManager,
+    wifiList: MutableList<String>,
+    requestPermissionLauncher: ManagedActivityResultLauncher<String, Boolean>
+) {
+
+    val context = LocalContext.current
+
+    LazyColumn {
+        items(wifiList) { wifiNetwork ->
+            WifiNetworkItem(wifiNetwork)
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun WifiNetworkItem(wifiNetwork: String) {
+    ListItem(
+        headlineText = {
+            Text(wifiNetwork, modifier = Modifier.clickable {
+                Log.d("greta", wifiNetwork)
+            })
+        },
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable {
+                // Handle item click
+            }
+    )
+}
 
 class MainActivity : ComponentActivity() {
 
     lateinit var requestPermissionLauncher: ManagedActivityResultLauncher<String, Boolean>
 
-    val networkCallback = object : ConnectivityManager.NetworkCallback() {
-
-        override fun onAvailable(network: Network) {
-            // Called when a network is available
-            showLogs("MAIN: ","Connected")
-            showSnackBarNow("Connected",applicationContext)
-        }
-        override fun onLost(network: Network) {
-            // Called when a network is lost
-            showLogs("MAIN: ","Disconnected")
-            showSnackBarNow("No Network",applicationContext)
-        }
-    }
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
-//    @RequiresApi(Build.VERSION_CODES.Q)
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onCreate(savedInstanceSecondViewModel: Bundle?) {
+        super.onCreate(savedInstanceSecondViewModel)
         Log.d("Launching", "App 1")
         var thisActivity = this;
+
         setContent {
-            Mastercellusv2Theme {
-                showLogs("MAIN: ","Initialized")
-                DisplayContent()
+            var wifiManager: WifiManager =
+                applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
+            val locationManager = applicationContext.getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
-                val networkMonitor = NetworkMonitor(applicationContext)
-                showLogs("temp",networkMonitor.checkNowForInternet().toString())
-                networkMonitor.registerNetworkCallback(networkCallback)
-
-/*
-                var wifiManager: WifiManager =
-                    applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
-                val locationManager = applicationContext.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-
-                val secondViewModel = viewModel<SecondViewModel>(
-                    factory = object : ViewModelProvider.Factory {
-                        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                            return SecondViewModel(
-                                context = applicationContext, wifiManager = wifiManager
-                            ) as T
-                        }
+            val secondViewModel = viewModel<SecondViewModel>(
+                factory = object : ViewModelProvider.Factory {
+                    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                        return SecondViewModel(
+                            context = applicationContext, wifiManager = wifiManager
+                        ) as T
                     }
-                )
+                }
+            )
 
-                requestPermissionLauncher = rememberLauncherForActivityResult(
-                    contract = ActivityResultContracts.RequestPermission()
-                ) { isGranted: Boolean ->
-                    if (isGranted) {
-                        // Permission granted, fetch Wi-Fi list
-                        Log.d("FETCHIGN", "List")
+            requestPermissionLauncher = rememberLauncherForActivityResult(
+                contract = ActivityResultContracts.RequestPermission()
+            ) { isGranted: Boolean ->
+                if (isGranted) {
+                    // Permission granted, fetch Wi-Fi list
+                    Log.d("FETCHIGN", "List")
 //                    fetchWifiList(wifiManager, wifiList, applicationContext)
 
+                } else {
+
+                    Log.d("FETCHIGN", "Not granted List")
+
+                    // Handle permission denied
+                    // You might want to show a message or take appropriate action
+                }
+            }
+
+            LaunchedEffect(key1 = secondViewModel.checkPermission ) {
+                Log.d("Perm: ", "Permission Launched")
+                // Check and request permissions when the composable is first launched
+                checkAndRequestPermissions(applicationContext, requestPermissionLauncher)
+                Log.d("ABCd", wifiManager.isWifiEnabled.toString())
+                if(wifiManager.isWifiEnabled){
+
+                    fetchWifiList(wifiManager, applicationContext,secondViewModel,thisActivity,locationManager)
+
+
+                }else{
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                        val panelIntent = Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY)
+                        ActivityCompat.startActivityForResult(thisActivity, panelIntent, 3, null)
                     } else {
 
-                        Log.d("FETCHIGN", "Not granted List")
-
-                        // Handle permission denied
-                        // You might want to show a message or take appropriate action
                     }
                 }
-
-                LaunchedEffect(key1 = secondViewModel.checkPermission ) {
-                    Log.d("Perm: ", "Permission Launched")
-                    // Check and request permissions when the composable is first launched
-                    checkAndRequestPermissions(applicationContext, requestPermissionLauncher)
-                    Log.d("ABCd", wifiManager.isWifiEnabled.toString())
-                    if(wifiManager.isWifiEnabled){
-
-                        fetchWifiList(wifiManager, applicationContext,secondViewModel,thisActivity,locationManager)
-
-
-                    }else{
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                            val panelIntent = Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY)
-                            ActivityCompat.startActivityForResult(thisActivity, panelIntent, 3, null)
-                        } else {
-
-                        }
-                   }*/
-                }
-
-//                App(this, secondViewModel)
-//                mDialog(secondViewModel,wifiManager,thisActivity)
-//                Log.d("Launching", "App 2")
-//            WifiList(wifiManager,wifiList,requestPermissionLauncher)
-//                Spacer(modifier = Modifier.height(16.dp))
-
             }
+
+            App(this, secondViewModel)
+            mDialog(secondViewModel,wifiManager,thisActivity)
+            Log.d("Launching", "App 2")
+//            WifiList(wifiManager,wifiList,requestPermissionLauncher)
+            Spacer(modifier = Modifier.height(16.dp))
+//            ConnectButton(a,applicationContext,wifiManager,"abc","amzad1234",requestPermissionLauncher)
         }
     }
-/*    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == 3) {
@@ -167,9 +170,8 @@ class MainActivity : ComponentActivity() {
                 // Add your logic here
             }
         }
-    }*/
-
-
+    }
+}
 
 @RequiresApi(Build.VERSION_CODES.Q)
 @Composable
@@ -199,7 +201,7 @@ fun App(context: Context, secondViewModel: SecondViewModel) {
 
 @RequiresApi(Build.VERSION_CODES.Q)
 @Composable
-fun mDialog(secondViewModel: SecondViewModel, wifiManager: WifiManager, thisActivity: com.android.mushroomapplication.MainActivity) {
+fun mDialog(secondViewModel: SecondViewModel, wifiManager: WifiManager, thisActivity: MainActivity) {
 
 //        var mytext by remember { mutableStateOf("My first text") }
 
@@ -226,6 +228,37 @@ fun mDialog(secondViewModel: SecondViewModel, wifiManager: WifiManager, thisActi
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.Q)
+@Composable
+fun ConnectButton(
+    activity: MainActivity,
+    applicationContext: Context,
+    wifiManager: WifiManager,
+    s: String,
+    s1: String,
+    requestPermissionLauncher: ManagedActivityResultLauncher<String, Boolean>
+) {
+    Button(modifier = Modifier.height(45.dp),
+        onClick = {
+
+            if (!wifiManager.isWifiEnabled) {
+
+            }
+
+            try {
+                checkAndRequestPermissions(applicationContext, requestPermissionLauncher)
+                //To Connect Later
+              //  connectToWifi(applicationContext, wifiManager, s, s1)
+
+            } catch (e: Exception) {
+                requestPermissionLauncher.launch(Manifest.permission.CHANGE_NETWORK_STATE)
+            }
+        }) {
+        Text("Connect to Wi-Fi please")
+    }
+}
+
+// Function to check and request necessary permissions
 fun checkAndRequestPermissions(context: Context, launcher: ActivityResultLauncher<String>) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
         // On Android 10 (Q) and higher, both ACCESS_FINE_LOCATION and ACCESS_BACKGROUND_LOCATION are required
@@ -289,20 +322,20 @@ fun fetchWifiList(
         ) != PackageManager.PERMISSION_GRANTED
     ) {
         Log.d("ABCD", "Please Grant Permission")
-        Toast.makeText(thisActivity,"Accept Location Permission", Toast.LENGTH_LONG).show()
+        Toast.makeText(thisActivity,"Accept Location Permission",Toast.LENGTH_LONG).show()
 
 //        checkAndRequestPermissions(context, )
         return
     }else{
         if(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)){
             Log.d("ABC", "Location Enabled")
-            Toast.makeText(thisActivity,"Getting Wifi details", Toast.LENGTH_LONG).show()
+            Toast.makeText(thisActivity,"Getting Wifi details",Toast.LENGTH_LONG).show()
 
 
 
         }else{
             Log.d("ABC", "Location Disabled")
-            Toast.makeText(thisActivity,"Please Enable Location", Toast.LENGTH_LONG).show()
+            Toast.makeText(thisActivity,"Please Enable Location",Toast.LENGTH_LONG).show()
         }
 
 
@@ -344,16 +377,9 @@ fun fetchWifiList(
 }
 
 @Composable
-fun DisplayContent(){
-    snacks.scaffoldState  = rememberScaffoldState()
-    snacks.coroutineScope = rememberCoroutineScope()
-    Scaffold(
-        scaffoldState = snacks.scaffoldState
-    ){Log.d("abc",it.toString())
-        lateinit var navController: NavHostController
-
-        navController = rememberNavController()
-        setUpNavGraph(navController = navController)
-//        Navigation(LocalContext.current)
-    }
+fun showToast() {
+    val context = LocalContext.current
+//    Toast.makeText()
 }
+
+
