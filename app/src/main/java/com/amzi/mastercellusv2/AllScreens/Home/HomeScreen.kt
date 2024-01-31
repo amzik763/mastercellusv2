@@ -198,14 +198,14 @@ fun HomeScreen(
                         .size(height = 56.dp, width = 56.dp)
                         .border(0.dp, lightGrey, shape = RoundedCornerShape(4.dp))
                         .clip(RoundedCornerShape(4.dp)),
-                    painter = painterResource(id = com.amzi.mastercellusv2.R.drawable.homeicon),
-                    contentDescription = "Home",
+                    painter = painterResource(id = com.amzi.mastercellusv2.R.drawable.ic_mushroom),
+                    contentDescription = "Mushroom",
                     contentScale = ContentScale.Crop,
                 )
 
                 Column (modifier = Modifier.padding(start = 12.dp)){
                     Text(
-                        text = "Home Automation",
+                        text = "Mushroom",
                         fontWeight = FontWeight.Bold,
                         fontSize = 16.sp,
                         color = lightBlack,
@@ -250,13 +250,16 @@ fun HomeScreen(
                         .fillMaxWidth()
                         .padding(6.dp),
                     onClick = {
-                        mNavigator.navigateTo(Screens.HomeAutomation.route)
+                        var a = Intent(ct, com.android.mushroomapplication.MainActivity::class.java)
+                        startActivity(ct, a, null)
+
+                        mNavigator.navigateTo(Screens.Detail.passNameandID("abc", "amzad"))
                     }
                 )
             }
         }
 
-        Text(
+/*        Text(
             text = "HOME AUTO",
             fontWeight = FontWeight.Bold,
             fontSize = 20.sp,
@@ -265,7 +268,9 @@ fun HomeScreen(
                 mNavigator.navigateTo(Screens.HomeAutomation.route)
 //                navHostController.navigate(route = Screens.Detail.passNameandID("abc","amzad"))
             }
-        )
+        )*/
+
+/*
         Text(
             text = "Mushroom",
             fontWeight = FontWeight.Bold,
@@ -282,8 +287,9 @@ fun HomeScreen(
                 }
 
         )
+*/
 
-        Text(
+/*        Text(
             text = "Login/SignUp",
             fontWeight = FontWeight.Bold,
             fontSize = MaterialTheme.typography.h3.fontSize,
@@ -295,10 +301,10 @@ fun HomeScreen(
 //                navHostController.navigate(route = Screens.Detail.passNameandID("abc","amzad"))
                 }
 
-        )
+        )*/
 
 
-        Text(
+/*        Text(
             text = "STARTER",
             fontWeight = FontWeight.Bold,
             fontSize = MaterialTheme.typography.h3.fontSize,
@@ -311,7 +317,7 @@ fun HomeScreen(
 //                navHostController.navigate(route = Screens.Detail.passNameandID("abc","amzad"))
                 }
 
-        )
+        )*/
 
 
     }
@@ -324,5 +330,11 @@ fun HomeScreenPreview(){
     HomeScreen(
 //        navHostController = rememberNavController()
     )
+
+}
+
+
+@Composable
+fun MacId(){
 
 }
