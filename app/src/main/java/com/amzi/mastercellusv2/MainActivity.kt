@@ -42,9 +42,15 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.amzi.mastercellusv2.AllViewModels.Factories.RegisterViewModelFactory
+import com.amzi.mastercellusv2.AllViewModels.RegisterViewModel
 import com.amzi.mastercellusv2.navgraphs.setUpNavGraph
 import com.amzi.mastercellusv2.ui.theme.Mastercellusv2Theme
 import com.amzi.mastercellusv2.utility.NetworkMonitor
+import com.amzi.mastercellusv2.utility.myComponents.authRepo
+import com.amzi.mastercellusv2.utility.myComponents.navController
+import com.amzi.mastercellusv2.utility.myComponents.registerViewModel
+import com.amzi.mastercellusv2.utility.myComponents.registerViewModelFactory
 import com.amzi.mastercellusv2.utility.showLogs
 import com.amzi.mastercellusv2.utility.showSnackBarNow
 import com.amzi.mastercellusv2.utility.snacks
@@ -81,6 +87,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         Log.d("Launching", "App 1")
         var thisActivity = this;
+
+        registerViewModelFactory = RegisterViewModelFactory(authRepo)
+        registerViewModel = registerViewModelFactory.create(RegisterViewModel::class.java)
         setContent {
             Mastercellusv2Theme {
                 showLogs("MAIN: ","Initialized")
@@ -350,10 +359,12 @@ fun DisplayContent(){
     Scaffold(
         scaffoldState = snacks.scaffoldState
     ){Log.d("abc",it.toString())
-        lateinit var navController: NavHostController
+//        lateinit var navController: NavHostController
 
         navController = rememberNavController()
-        setUpNavGraph(navController = navController)
+        setUpNavGraph(
+//            navController = navController
+        )
 //        Navigation(LocalContext.current)
     }
 }

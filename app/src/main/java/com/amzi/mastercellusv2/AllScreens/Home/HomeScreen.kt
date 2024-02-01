@@ -112,6 +112,7 @@ fun HomeScreen(
             }
         }
 
+
         Spacer(modifier = Modifier.height(36.dp))
         Text(
             text = "App List",
@@ -129,6 +130,7 @@ fun HomeScreen(
         )
 
         Spacer(modifier = Modifier.height(24.dp))
+
         Row(modifier = Modifier
             .padding(start = 24.dp, end = 16.dp)
             .fillMaxWidth(),
@@ -146,7 +148,11 @@ fun HomeScreen(
                     contentScale = ContentScale.Crop,
                 )
 
-                Column (modifier = Modifier.padding(start = 12.dp)){
+                Column (modifier = Modifier
+                    .padding(start = 12.dp)
+                    .clickable {
+
+                    }){
                     Text(
                         text = "Home Automation",
                         fontWeight = FontWeight.Bold,
@@ -166,10 +172,7 @@ fun HomeScreen(
                             fontWeight = FontWeight.Bold,
                             fontSize = 10.sp,
                             color = Gray,
-                            fontStyle = FontStyle.Italic,
-                            modifier = Modifier.clickable {
-//                navHostController.navigate(route = Screens.Detail.passNameandID("abc","amzad"))
-                            })
+                            fontStyle = FontStyle.Italic)
                     }
                 }
             }
@@ -197,9 +200,15 @@ fun HomeScreen(
                     }
                 )
             }
+
+
         }
 
+        Spacer(modifier = Modifier.height(10.dp))
+//        if()
+        MacId()
         Spacer(modifier = Modifier.height(24.dp))
+
         Row(modifier = Modifier
             .padding(start = 24.dp, end = 16.dp)
             .fillMaxWidth(),
@@ -273,6 +282,9 @@ fun HomeScreen(
             }
         }
 
+        Spacer(modifier = Modifier.height(10.dp))
+        MacId()
+
 /*        Text(
             text = "HOME AUTO",
             fontWeight = FontWeight.Bold,
@@ -341,7 +353,7 @@ fun HomeScreen(
 @Preview(showBackground = true, showSystemUi = true)
 fun HomeScreenPreview(){
 
-   MacId()
+   HomeScreen()
 }
 
 
@@ -359,14 +371,14 @@ fun MacId(){
             Row (
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(8.dp),
+                    .padding(4.dp),
                 horizontalArrangement = Arrangement.SpaceBetween){
                 Text(text = "Enter Device ID:",
-                    fontSize = 16.sp,
+                    fontSize = 14.sp,
                     color = lightBlack)
 
                 Text(text = "HIDE",
-                    fontSize = 16.sp,
+                    fontSize = 14.sp,
                     fontWeight = FontWeight.Bold,
                     fontStyle = FontStyle.Italic,
                     color = Gray
@@ -376,7 +388,7 @@ fun MacId(){
 
             Row (modifier = Modifier
                 .fillMaxWidth()
-                .padding(start = 16.dp, top = 8.dp, end = 24.dp),
+                .padding(start = 16.dp, top = 4.dp, end = 24.dp, bottom = 12.dp),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween){
 /*                TextField(
@@ -411,12 +423,23 @@ fun MacId(){
                 ),value = macId,
                     onValueChange ={ newText -> macId = newText },
                     shape = RoundedCornerShape(8.dp),
+                    maxLines = 1,
+                    modifier = Modifier
+                        .fillMaxWidth(0.7f)
+                        .height(40.dp),
+                    label = {
+                        Text(text = "Enter MacId",
+                            style = TextStyle(
+                                fontSize = 12.sp
+                            ),
+                            modifier = Modifier.padding(0.dp))
+                    },
 
                 )
                 Surface(
                     modifier = Modifier
                         .padding(start = 16.dp)
-                        .size(width = 64.dp, height = 28.dp),
+                        .size(width = 64.dp, height = 36.dp),
                     color = lightBlue,
                     shape = RoundedCornerShape(corner = CornerSize(8.dp)),
                     border = BorderStroke(width = 4.dp, color = lightBlue),
@@ -431,7 +454,7 @@ fun MacId(){
                         ),
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(6.dp),
+                            .padding(11.dp),
                         onClick = {
 
                         }
@@ -439,8 +462,7 @@ fun MacId(){
                 }
 
             }
-
-
         }
     }
 }
+
