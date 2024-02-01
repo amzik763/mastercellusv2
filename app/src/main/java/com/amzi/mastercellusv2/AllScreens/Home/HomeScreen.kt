@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -20,22 +21,34 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
+import androidx.compose.material.Card
 import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
+import androidx.compose.material.TextField
+import androidx.compose.material.TextFieldColors
+import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.Gray
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -53,6 +66,7 @@ import com.amzi.mastercellusv2.ui.theme.lightOrange
 import com.amzi.mastercellusv2.utility.mGraph
 import com.android.mushroomapplication.R
 import com.example.homeapplication.navigation.Navigation
+import com.example.homeapplication.ui.theme.DarkOrange
 
 @Composable
 fun HomeScreen(
@@ -151,7 +165,7 @@ fun HomeScreen(
                             text = "   Edit",
                             fontWeight = FontWeight.Bold,
                             fontSize = 10.sp,
-                            color = Color.Gray,
+                            color = Gray,
                             fontStyle = FontStyle.Italic,
                             modifier = Modifier.clickable {
 //                navHostController.navigate(route = Screens.Detail.passNameandID("abc","amzad"))
@@ -222,7 +236,7 @@ fun HomeScreen(
                             text = "   Edit",
                             fontWeight = FontWeight.Bold,
                             fontSize = 10.sp,
-                            color = Color.Gray,
+                            color = Gray,
                             fontStyle = FontStyle.Italic,
                             modifier = Modifier.clickable {
 //                navHostController.navigate(route = Screens.Detail.passNameandID("abc","amzad"))
@@ -327,14 +341,106 @@ fun HomeScreen(
 @Preview(showBackground = true, showSystemUi = true)
 fun HomeScreenPreview(){
 
-    HomeScreen(
-//        navHostController = rememberNavController()
-    )
-
+   MacId()
 }
 
 
 @Composable
 fun MacId(){
 
+    Card(
+        shape = RoundedCornerShape(8.dp),
+        modifier = Modifier
+            .border(1.dp, color = lightGrey, shape = RoundedCornerShape(8.dp))
+    ) {
+        Column (modifier = Modifier
+            .padding(8.dp)
+            .fillMaxWidth()){
+            Row (
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp),
+                horizontalArrangement = Arrangement.SpaceBetween){
+                Text(text = "Enter Device ID:",
+                    fontSize = 16.sp,
+                    color = lightBlack)
+
+                Text(text = "HIDE",
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Bold,
+                    fontStyle = FontStyle.Italic,
+                    color = Gray
+                )
+            }
+            var macId by remember { mutableStateOf("") }
+
+            Row (modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 16.dp, top = 8.dp, end = 24.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween){
+/*                TextField(
+//                    modifier = Modifier
+//                        .size(250.dp, 42.dp),
+                    shape = RoundedCornerShape(10.dp),
+                    maxLines = 1,
+                    colors = TextFieldDefaults.textFieldColors(backgroundColor = lightGrey, textColor = lightBlack),
+                    value = macId,
+                    onValueChange = { newText -> macId = newText }{ newText -> macId = newText },
+                    placeholder = { Text("Enter Mac ID",
+//                        Modifier.size(240.dp,90.dp),
+                        style = TextStyle(
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight.Normal,
+                            color = Gray
+                        )) },
+                    visualTransformation = VisualTransformation.None,
+                    singleLine = true,
+                    modifier = Modifier.fillMaxWidth(0.7f).height(45.dp),
+//                        .padding(8.dp,2.dp),
+                    textStyle = TextStyle(
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.Bold,
+                        )
+                )*/
+
+                OutlinedTextField(colors = TextFieldDefaults.outlinedTextFieldColors(
+                    focusedBorderColor = Color.Yellow,
+                    unfocusedBorderColor = Grey,
+                    focusedLabelColor = lightBlack
+                ),value = macId,
+                    onValueChange ={ newText -> macId = newText },
+                    shape = RoundedCornerShape(8.dp),
+
+                )
+                Surface(
+                    modifier = Modifier
+                        .padding(start = 16.dp)
+                        .size(width = 64.dp, height = 28.dp),
+                    color = lightBlue,
+                    shape = RoundedCornerShape(corner = CornerSize(8.dp)),
+                    border = BorderStroke(width = 4.dp, color = lightBlue),
+                ) {
+                    ClickableText(
+                        text = AnnotatedString("SET"),
+                        style = TextStyle(
+                            color = Color.White,
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight.Bold,
+                            textAlign = TextAlign.Center
+                        ),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(6.dp),
+                        onClick = {
+
+                        }
+                    )
+                }
+
+            }
+
+
+        }
+    }
 }
