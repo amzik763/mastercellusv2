@@ -42,7 +42,9 @@ fun NavigationController (navController: NavHostController, context: Context){
 
     NavHost(navController = navController, startDestination = NavigationItem.HomeScreen.route){
         composable (NavigationItem.HomeScreen.route) {
-            HomeScreen(viewModel)
+            HomeScreen(
+//                viewModel
+            )
         }
         composable (NavigationItem.LedBulbScreen.route){
             LedBulbScreen(context, viewModel)

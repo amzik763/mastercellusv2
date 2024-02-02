@@ -8,7 +8,9 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -18,7 +20,10 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Divider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -40,6 +45,8 @@ import com.example.homeapplication.screen.data.categoryList3
 import com.example.homeapplication.screen.data.categoryList4
 import com.example.homeapplication.screen.data.categoryList5
 import com.example.homeapplication.screen.data.categoryList6
+import com.example.homeapplication.ui.theme.lightBlack
+import com.example.homeapplication.ui.theme.lightOrange
 import com.example.homeapplication.viewModel.HomeAppViewModel
 
 @Composable
@@ -48,15 +55,20 @@ fun LedBulbScreen(context :Context,viewModel: HomeAppViewModel){
     // Lock the screen orientation to portrait mode
     val activity = LocalContext.current as Activity
     activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+Column {
 
-    LazyColumn(modifier = Modifier
-        .fillMaxWidth()
-        .fillMaxSize()
+
+    LedText()
+
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxWidth()
+            .fillMaxHeight(),
+        horizontalAlignment = Alignment.CenterHorizontally
         //.padding(20.dp)
-        .background(Color(0, 0, 51)))
+    )
     {
         item {
-            LedText()
             Spacer(modifier = Modifier.height(35.dp))
             BulbRow(viewModel)
             Spacer(modifier = Modifier.height(25.dp))
@@ -65,28 +77,52 @@ fun LedBulbScreen(context :Context,viewModel: HomeAppViewModel){
             BulbRow33(viewModel)
             Spacer(modifier = Modifier.height(25.dp))
             BulbRow44(viewModel)
-            Spacer(modifier = Modifier.height(25.dp))
-           }
+            Spacer(modifier = Modifier.height(100.dp))
+        }
 
-        Log.w("led","done ....... 1 ")
+        Log.w("led", "done ....... 1 ")
     }
 }
-
+}
 @Composable
 fun LedText(){
-    Box(
-       modifier = Modifier
-           .fillMaxWidth()
-           .size(width = 400.dp, height = 80.dp)
-           .background(Color(153, 204, 255), RoundedCornerShape(3.dp))) {
-        Text(text = stringResource(id = R.string.Bulb),
-        style = TextStyle(
-            fontSize = 35.sp,
+    Column (
+//        modifier = Modifier.verticalScroll(rememberScrollState()),
+
+        )
+    {
+        Text(
+            modifier = Modifier.padding(start = 16.dp, top = 16.dp),
+            text = "My Home",
             fontWeight = FontWeight.Bold,
-            fontFamily = FontFamily.Serif),
+            fontSize = 24.sp,
+            color = lightBlack,
+        )
+        Spacer(modifier = Modifier.height(4.dp))
+        Divider(
             modifier = Modifier
-                .padding(start = 5.dp)
-                .align(Alignment.CenterStart)
+                .padding(start = 16.dp)
+                .fillMaxWidth(0.2f)
+                .height(4.dp)
+                .background(color = lightOrange)
+        )
+
+        Spacer(modifier = Modifier.height(36.dp))
+
+        Text(
+            modifier = Modifier.padding(start = 16.dp),
+            text = "Device Categories",
+            fontWeight = FontWeight.SemiBold,
+            fontSize = 18.sp,
+            color = lightBlack,
+        )
+
+        Spacer(modifier = Modifier.height(4.dp))
+        Divider(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(4.dp)
+                .background(color = lightOrange)
         )
     }
 }
@@ -99,7 +135,6 @@ fun BulbRow(viewModel: HomeAppViewModel){
         }
     }
 }
-
 @Composable
 fun BulbRow22(viewModel: HomeAppViewModel){
     LazyRow {
@@ -117,7 +152,6 @@ fun BulbRow33(viewModel: HomeAppViewModel){
         }
     }
 }
-
 @Composable
 fun BulbRow44(viewModel: HomeAppViewModel){
     LazyRow {
@@ -126,7 +160,6 @@ fun BulbRow44(viewModel: HomeAppViewModel){
         }
     }
 }
-
 @Composable
 fun BulbRow1(
     category: Category,
@@ -145,7 +178,7 @@ fun BulbRow1(
             if (clr.value) Color(255, 255, 153) else category.color,
             RoundedCornerShape(8.dp)
         )
-        .width(168.dp)
+        .width(130.dp)
         .height(110.dp)
     ){
         Text(text = category.title, style = TextStyle(

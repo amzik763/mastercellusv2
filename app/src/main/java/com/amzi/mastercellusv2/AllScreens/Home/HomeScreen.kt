@@ -79,10 +79,11 @@ fun HomeScreen(
     Column(
         Modifier
             .fillMaxSize()
-            .padding(start = 16.dp, end = 16.dp),
+
     ) {
         Row (modifier = Modifier
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .padding(start = 16.dp, end = 16.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween){
             Image(
@@ -115,6 +116,7 @@ fun HomeScreen(
 
         Spacer(modifier = Modifier.height(36.dp))
         Text(
+            modifier = Modifier.padding(start = 16.dp, end = 16.dp),
             text = "App List",
             fontWeight = FontWeight.Bold,
             fontSize = 24.sp,
@@ -132,11 +134,12 @@ fun HomeScreen(
         Spacer(modifier = Modifier.height(24.dp))
 
         Row(modifier = Modifier
-            .padding(start = 24.dp, end = 16.dp)
+            .padding(start = 36.dp, end = 28.dp)
             .fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween){
-            Row (verticalAlignment = Alignment.CenterVertically){
+            Row (
+                verticalAlignment = Alignment.CenterVertically){
                 Image(
                     modifier = Modifier
 //                    .padding(8.dp)
@@ -210,7 +213,7 @@ fun HomeScreen(
         Spacer(modifier = Modifier.height(24.dp))
 
         Row(modifier = Modifier
-            .padding(start = 24.dp, end = 16.dp)
+            .padding(start = 36.dp, end = 28.dp)
             .fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween){
@@ -363,6 +366,7 @@ fun MacId(){
     Card(
         shape = RoundedCornerShape(8.dp),
         modifier = Modifier
+            .padding(start = 24.dp, end = 24.dp)
             .border(1.dp, color = lightGrey, shape = RoundedCornerShape(8.dp))
     ) {
         Column (modifier = Modifier
