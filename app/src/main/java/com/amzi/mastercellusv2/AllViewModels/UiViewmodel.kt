@@ -7,9 +7,17 @@ import androidx.lifecycle.ViewModel
 
 class UiViewmodel : ViewModel() {
 
-    var showMacId by mutableStateOf(false)
+    var showHomeMacId by mutableStateOf(false)
         private set
 
-//    var showMacId by mutableStateOf(false)
-//        private set
+    var showMushMacId by mutableStateOf(false)
+        private set
+
+    fun toggleHomeMacIdVisibility() {
+        showHomeMacId = !showHomeMacId
+    }
+
+    fun toggleMushMacIdVisibility() {
+        showMushMacId = !showMushMacId
+    }
 }

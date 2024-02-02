@@ -54,6 +54,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat.startActivity
+import com.amzi.mastercellusv2.AllViewModels.UiViewmodel
 import com.amzi.mastercellusv2.navgraphs.Screens
 import com.amzi.mastercellusv2.navgraphs.mNavigator
 import com.amzi.mastercellusv2.ui.theme.Grey
@@ -71,6 +72,8 @@ import com.example.homeapplication.ui.theme.DarkOrange
 @Composable
 fun HomeScreen(
 //  navHostController: NavHostController
+
+    uiViewModel: UiViewmodel
 ) {
 
     var ct = LocalContext.current
@@ -112,8 +115,6 @@ fun HomeScreen(
                 )
             }
         }
-
-
         Spacer(modifier = Modifier.height(36.dp))
         Text(
             modifier = Modifier.padding(start = 16.dp, end = 16.dp),
@@ -154,6 +155,8 @@ fun HomeScreen(
                 Column (modifier = Modifier
                     .padding(start = 12.dp)
                     .clickable {
+                        // Toggle showMacId when clicked
+                        uiViewModel.toggleHomeMacIdVisibility()
 
                     }){
                     Text(
@@ -206,10 +209,10 @@ fun HomeScreen(
 
 
         }
-
         Spacer(modifier = Modifier.height(10.dp))
-//        if()
-        MacId()
+        if (uiViewModel.showHomeMacId) {
+            MacId()
+        }
         Spacer(modifier = Modifier.height(24.dp))
 
         Row(modifier = Modifier
@@ -229,7 +232,10 @@ fun HomeScreen(
                     contentScale = ContentScale.Crop,
                 )
 
-                Column (modifier = Modifier.padding(start = 12.dp)){
+                Column (modifier = Modifier.padding(start = 12.dp)
+                    .clickable {
+                        uiViewModel.toggleMushMacIdVisibility()
+                    }){
                     Text(
                         text = "Mushroom",
                         fontWeight = FontWeight.Bold,
@@ -249,10 +255,8 @@ fun HomeScreen(
                             fontWeight = FontWeight.Bold,
                             fontSize = 10.sp,
                             color = Gray,
-                            fontStyle = FontStyle.Italic,
-                            modifier = Modifier.clickable {
-//                navHostController.navigate(route = Screens.Detail.passNameandID("abc","amzad"))
-                            })
+                            fontStyle = FontStyle.Italic
+                        )
                     }
                 }
             }
@@ -284,9 +288,10 @@ fun HomeScreen(
                 )
             }
         }
-
         Spacer(modifier = Modifier.height(10.dp))
-        MacId()
+        if (uiViewModel.showMushMacId) {
+            MacId()
+        }
 
 /*        Text(
             text = "HOME AUTO",
@@ -356,7 +361,7 @@ fun HomeScreen(
 @Preview(showBackground = true, showSystemUi = true)
 fun HomeScreenPreview(){
 
-   HomeScreen()
+//   HomeScreen()
 }
 
 
@@ -395,50 +400,26 @@ fun MacId(){
                 .padding(start = 16.dp, top = 4.dp, end = 24.dp, bottom = 12.dp),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween){
-/*                TextField(
-//                    modifier = Modifier
-//                        .size(250.dp, 42.dp),
-                    shape = RoundedCornerShape(10.dp),
-                    maxLines = 1,
-                    colors = TextFieldDefaults.textFieldColors(backgroundColor = lightGrey, textColor = lightBlack),
-                    value = macId,
-                    onValueChange = { newText -> macId = newText }{ newText -> macId = newText },
-                    placeholder = { Text("Enter Mac ID",
-//                        Modifier.size(240.dp,90.dp),
-                        style = TextStyle(
-                            fontSize = 12.sp,
-                            fontWeight = FontWeight.Normal,
-                            color = Gray
-                        )) },
-                    visualTransformation = VisualTransformation.None,
-                    singleLine = true,
-                    modifier = Modifier.fillMaxWidth(0.7f).height(45.dp),
-//                        .padding(8.dp,2.dp),
-                    textStyle = TextStyle(
-                        fontSize = 20.sp,
-                        fontWeight = FontWeight.Bold,
-                        )
-                )*/
 
                 OutlinedTextField(colors = TextFieldDefaults.outlinedTextFieldColors(
-                    focusedBorderColor = Color.Yellow,
+                    focusedBorderColor = lightBlack,
                     unfocusedBorderColor = Grey,
-                    focusedLabelColor = lightBlack
+                    focusedLabelColor = lightBlack,
+                    textColor = lightBlack
                 ),value = macId,
                     onValueChange ={ newText -> macId = newText },
                     shape = RoundedCornerShape(8.dp),
                     maxLines = 1,
                     modifier = Modifier
                         .fillMaxWidth(0.7f)
-                        .height(40.dp),
+                        .height(56.dp),
                     label = {
                         Text(text = "Enter MacId",
                             style = TextStyle(
-                                fontSize = 12.sp
-                            ),
+                                fontSize = 10.sp),
+                            color = lightBlack,
                             modifier = Modifier.padding(0.dp))
                     },
-
                 )
                 Surface(
                     modifier = Modifier
