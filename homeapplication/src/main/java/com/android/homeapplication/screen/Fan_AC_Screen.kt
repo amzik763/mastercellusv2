@@ -6,7 +6,9 @@ import android.content.pm.ActivityInfo
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,6 +20,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Divider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -37,6 +40,8 @@ import androidx.compose.ui.unit.sp
 import com.android.homeapplication.R
 import com.example.homeapplication.screen.data.Category
 import com.example.homeapplication.screen.data.categoryList7
+import com.example.homeapplication.ui.theme.lightBlack
+import com.example.homeapplication.ui.theme.lightOrange
 import com.example.homeapplication.viewModel.HomeAppViewModel
 
 
@@ -49,9 +54,12 @@ fun FanAcScreen(context : Context,viewModel: HomeAppViewModel){
 
     LazyColumn(modifier = Modifier
         .fillMaxWidth()
-        .fillMaxSize()
+        .fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.SpaceBetween
+
         //.padding(20.dp)
-        .background(Color(0, 0, 51))){
+             ){
         item {
             FanAcText()
             Spacer(modifier = Modifier.height(40.dp))
@@ -64,25 +72,41 @@ fun FanAcScreen(context : Context,viewModel: HomeAppViewModel){
 
 @Composable
 fun FanAcText(){
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .size(width = 400.dp, height = 80.dp)
-            .background(Color(153, 204, 255), RoundedCornerShape(3.dp)))
+    Column ()
     {
-
-        Text(text = stringResource(id = R.string.FanAc),
-            style = TextStyle(
-                fontSize = 35.sp,
-                fontWeight = FontWeight.Bold,
-                fontFamily = FontFamily.Serif),
+        Text(
+            modifier = Modifier.padding(start = 16.dp, top = 16.dp),
+            text = "My Home",
+            fontWeight = FontWeight.Bold,
+            fontSize = 24.sp,
+            color = lightBlack,
+        )
+        Spacer(modifier = Modifier.height(4.dp))
+        Divider(
             modifier = Modifier
-                .padding(start = 5.dp)
-                .align(CenterStart)
-
+                .padding(start = 16.dp)
+                .fillMaxWidth(0.2f)
+                .height(4.dp)
+                .background(color = lightOrange)
         )
 
+        Spacer(modifier = Modifier.height(36.dp))
 
+        Text(
+            modifier = Modifier.padding(start = 16.dp),
+            text = "FAN and AC",
+            fontWeight = FontWeight.SemiBold,
+            fontSize = 18.sp,
+            color = lightBlack,
+        )
+
+        Spacer(modifier = Modifier.height(4.dp))
+        Divider(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(4.dp)
+                .background(color = lightOrange)
+        )
     }
 }
 @Composable
@@ -102,7 +126,7 @@ fun FanAcRow(
         mutableStateOf(viewModel.acState[category.id])
     }
     Box(modifier = Modifier
-        .padding(end = 15.dp, start = 15.dp)
+        .padding(end = 24.dp, start = 24.dp)
         .clickable {
             viewModel.acSwitch(category.id)
             clr.value = !clr.value
@@ -111,7 +135,7 @@ fun FanAcRow(
             if (clr.value) Color(255, 255, 153) else category.color,
             RoundedCornerShape(8.dp)
         )
-        .width(168.dp)
+        .width(130.dp)
         .height(110.dp)
     ){
         Text(text = category.title, style = TextStyle(

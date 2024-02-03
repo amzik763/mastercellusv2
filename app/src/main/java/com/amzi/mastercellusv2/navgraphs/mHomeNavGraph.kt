@@ -11,6 +11,7 @@ import androidx.navigation.navigation
 import com.amzi.mastercellusv2.AllScreens.Home.DetailsScreen
 import com.amzi.mastercellusv2.AllScreens.Home.HomeScreen
 import com.amzi.mastercellusv2.AllScreens.starterScreens.MainStarterScreen
+import com.amzi.mastercellusv2.AllViewModels.UiViewmodel
 import com.amzi.mastercellusv2.utility.mGraph
 import com.example.homeapplication.navigation.Navigation
 
@@ -31,7 +32,7 @@ fun NavGraphBuilder.homeNavGraph(
         }
 
         composable(route = Screens.Home.route){
-            HomeScreen()
+            HomeScreen(UiViewmodel(LocalContext.current))
         }
 
         composable(route = Screens.HomeAutomation.route){

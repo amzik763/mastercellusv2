@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import com.amzi.mastercellusv2.utility.mGraph
+import com.amzi.mastercellusv2.utility.myComponents.navController
 
 class mNavigator(){
 
@@ -26,7 +27,7 @@ class mNavigator(){
 
 @Composable
 fun setUpNavGraph(
-    navController: NavHostController,
+//    navController: NavHostController,
 ){
 
     NavHost(navController = navController,

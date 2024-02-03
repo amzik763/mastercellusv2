@@ -21,7 +21,6 @@ class RegisterViewModel(authRepo: AuthRepo) : ViewModel() {
 
 init {
     showLogs("ViewModel:","Created")
-
 }
 
     var authRepo:AuthRepo = authRepo
@@ -41,7 +40,6 @@ init {
         }
 
     }
-
     fun setPassword(password : String, otp : Int){
 
         viewModelScope.launch {
