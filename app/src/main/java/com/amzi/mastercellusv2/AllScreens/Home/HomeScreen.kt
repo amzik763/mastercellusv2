@@ -281,8 +281,6 @@ fun HomeScreen(
         if (uiViewModel.showMushMacId) {
             MacIdMush(uiViewModel)
         }
-
-
     }
 }
 
@@ -314,7 +312,9 @@ fun MacIdHome(uiViewModel: UiViewmodel){
                     color = Gray
                 )
             }
-            var macId by remember { mutableStateOf("") }
+            var macId by remember { mutableStateOf("NOT REGISTERED") }
+            macId = uiViewModel.getMacId(KEY_HOMEAUTO_MACID)
+
 
             Row (modifier = Modifier
                 .fillMaxWidth()
@@ -362,7 +362,7 @@ fun MacIdHome(uiViewModel: UiViewmodel){
                             .fillMaxWidth()
                             .padding(11.dp),
                         onClick = {
-                            Log.d("Hey", "MAC IDDDD")
+                            Log.d("Home Screen macId", "show mac Id")
                             uiViewModel.macId(KEY_HOMEAUTO_MACID, macId)
                         }
                     )
@@ -400,7 +400,8 @@ fun MacIdMush(uiViewModel: UiViewmodel){
                     color = Gray
                 )
             }
-            var macId by remember { mutableStateOf("") }
+            var macId by remember { mutableStateOf("NOT REGISTERED") }
+            macId = uiViewModel.getMacId(KEY_MUSHROOM_MACID)
 
             Row (modifier = Modifier
                 .fillMaxWidth()
@@ -448,7 +449,7 @@ fun MacIdMush(uiViewModel: UiViewmodel){
                             .fillMaxWidth()
                             .padding(11.dp),
                         onClick = {
-                            Log.d("Hey", "MAC IDDDD")
+                            Log.d("Home Screen macId", "show mac Id")
                             uiViewModel.macId(KEY_MUSHROOM_MACID ,macId)
                         }
                     )

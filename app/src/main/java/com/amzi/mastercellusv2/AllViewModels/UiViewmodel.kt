@@ -28,6 +28,7 @@ class UiViewmodel(context: Context) : ViewModel() {
         showMushMacId = !showMushMacId
     }
 
+  //SHARED PREFERENCES
 
     private val sharedPreferences: SharedPreferences
         get() = mContext.getSharedPreferences(PREFERNCES_NAME, Context.MODE_PRIVATE)
@@ -38,14 +39,8 @@ class UiViewmodel(context: Context) : ViewModel() {
         editor.apply()
     }
 
-
-    fun getHomeMacId(): String {
-        return sharedPreferences.getString(KEY_HOMEAUTO_MACID, "") ?: ""
+    fun getMacId(key: String): String {
+        return sharedPreferences.getString(key, "") ?: ""
     }
-
-    fun getMushMacId(): String {
-        return sharedPreferences.getString(KEY_MUSHROOM_MACID, "") ?: ""
-    }
-
 
 }
