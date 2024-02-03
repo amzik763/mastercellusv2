@@ -111,7 +111,7 @@ fun LedText(){
 
         Text(
             modifier = Modifier.padding(start = 16.dp),
-            text = "Device Categories",
+            text = "LED BULB",
             fontWeight = FontWeight.SemiBold,
             fontSize = 18.sp,
             color = lightBlack,
