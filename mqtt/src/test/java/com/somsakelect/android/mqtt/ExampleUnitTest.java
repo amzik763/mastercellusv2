@@ -1,4 +1,4 @@
-package com.android.mqtt;
+package com.somsakelect.android.mqtt;
 
 import org.junit.Test;
 

@@ -132,8 +132,9 @@ class SecondViewModel(
      fun pubTempHumidCo2 ( temperature: String, humidity: String, co2: String) {
 
      if(isPresetPending){
-            return
          Toast.makeText(ct, "Update in Progress Already", Toast.LENGTH_LONG).show()
+
+            return
 
      }
 
@@ -184,6 +185,9 @@ class SecondViewModel(
                 PresetCounter = 3
 
             }
+        }else{
+            Toast.makeText(ct,"Client not connected",Toast.LENGTH_LONG).show()
+
         }
 
     } catch (e:Exception){

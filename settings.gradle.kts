@@ -12,7 +12,6 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-
 rootProject.name = "mastercellusv2"
 include(":app")
 include(":homeapplication")
