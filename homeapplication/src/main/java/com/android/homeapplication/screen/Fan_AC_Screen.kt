@@ -6,6 +6,7 @@ import android.content.pm.ActivityInfo
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -53,7 +54,10 @@ fun FanAcScreen(context : Context,viewModel: HomeAppViewModel){
 
     LazyColumn(modifier = Modifier
         .fillMaxWidth()
-        .fillMaxSize()
+        .fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.SpaceBetween
+
         //.padding(20.dp)
              ){
         item {
@@ -122,7 +126,7 @@ fun FanAcRow(
         mutableStateOf(viewModel.acState[category.id])
     }
     Box(modifier = Modifier
-        .padding(end = 15.dp, start = 15.dp)
+        .padding(end = 24.dp, start = 24.dp)
         .clickable {
             viewModel.acSwitch(category.id)
             clr.value = !clr.value

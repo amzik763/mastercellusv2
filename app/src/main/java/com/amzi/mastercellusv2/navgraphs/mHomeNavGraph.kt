@@ -32,7 +32,7 @@ fun NavGraphBuilder.homeNavGraph(
         }
 
         composable(route = Screens.Home.route){
-            HomeScreen(UiViewmodel())
+            HomeScreen(UiViewmodel(LocalContext.current))
         }
 
         composable(route = Screens.HomeAutomation.route){

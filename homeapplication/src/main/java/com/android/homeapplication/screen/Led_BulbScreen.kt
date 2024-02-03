@@ -7,6 +7,7 @@ import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -64,7 +65,9 @@ Column {
         modifier = Modifier
             .fillMaxWidth()
             .fillMaxHeight(),
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.SpaceBetween
+
         //.padding(20.dp)
     )
     {
@@ -169,7 +172,7 @@ fun BulbRow1(
         mutableStateOf<Boolean>(viewModel.bulbsState[category.id])
     }
     Box(modifier = Modifier
-        .padding(end = 15.dp, start = 15.dp)
+        .padding(end = 24.dp, start = 24.dp)
         .clickable {
             viewModel.bulbSwitch(category.id)
             clr.value = !clr.value
