@@ -54,6 +54,8 @@ import com.amzi.mastercellusv2.ui.theme.lightBlack
 import com.amzi.mastercellusv2.ui.theme.lightBlue
 import com.amzi.mastercellusv2.ui.theme.lightGrey
 import com.amzi.mastercellusv2.ui.theme.lightOrange
+import com.amzi.mastercellusv2.utility.KEY_HOMEAUTO_MACID
+import com.amzi.mastercellusv2.utility.KEY_MUSHROOM_MACID
 import com.android.mushroomapplication.R
 
 @Composable
@@ -361,7 +363,7 @@ fun MacIdHome(uiViewModel: UiViewmodel){
                             .padding(11.dp),
                         onClick = {
                             Log.d("Hey", "MAC IDDDD")
-                            uiViewModel.saveTextValue(macId)
+                            uiViewModel.macId(KEY_HOMEAUTO_MACID, macId)
                         }
                     )
                 }
@@ -447,7 +449,7 @@ fun MacIdMush(uiViewModel: UiViewmodel){
                             .padding(11.dp),
                         onClick = {
                             Log.d("Hey", "MAC IDDDD")
-                            uiViewModel.saveHomeMacId(macId)
+                            uiViewModel.macId(KEY_MUSHROOM_MACID ,macId)
                         }
                     )
                 }
