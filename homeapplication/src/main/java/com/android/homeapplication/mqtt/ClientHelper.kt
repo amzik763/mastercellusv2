@@ -2,7 +2,7 @@ package com.example.homeapplication.mqtt
 
 import android.content.Context
 import android.util.Log
-import com.android.mqtt.MqttAndroidClient
+import com.somsakelect.android.mqtt.MqttAndroidClient
 import org.eclipse.paho.client.mqttv3.*
 
 class MqttClientHelper(context: Context?) {

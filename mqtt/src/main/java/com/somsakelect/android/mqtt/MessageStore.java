@@ -1,4 +1,4 @@
-package com.android.mqtt;
+package com.somsakelect.android.mqtt;
 
 
 import org.eclipse.paho.client.mqttv3.MqttMessage;

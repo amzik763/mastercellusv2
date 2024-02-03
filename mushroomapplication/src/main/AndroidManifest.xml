@@ -8,7 +8,9 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application>
-        <service android:name="com.android.mqtt.MqttService" />
+<!--        <service android:name="com.android.mqtt.MqttService" />-->
+        <service android:name="com.somsakelect.android.mqtt.MqttService" />
+
     </application>
 
 </manifest>

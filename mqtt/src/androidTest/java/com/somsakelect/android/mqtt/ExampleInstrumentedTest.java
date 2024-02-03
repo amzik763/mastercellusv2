@@ -1,4 +1,4 @@
-package com.android.mqtt;
+package com.somsakelect.android.mqtt;
 
 import android.content.Context;
 
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("com.android.mqtt.test", appContext.getPackageName());
+        assertEquals("com.somsakelect.android.mqtt.test", appContext.getPackageName());
     }
 }

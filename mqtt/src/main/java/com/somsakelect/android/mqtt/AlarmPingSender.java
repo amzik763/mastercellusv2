@@ -1,4 +1,4 @@
-package com.android.mqtt;
+package com.somsakelect.android.mqtt;
 /*
  * This scripts is modified from https://github.com/eclipse/paho.mqtt.android/tree/master/org.eclipse.paho.android.service
  * for fixed error below on Android 12:

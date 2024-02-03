@@ -1,4 +1,4 @@
-package com.android.mqtt;
+package com.somsakelect.android.mqtt;
 
 
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
@@ -24,7 +24,7 @@ class MqttDeliveryTokenAndroid extends MqttTokenAndroid
     }
 
     /**
-     * @see org.eclipse.paho.client.mqttv3.IMqttDeliveryToken#getMessage()
+     * @see IMqttDeliveryToken#getMessage()
      */
     @Override
     public MqttMessage getMessage() throws MqttException {

@@ -2,12 +2,12 @@ package com.example.demo.ui.mqtt
 
 import android.content.Context
 import android.util.Log
-import com.android.mqtt.MqttAndroidClient
 import com.example.demo.Utility.sharedDataMushroom
 import com.example.demo.data.PresetData
 import com.example.demo.data.modelData
 import com.example.demo.viewmodels.SecondViewModel
 import com.google.gson.GsonBuilder
+import com.somsakelect.android.mqtt.MqttAndroidClient
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -88,7 +88,6 @@ class ClientHelper(context: Context?, secondViewModel: SecondViewModel) {
                         hum2.value = responseData.d.LIVE_HUMIDITY.toString()
                         co22.value = responseData.d.LIVE_CO2.toString()
                         svm.wname.value = responseData.info.ssid
-
 
                         if(svm.isPresetPending && svm.PresetCounter>0){
                             Log.d("UPDATE: ","PRESET PASSED")
@@ -273,6 +272,9 @@ class ClientHelper(context: Context?, secondViewModel: SecondViewModel) {
 
                 override fun onFailure(asyncActionToken: IMqttToken?, exception: Throwable?) {
                     Log.d(TAG, "Connection failure")
+                    Log.d(TAG, "Connection failure" + exception?.fillInStackTrace())
+                    Log.d(TAG, "Connection failure" + exception?.message.toString())
+                    exception?.printStackTrace()
                 }
             })
         } catch (e: MqttException) {
