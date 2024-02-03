@@ -3,6 +3,7 @@ package com.example.homeapplication.screen
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -21,17 +22,18 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.android.homeapplication.R
+import com.example.homeapplication.navigation.NavigationItem
 import com.example.homeapplication.ui.theme.lightBlack
 import com.example.homeapplication.ui.theme.lightGrey
 import com.example.homeapplication.ui.theme.lightOrange
 
-@Preview
+//@Preview
 @Composable
-fun HomeScreen(){
+fun HomeScreen(navController: NavHostController){
   Column (
       Modifier
           .fillMaxSize()
@@ -85,6 +87,9 @@ fun HomeScreen(){
               modifier = Modifier
                   .padding(start = 24.dp, end = 24.dp)
                   .border(1.dp, color = lightGrey, shape = RoundedCornerShape(8.dp))
+                  .clickable {
+                      navController.navigate(NavigationItem.LedBulbScreen.route)
+                  }
           ){
               Image(
                   modifier = Modifier
@@ -112,6 +117,9 @@ fun HomeScreen(){
               modifier = Modifier
                   .padding(start = 24.dp, end = 24.dp)
                   .border(1.dp, color = lightGrey, shape = RoundedCornerShape(8.dp))
+                  .clickable {
+                      navController.navigate(NavigationItem.FanAcScreen.route)
+                  }
           ){
               Image(
                   modifier = Modifier
@@ -139,6 +147,9 @@ fun HomeScreen(){
               modifier = Modifier
                   .padding(start = 24.dp, end = 24.dp)
                   .border(1.dp, color = lightGrey, shape = RoundedCornerShape(8.dp))
+                  .clickable {
+                      navController.navigate(NavigationItem.FanAcScreen.route)
+                  }
           ){
               Image(
                   modifier = Modifier

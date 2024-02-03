@@ -358,12 +358,12 @@ fun fetchWifiList(
 //    val sc = wifiManager.scanResults
 //    wifiListState.value = sc
     try {
-        Log.d("wifi name: ", sc.get(0).BSSID.toString())
-        Log.d("wifi name: ", sc.get(0).BSSID.toString())
-        Log.d("wifi name: ", sc.get(1).BSSID.toString())
-        Log.d("wifi name: ", sc.get(1).level.toString())
-        Log.d("wifi name: ", sc.get(1).SSID)
-        Log.d("wifi name: ", sc.get(0).SSID)
+//        Log.d("wifi name: ", sc.get(0).BSSID.toString())
+//        Log.d("wifi name: ", sc.get(0).BSSID.toString())
+//        Log.d("wifi name: ", sc.get(1).BSSID.toString())
+//        Log.d("wifi name: ", sc.get(1).level.toString())
+//        Log.d("wifi name: ", sc.get(1).SSID)
+//        Log.d("wifi name: ", sc.get(0).SSID)
 
     } catch (e: Exception) {
 
