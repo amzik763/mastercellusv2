@@ -40,7 +40,7 @@ class UiViewmodel(context: Context) : ViewModel() {
     }
 
     fun getMacId(key: String): String {
-        return sharedPreferences.getString(key, "") ?: ""
+        return sharedPreferences.getString(key, "Not Registered") ?: "Not Registered"
     }
 
 }

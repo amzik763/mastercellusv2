@@ -26,6 +26,7 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -61,15 +62,16 @@ import com.android.mushroomapplication.R
 @Composable
 fun HomeScreen(
 //  navHostController: NavHostController
+
     uiViewModel: UiViewmodel,
 ) {
+
     var ct = LocalContext.current
     Log.d("AMZI: ","hello a")
 
     Column(
         Modifier
             .fillMaxSize()
-
 
     ) {
         Row (modifier = Modifier
@@ -103,9 +105,7 @@ fun HomeScreen(
                 )
             }
         }
-
         Spacer(modifier = Modifier.height(36.dp))
-
         Text(
             modifier = Modifier.padding(start = 16.dp, end = 16.dp),
             text = "App List",
@@ -115,7 +115,6 @@ fun HomeScreen(
         )
 
         Spacer(modifier = Modifier.height(12.dp))
-
         Divider(
             modifier = Modifier
                 .fillMaxWidth()
@@ -158,7 +157,7 @@ fun HomeScreen(
                     )
                     Row{
                         Text(
-                            text = "Not Registered",
+                            text = uiViewModel.getMacId(KEY_HOMEAUTO_MACID),
                             fontWeight = FontWeight.Bold,
                             fontSize = 10.sp,
                             color = lightBlue,
@@ -200,9 +199,7 @@ fun HomeScreen(
 
 
         }
-
         Spacer(modifier = Modifier.height(10.dp))
-
         if (uiViewModel.showHomeMacId) {
             MacIdHome(uiViewModel)
         }
@@ -224,7 +221,9 @@ fun HomeScreen(
                     contentDescription = "Mushroom",
                     contentScale = ContentScale.Crop,
                 )
-                Column (modifier = Modifier.padding(start = 12.dp)
+
+                Column (modifier = Modifier
+                    .padding(start = 12.dp)
                     .clickable {
                         uiViewModel.toggleMushMacIdVisibility()
                     }){
@@ -236,7 +235,7 @@ fun HomeScreen(
                     )
                     Row{
                         Text(
-                            text = "Not Registered",
+                            text = uiViewModel.getMacId(KEY_MUSHROOM_MACID),
                             fontWeight = FontWeight.Bold,
                             fontSize = 10.sp,
                             color = lightBlue,
@@ -274,6 +273,7 @@ fun HomeScreen(
                     onClick = {
                         var a = Intent(ct, com.android.mushroomapplication.MainActivity::class.java)
                         startActivity(ct, a, null)
+
                         mNavigator.navigateTo(Screens.Detail.passNameandID("abc", "amzad"))
                     }
                 )
@@ -285,6 +285,8 @@ fun HomeScreen(
         }
     }
 }
+
+
 @Composable
 fun MacIdHome(uiViewModel: UiViewmodel){
     Card(
@@ -312,8 +314,17 @@ fun MacIdHome(uiViewModel: UiViewmodel){
                     color = Gray
                 )
             }
-            var macId1 by remember { mutableStateOf("NOT REGISTERED") }
-            macId1 = uiViewModel.getMacId(KEY_HOMEAUTO_MACID)
+            var macIdHome by remember { mutableStateOf("") }
+            LaunchedEffect(key1 = uiViewModel.showHomeMacId, block = {
+               // macIdHome = uiViewModel.getMacId(KEY_HOMEAUTO_MACID)
+
+            })
+            if (!uiViewModel.showHomeMacId) {
+//                MacIdHome(uiViewModel)
+                 // macIdHome = uiViewModel.getMacId(KEY_HOMEAUTO_MACID)
+
+            }
+
 
             Row (modifier = Modifier
                 .fillMaxWidth()
@@ -326,8 +337,8 @@ fun MacIdHome(uiViewModel: UiViewmodel){
                     unfocusedBorderColor = Grey,
                     focusedLabelColor = lightBlack,
                     textColor = lightBlack
-                ),value = macId1,
-                    onValueChange ={ newText -> macId1 = newText },
+                ),value = macIdHome,
+                    onValueChange ={ newText -> macIdHome = newText },
                     shape = RoundedCornerShape(8.dp),
                     maxLines = 1,
                     modifier = Modifier
@@ -362,7 +373,7 @@ fun MacIdHome(uiViewModel: UiViewmodel){
                             .padding(11.dp),
                         onClick = {
                             Log.d("Home Screen macId", "show mac Id")
-                            uiViewModel.macId(KEY_HOMEAUTO_MACID, macId1)
+                            uiViewModel.macId(KEY_HOMEAUTO_MACID, macIdHome)
                         }
                     )
                 }
@@ -370,71 +381,72 @@ fun MacIdHome(uiViewModel: UiViewmodel){
         }
     }
 }
+
+
 @Composable
-fun MacIdMush(uiViewModel: UiViewmodel) {
+fun MacIdMush(uiViewModel: UiViewmodel){
     Card(
         shape = RoundedCornerShape(8.dp),
         modifier = Modifier
             .padding(start = 24.dp, end = 24.dp)
             .border(1.dp, color = lightGrey, shape = RoundedCornerShape(8.dp))
     ) {
-        Column(
-            modifier = Modifier
-                .padding(8.dp)
-                .fillMaxWidth()
-        ) {
-            Row(
+        Column (modifier = Modifier
+            .padding(8.dp)
+            .fillMaxWidth()){
+            Row (
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(4.dp),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Text(
-                    text = "Enter Device ID:",
+                horizontalArrangement = Arrangement.SpaceBetween){
+                Text(text = "Enter Device ID:",
                     fontSize = 14.sp,
-                    color = lightBlack
-                )
+                    color = lightBlack)
 
-                Text(
-                    text = "HIDE",
+                Text(text = "HIDE",
                     fontSize = 14.sp,
                     fontWeight = FontWeight.Bold,
                     fontStyle = FontStyle.Italic,
                     color = Gray
                 )
             }
-            var macIdMush by remember { mutableStateOf("NOT REGISTERED") }
-            macIdMush = uiViewModel.getMacId(KEY_MUSHROOM_MACID)
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(start = 16.dp, top = 4.dp, end = 24.dp, bottom = 12.dp),
+            var macIdMush by remember { mutableStateOf("") }
+            LaunchedEffect(key1 = uiViewModel.showMushMacId, block = {
+                //macIdMush = uiViewModel.getMacId(KEY_MUSHROOM_MACID)
+
+            })
+            if (!uiViewModel.showMushMacId) {
+//                MacIdHome(uiViewModel)
+                //macIdMush = uiViewModel.getMacId(KEY_MUSHROOM_MACID)
+
+            }
+//            macIdMush = uiViewModel.getMacId(KEY_MUSHROOM_MACID)
+
+            Row (modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 16.dp, top = 4.dp, end = 24.dp, bottom = 12.dp),
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
+                horizontalArrangement = Arrangement.SpaceBetween){
 
                 OutlinedTextField(colors = TextFieldDefaults.outlinedTextFieldColors(
                     focusedBorderColor = lightBlack,
                     unfocusedBorderColor = Grey,
                     focusedLabelColor = lightBlack,
                     textColor = lightBlack
-                ), value = macIdMush,
-                    onValueChange = { newText -> macIdMush = newText },
+                ),value = macIdMush,
+                    onValueChange ={ newText -> macIdMush = newText },
                     shape = RoundedCornerShape(8.dp),
                     maxLines = 1,
                     modifier = Modifier
                         .fillMaxWidth(0.7f)
                         .height(56.dp),
                     label = {
-                        Text(
-                            text = "Enter MacId",
+                        Text(text = "Enter MacId",
                             style = TextStyle(
-                                fontSize = 10.sp
-                            ),
+                                fontSize = 10.sp),
                             color = lightBlack,
-                            modifier = Modifier.padding(0.dp)
-                        )
-                    }
+                            modifier = Modifier.padding(0.dp))
+                    },
                 )
                 Surface(
                     modifier = Modifier
@@ -450,14 +462,14 @@ fun MacIdMush(uiViewModel: UiViewmodel) {
                             color = Color.White,
                             fontSize = 12.sp,
                             fontWeight = FontWeight.Bold,
-                            textAlign  = TextAlign.Center
+                            textAlign = TextAlign.Center
                         ),
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(11.dp),
                         onClick = {
                             Log.d("Home Screen macId", "show mac Id")
-                            uiViewModel.macId(KEY_MUSHROOM_MACID, macIdMush)
+                            uiViewModel.macId(KEY_MUSHROOM_MACID ,macIdMush)
                         }
                     )
                 }
@@ -465,3 +477,5 @@ fun MacIdMush(uiViewModel: UiViewmodel) {
         }
     }
 }
+
+
