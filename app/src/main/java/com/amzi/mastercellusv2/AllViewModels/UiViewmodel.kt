@@ -28,6 +28,7 @@ class UiViewmodel(context: Context) : ViewModel() {
         showMushMacId = !showMushMacId
     }
 
+
   //SHARED PREFERENCES
 
     private val sharedPreferences: SharedPreferences

@@ -117,7 +117,6 @@ fun FanACRow(viewModel: HomeAppViewModel){
         }
     }
 }
-
 @Composable
 fun FanAcRow(
     category: Category,

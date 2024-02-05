@@ -22,10 +22,6 @@ fun NavGraphBuilder.homeNavGraph(
         startDestination = Screens.Home.route,
         route = mGraph.HOME
     ){
-//        starterNavGraph(navController)
-//        composable(route = Screens.Starter.route){
-//            StarterScreen()
-//        }
 
         composable(route = mGraph.STARTER){
             MainStarterScreen()
