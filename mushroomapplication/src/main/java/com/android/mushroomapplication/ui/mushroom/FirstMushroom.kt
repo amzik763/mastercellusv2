@@ -97,8 +97,7 @@ fun Title(navController: NavHostController? = null, secondViewModel: SecondViewM
                 Row(modifier = Modifier
                     .background(color = Color.White)
                     ,verticalAlignment = Alignment.CenterVertically){
-
-                        //Cti Logo
+            //Cti Logo
                         Image(
                             modifier = Modifier
                                 .padding(16.dp)
