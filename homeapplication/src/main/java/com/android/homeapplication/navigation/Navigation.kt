@@ -30,7 +30,6 @@ import com.example.homeapplication.viewModel.HomeAppViewModel
 @Composable
 fun NavigationController (navController: NavHostController, context: Context){
 
-
     val viewModel = viewModel<HomeAppViewModel>(
         factory = object : ViewModelProvider.Factory {
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -40,7 +39,6 @@ fun NavigationController (navController: NavHostController, context: Context){
             }
         }
     )
-
     NavHost(navController = navController, startDestination = NavigationItem.HomeScreen.route){
         composable (NavigationItem.HomeScreen.route) {
             HomeScreen(navController

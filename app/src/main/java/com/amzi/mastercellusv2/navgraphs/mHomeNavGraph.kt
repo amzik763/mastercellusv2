@@ -18,12 +18,10 @@ import com.example.homeapplication.navigation.Navigation
 fun NavGraphBuilder.homeNavGraph(
     navController: NavHostController
 ){
-
     navigation(
         startDestination = Screens.Home.route,
         route = mGraph.HOME
     ){
-
         composable(route = mGraph.STARTER){
             MainStarterScreen()
         }
