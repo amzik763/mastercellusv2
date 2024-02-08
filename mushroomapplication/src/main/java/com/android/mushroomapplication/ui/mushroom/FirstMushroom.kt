@@ -498,6 +498,7 @@ fun Title(navController: NavHostController? = null, secondViewModel: SecondViewM
                     }
                     Column(modifier = Modifier.padding(10.dp)){
 
+
                         Text(
                             text = "Contact us",
                             fontSize = 14.sp,

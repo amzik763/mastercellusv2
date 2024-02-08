@@ -48,6 +48,7 @@ import com.example.homeapplication.viewModel.HomeAppViewModel
 @Composable
 fun FanAcScreen(context : Context,viewModel: HomeAppViewModel){
 
+
     // Lock the screen orientation to portrait mode
     val activity = LocalContext.current as Activity
     activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
