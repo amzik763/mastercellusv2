@@ -58,7 +58,6 @@ fun LedBulbScreen(context :Context,viewModel: HomeAppViewModel){
     activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 Column {
 
-
     LedText()
 
     LazyColumn(
@@ -67,7 +66,6 @@ Column {
             .fillMaxHeight(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceBetween
-
         //.padding(20.dp)
     )
     {

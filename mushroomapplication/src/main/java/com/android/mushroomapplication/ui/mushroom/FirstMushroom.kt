@@ -82,7 +82,6 @@ fun Title(navController: NavHostController? = null, secondViewModel: SecondViewM
                 contentScale = ContentScale.FillBounds
             )
     ) {
-
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -530,15 +529,11 @@ fun Title(navController: NavHostController? = null, secondViewModel: SecondViewM
                                 fontWeight = FontWeight.Bold,
 
                                 )
-
                         }
                     }
                 }
-
-
-                }
-
             }
+        }
         }
     }
 @Preview(showBackground = true)

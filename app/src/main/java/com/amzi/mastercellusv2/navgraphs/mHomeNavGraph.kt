@@ -35,8 +35,6 @@ fun NavGraphBuilder.homeNavGraph(
             Navigation(LocalContext.current)
 
         }
-
-
         composable(route = Screens.Detail.route,
             arguments = listOf(
                 navArgument(DETAILS_ARGUMENT_KEY){
@@ -52,21 +50,6 @@ fun NavGraphBuilder.homeNavGraph(
             Log.d("AMZI: ", it.arguments?.getString(DETAILS_ARGUMENT_NAME).toString())
             DetailsScreen(it.arguments?.getString(DETAILS_ARGUMENT_NAME).toString())
         }
-
-
-
-      /*  composable(route = Screens.Splash.route,
-            arguments = listOf(
-                navArgument(AUTH_ARGUMENT_ID){
-                    type = NavType.IntType
-                    defaultValue = 0
-                }
-            )){
-
-            Log.d("AMZI: ", it.arguments?.getInt(AUTH_ARGUMENT_ID).toString())
-            SplashScreen()
-        }*/
-
     }
 
 
