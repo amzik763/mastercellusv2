@@ -156,6 +156,8 @@ class MainActivity : ComponentActivity() {
                    }*/
                 }
 
+
+
 //                App(this, secondViewModel)
 //                mDialog(secondViewModel,wifiManager,thisActivity)
 //                Log.d("Launching", "App 2")
@@ -182,8 +184,6 @@ class MainActivity : ComponentActivity() {
             }
         }
     }*/
-
-
 
 @RequiresApi(Build.VERSION_CODES.Q)
 @Composable
