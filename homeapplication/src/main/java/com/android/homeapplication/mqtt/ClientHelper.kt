@@ -22,19 +22,13 @@ class MqttClientHelper(context: Context?) {
         mqttAndroidClient.setCallback(callback)
     }
 
-
     init {
-
-
         try {
-
             mqttAndroidClient = MqttAndroidClient(context, serverUri, clientId)
             mqttAndroidClient.setCallback(object : MqttCallbackExtended {
 
-
                 override fun connectComplete(b: Boolean, s: String) {
                     Log.w(TAG, s)
-
                 }
 
                 override fun connectionLost(throwable: Throwable) {

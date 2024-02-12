@@ -62,18 +62,13 @@ import com.android.mushroomapplication.R
 @Composable
 fun HomeScreen(
 //  navHostController: NavHostController
-
     uiViewModel: UiViewmodel,
 ) {
-
-
     var ct = LocalContext.current
     Log.d("AMZI: ","hello a")
-
     Column(
         Modifier
             .fillMaxSize()
-
     ) {
         Row (modifier = Modifier
             .fillMaxWidth()
@@ -87,7 +82,6 @@ fun HomeScreen(
                 painter = painterResource(id = R.drawable.skaio),
                 contentDescription = "My Icon",
             )
-
             Row (verticalAlignment = Alignment.CenterVertically){
                 Image(
                     modifier = Modifier

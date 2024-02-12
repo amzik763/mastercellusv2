@@ -156,8 +156,6 @@ class MainActivity : ComponentActivity() {
                    }*/
                 }
 
-
-
 //                App(this, secondViewModel)
 //                mDialog(secondViewModel,wifiManager,thisActivity)
 //                Log.d("Launching", "App 2")
