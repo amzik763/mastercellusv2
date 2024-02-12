@@ -48,7 +48,7 @@ fun Title(navController: NavHostController? = null, secondViewModel: SecondViewM
 
     // Lock the screen orientation to portrait mode
     val activity = LocalContext.current as Activity
-    activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+    activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
 
     Log.w(TAG, "checking..........................")
 
@@ -482,20 +482,14 @@ fun Title(navController: NavHostController? = null, secondViewModel: SecondViewM
                             modifier = Modifier
                                 .padding(10.dp)
                                 .size(24.dp)
-
-
                         ) {
                             Image(
                                 painter = painterResource(id = R.drawable.phone),
                                 contentDescription = "Setting button",
                                 modifier = Modifier
                                     .padding(start = 3.dp)
-                                   // .size(24.dp)
-
-
                             )
-
-                    }
+                        }
                     Column(modifier = Modifier.padding(10.dp)){
 
                         Text(
@@ -517,8 +511,6 @@ fun Title(navController: NavHostController? = null, secondViewModel: SecondViewM
                                 //color = Color(0xFF90EE90),
                                 color = Color.Black,
                                 fontWeight = FontWeight.Bold,
-//                    modifier = Modifier
-                                //    .padding(top = 5.dp,start = 5.dp)
                             )
                             Spacer(modifier = Modifier.width(8.dp))
                             Text(
