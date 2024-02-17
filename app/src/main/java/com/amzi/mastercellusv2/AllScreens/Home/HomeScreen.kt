@@ -274,7 +274,7 @@ fun HomeScreen(
                         var a = Intent(ct, com.android.mushroomapplication.MainActivity::class.java)
                         startActivity(ct, a, null)
 
-                        mNavigator.navigateTo(Screens.Detail.passNameandID("abc", "amzad"))
+//                        mNavigator.navigateTo(Screens.Detail.passNameandID("abc", "amzad"))
                     }
                 )
             }
