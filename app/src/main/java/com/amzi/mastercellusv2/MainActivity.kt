@@ -183,8 +183,6 @@ class MainActivity : ComponentActivity() {
         }
     }*/
 
-
-
 @RequiresApi(Build.VERSION_CODES.Q)
 @Composable
 fun App(context: Context, secondViewModel: SecondViewModel) {
