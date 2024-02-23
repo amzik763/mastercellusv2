@@ -1,5 +1,6 @@
 package com.amzi.mastercellusv2.navgraphs
 
+import android.content.Context
 import androidx.compose.runtime.LaunchedEffect
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraphBuilder
@@ -21,7 +22,7 @@ import com.amzi.mastercellusv2.Repository.AuthRepo
 import com.amzi.mastercellusv2.utility.mGraph
 
 fun NavGraphBuilder.authNavGraph(
-    navController: NavHostController
+    navController: NavHostController,
 ){
 
     val authAPI: AuthAPIs by lazy {

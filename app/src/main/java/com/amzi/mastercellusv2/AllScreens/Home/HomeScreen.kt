@@ -1,5 +1,6 @@
 package com.amzi.mastercellusv2.AllScreens.Home
 
+import android.app.Activity
 import android.content.Intent
 import android.util.Log
 import androidx.compose.foundation.BorderStroke
@@ -65,6 +66,7 @@ fun HomeScreen(
     uiViewModel: UiViewmodel,
 ) {
     var ct = LocalContext.current
+    val activity = (LocalContext.current as? Activity)
     Log.d("AMZI: ","hello a")
     Column(
         Modifier
@@ -94,9 +96,13 @@ fun HomeScreen(
                 Image(
                     modifier = Modifier
 //                    .padding(8.dp)
-                        .size(height = 27.dp, width = 32.dp),
+                        .size(height = 27.dp, width = 32.dp)
+                        .clickable {
+                                   activity?.finishAffinity()
+                        },
                     painter = painterResource(id = com.amzi.mastercellusv2.R.drawable.ic_logout),
                     contentDescription = "User",
+
                 )
             }
         }
@@ -269,7 +275,7 @@ fun HomeScreen(
                         var a = Intent(ct, com.android.mushroomapplication.MainActivity::class.java)
                         startActivity(ct, a, null)
 
-                        mNavigator.navigateTo(Screens.Detail.passNameandID("abc", "amzad"))
+//                        mNavigator.navigateTo(Screens.Detail.passNameandID("abc", "amzad"))
                     }
                 )
             }
@@ -472,5 +478,7 @@ fun MacIdMush(uiViewModel: UiViewmodel){
         }
     }
 }
+
+
 
 

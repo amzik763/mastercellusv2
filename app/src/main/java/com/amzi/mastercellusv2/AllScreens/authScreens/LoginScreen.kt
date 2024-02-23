@@ -1,5 +1,8 @@
 package com.amzi.mastercellusv2.AllScreens.authScreens
 
+import android.app.Fragment
+import android.content.Context
+import android.widget.Toast
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -19,6 +22,7 @@ import androidx.compose.material.Icon
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.currentCompositionLocalContext
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -26,6 +30,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
@@ -35,17 +40,21 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.ContentProviderCompat.requireContext
 import com.amzi.mastercellusv2.AllViewModels.RegisterViewModel
 import com.amzi.mastercellusv2.R
 import com.amzi.mastercellusv2.navgraphs.Screens
 import com.amzi.mastercellusv2.navgraphs.mNavigator
 import com.amzi.mastercellusv2.utility.mGraph
 import com.amzi.mastercellusv2.utility.showLogs
+import com.android.mushroomapplication.showToast
 import com.android.updatedsoftstarter.components.LoginInputText
 
 
 @Composable
 fun LoginScreen(viewModel: RegisterViewModel) {
+
+    val ct = LocalContext.current
     val registerViewModel = viewModel
 
     showLogs("login: ", registerViewModel.mobNum)
@@ -53,6 +62,7 @@ fun LoginScreen(viewModel: RegisterViewModel) {
     var mobNum by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var fcm_token by remember { mutableStateOf("") }
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -79,6 +89,9 @@ fun LoginScreen(viewModel: RegisterViewModel) {
             )
         )
         Spacer(modifier = Modifier.height(20.dp))
+
+
+
         LoginInputText(
             modifier = Modifier
                 .padding(top = 9.dp, bottom = 8.dp),
@@ -121,6 +134,9 @@ fun LoginScreen(viewModel: RegisterViewModel) {
             )
         )
         Spacer(modifier = Modifier.height(30.dp))
+
+
+
         Surface(
             modifier = Modifier
                 .padding(start = 50.dp, end = 50.dp),
@@ -143,11 +159,21 @@ fun LoginScreen(viewModel: RegisterViewModel) {
                     .align(Alignment.CenterHorizontally),
                 onClick = {
 //                    mNavigator.navigateTo(mGraph.STARTER)
-                    mNavigator.navigateTo(Screens.Home.route)
+                    if (
+                        (mobNum == "9416922877" && password == "cellus")||
+                        (mobNum == "9721174847" && password == "cellus") ||
+                        (mobNum == "8239172431" && password == "cellus"))
+                    {
+                        mNavigator.navigateTo(Screens.Home.route)
+
+                    } else{
+                        Toast.makeText(ct, "Login Unsuccessful", Toast.LENGTH_LONG).show()
+                    }
 //                    registerViewModel.loginUser(mobNum,password,fcm_token)
                 }
             )
         }
+
         Row(modifier = Modifier.padding(top = 15.dp, start = 100.dp)){
             Text(
                 text = "Forgot your password? ",
