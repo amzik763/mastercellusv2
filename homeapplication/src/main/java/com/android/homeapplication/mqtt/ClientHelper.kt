@@ -22,6 +22,7 @@ class MqttClientHelper(context: Context?) {
         mqttAndroidClient.setCallback(callback)
     }
 
+
     init {
         try {
             mqttAndroidClient = MqttAndroidClient(context, serverUri, clientId)
