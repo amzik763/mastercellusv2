@@ -12,7 +12,8 @@ package com.example.homeapplication.mqtt
 const val MQTT_HOST = "3.110.187.253"
 const val MQTT_PORT = "1883"
 const val MQTT_USERNAME = ""
-const val MQTT_PASSWORD = ""
+const val MAC_HA = "70:04:1D:55:92:BC"
+const val OLD_MAC = "70:04:1D:55:92:4A"
 
 const val CONNECTION_TIMEOUT = 3
 const val CONNECTION_KEEP_ALIVE_INTERVAL = 60

@@ -5,6 +5,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.homeapplication.mqtt.MAC_HA
 import com.example.homeapplication.mqtt.MqttClientHelper
 import kotlinx.coroutines.launch
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken
@@ -75,7 +76,7 @@ import org.eclipse.paho.client.mqttv3.MqttMessage
             // Build the message with the sum
             val message = "UPDATE_HOME_AUTOMATION_DATA=$sumOfIds,0,0"
             Log.w("tag", message)
-            mqttClient.publish("HA/70:04:1D:55:92:4A/$/command", message)
+            mqttClient.publish("HA/$MAC_HA/$/command", message)
 
             mqttClient.subscribe("HA/HOME_AUTO/status${id}")
             // Show a Toast message when the status changes
@@ -107,7 +108,7 @@ import org.eclipse.paho.client.mqttv3.MqttMessage
         // Build the message with the sum
         val message = "UPDATE_HOME_AUTOMATION_DATA=$sumOfIds,0,0"
         Log.w("tag", message)
-        mqttClient.publish("HA/70:04:1D:55:92:4A/$/command", message)
+        mqttClient.publish("HA/$MAC_HA/$/command", message)
 
         mqttClient.subscribe("HA/HOME_AUTO/status${id}")
         // Show a Toast message when the status changes

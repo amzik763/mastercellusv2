@@ -28,7 +28,7 @@ class MqttClientHelper(context: Context?) {
             mqttAndroidClient.setCallback(object : MqttCallbackExtended {
 
                 override fun connectComplete(b: Boolean, s: String) {
-                    Log.w(TAG, s)
+                    Log.w(TAG,  s)
                 }
 
                 override fun connectionLost(throwable: Throwable) {
