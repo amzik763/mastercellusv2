@@ -21,6 +21,7 @@ const val CONNECTION_CLEAN_SESSION = true
 const val CONNECTION_RECONNECT = true
 
 
+
 // Other options
 //const val SOLACE_CONNECTION_TIMEOUT = 3
 //const val SOLACE_CONNECTION_KEEP_ALIVE_INTERVAL = 60

@@ -7,6 +7,8 @@ import org.eclipse.paho.client.mqttv3.*
 
 class MqttClientHelper(context: Context?) {
 
+    var MAC_ID = ""
+
     companion object {
         const val TAG = "MqttClientHelper"
     }
@@ -21,6 +23,8 @@ class MqttClientHelper(context: Context?) {
     }
 
     init {
+
+
         if(mqttAndroidClient == null){
             mqttAndroidClient = MqttAndroidClient(context, serverUri, clientId)
             mqttAndroidClient!!.setCallback(object : MqttCallbackExtended {
@@ -48,6 +52,10 @@ class MqttClientHelper(context: Context?) {
             connect()
         }
 
+        ////////log mcid
+
+        Log.d("Shared MacID", MAC_ID)
+
     }
 
     private fun connect() {
@@ -72,6 +80,7 @@ class MqttClientHelper(context: Context?) {
                     mqttAndroidClient!!.setBufferOpts(disconnectedBufferOptions)
 //                    val macId = "70:04:1D:55:7C:28"
                      val macId = "70:04:1D:55:94:9A"
+
 
                     subscribe("Mashroom/Green/status",1)
                     subscribe("Mashroom/$MAC_ID/$/command",1)

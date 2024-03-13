@@ -32,6 +32,7 @@ class ClientHelper(context: Context?, secondViewModel: SecondViewModel) {
     lateinit var hum:String
     lateinit var co2:String
 
+    var MAC_ID = secondViewModel.MAC_ID
 
     // TAG
     companion object {

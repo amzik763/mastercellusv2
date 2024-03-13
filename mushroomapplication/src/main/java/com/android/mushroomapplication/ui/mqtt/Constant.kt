@@ -22,9 +22,12 @@ const val CONNECTION_RECONNECT = true
 
 const val NEW_MAC_ID = "70:04:1D:55:9E:5A"
 const val MAC_ID_perm = "70:04:1D:55:94:9A"
-const val MAC_ID = "70:04:1D:55:7C:28"
+//const val MAC_ID = "70:04:1D:55:7C:28"
 const val MAC_ID2 = "48:27:E2:45:63:C0"
 //const val SOLACE_CONNECTION_TIMEOUT = 3
 //const val SOLACE_CONNECTION_KEEP_ALIVE_INTERVAL = 60
 //const val SOLACE_CONNECTION_CLEAN_SESSION = true
 //const val SOLACE_CONNECTION_RECONNECT = true
+
+
+

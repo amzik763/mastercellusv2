@@ -1,6 +1,7 @@
 package com.example.demo.viewmodels
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.net.wifi.WifiManager
 import android.util.Log
 import android.widget.Toast
@@ -10,17 +11,21 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.demo.Utility.KEY_MUSHROOM_MACID
+import com.example.demo.Utility.PREFERNCES_NAME
 import com.example.demo.Utility.sharedDataMushroom
 import com.example.demo.data.modelData
 import com.example.demo.ui.mqtt.ClientHelper
-import com.example.demo.ui.mqtt.MAC_ID
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
+
 class SecondViewModel(
      context: Context,
      wifiManager: WifiManager
      ) : ViewModel() {
 
+
+         var MAC_ID = ""
     //wifi pending
     var isWifiPending:Boolean = false
     var wifiCounter = 3
@@ -37,7 +42,7 @@ class SecondViewModel(
 
 
      val ct = context
-        var myContext = context
+     var myContext = context
     var currentSSID = ""
     var checkPermission by mutableStateOf(0)
     val mqttClient = ClientHelper(context.applicationContext,this)
@@ -111,6 +116,8 @@ class SecondViewModel(
                Log.d("not","find me")
                startFetchingData2()
           }
+
+        MAC_ID = getMacId(KEY_MUSHROOM_MACID)
 
 
      }
@@ -214,6 +221,22 @@ class SecondViewModel(
             mqttClient.publish("Mashroom/$MAC_ID/$/command", formatedData)
         }
     }
+
+    //SHARED PREFERENCES
+
+    private val sharedPreferences: SharedPreferences
+        get() = myContext.getSharedPreferences(PREFERNCES_NAME, Context.MODE_PRIVATE)
+
+    /*fun macId(key: String, macId: String) {
+        val editor: SharedPreferences.Editor = sharedPreferences.edit()
+        editor.putString(key, macId)
+        editor.apply()
+    }*/
+
+    fun getMacId(key: String): String {
+        return sharedPreferences.getString(key, "Not Registered") ?: "Not Registered"
+    }
+
     fun showToast() {
 //        Toast.makeText(conte,"Please Enable Location",Toast.LENGTH_LONG).show()
     }

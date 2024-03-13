@@ -6,8 +6,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import com.amzi.mastercellusv2.utility.KEY_HOMEAUTO_MACID
-import com.amzi.mastercellusv2.utility.KEY_MUSHROOM_MACID
 import com.amzi.mastercellusv2.utility.PREFERNCES_NAME
 
 class UiViewmodel(context: Context) : ViewModel() {

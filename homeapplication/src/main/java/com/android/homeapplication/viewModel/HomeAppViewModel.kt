@@ -1,21 +1,25 @@
 package com.example.homeapplication.viewModel
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.homeapplication.mqtt.MAC_HA
 import com.example.homeapplication.mqtt.MqttClientHelper
+import com.example.homeapplication.utility.KEY_HOMEAUTO_MACID
+import com.example.homeapplication.utility.PREFERNCES_NAME
 import kotlinx.coroutines.launch
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken
 import org.eclipse.paho.client.mqttv3.MqttCallbackExtended
 import org.eclipse.paho.client.mqttv3.MqttMessage
 
-    //class HomeAppViewModel(context:Context):ViewModel(){
+//class HomeAppViewModel(context:Context):ViewModel(){
     class HomeAppViewModel(private val context: Context):ViewModel(){
 
-    private val mqttClient = MqttClientHelper(context.applicationContext)
+        val mContext = context
+
+        private val mqttClient = MqttClientHelper(context.applicationContext)
     var bulbsState = mutableListOf<Boolean>()
     var acState = mutableListOf<Boolean>()//fan and ac state
 
@@ -66,6 +70,9 @@ import org.eclipse.paho.client.mqttv3.MqttMessage
 //    }
     fun bulbSwitch(id: Int) {
 
+
+        val homeMac = getMacId(KEY_HOMEAUTO_MACID)
+
         try {
             bulbsState[id] = !bulbsState[id] // Toggle the state for the given ID
             Log.w("tag", "${bulbsState[id].toString()}")
@@ -76,7 +83,7 @@ import org.eclipse.paho.client.mqttv3.MqttMessage
             // Build the message with the sum
             val message = "UPDATE_HOME_AUTOMATION_DATA=$sumOfIds,0,0"
             Log.w("tag", message)
-            mqttClient.publish("HA/$MAC_HA/$/command", message)
+            mqttClient.publish("HA/$homeMac/$/command", message)
 
             mqttClient.subscribe("HA/HOME_AUTO/status${id}")
             // Show a Toast message when the status changes
@@ -99,6 +106,9 @@ import org.eclipse.paho.client.mqttv3.MqttMessage
 //        mqttClient.publish("HA/70:04:1D:55:92:48/$/command", message)
 // }
     fun acSwitch(id: Int) {
+
+        val homeMac = getMacId(KEY_HOMEAUTO_MACID)
+
         acState[id] = !acState[id] // Toggle the state for the given ID
         Log.w("tag","${acState[id].toString()}")
 
@@ -108,11 +118,27 @@ import org.eclipse.paho.client.mqttv3.MqttMessage
         // Build the message with the sum
         val message = "UPDATE_HOME_AUTOMATION_DATA=$sumOfIds,0,0"
         Log.w("tag", message)
-        mqttClient.publish("HA/$MAC_HA/$/command", message)
+        mqttClient.publish("HA/$homeMac/$/command", message)
 
         mqttClient.subscribe("HA/HOME_AUTO/status${id}")
         // Show a Toast message when the status changes
         val statusMessage = if (bulbsState[id]) "Device id $id is on" else "Device id $id is off"
         Toast.makeText(context, statusMessage, Toast.LENGTH_SHORT).show()
     }
+
+
+        //SHARED PREFERENCES
+
+        private val sharedPreferences: SharedPreferences
+            get() = mContext.getSharedPreferences(PREFERNCES_NAME, Context.MODE_PRIVATE)
+
+        /*fun macId(key: String, macId: String) {
+            val editor: SharedPreferences.Editor = sharedPreferences.edit()
+            editor.putString(key, macId)
+            editor.apply()
+        }*/
+
+        fun getMacId(key: String): String {
+            return sharedPreferences.getString(key, "Not Registered") ?: "Not Registered"
+        }
 }

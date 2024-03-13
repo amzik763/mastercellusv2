@@ -56,9 +56,10 @@ import com.amzi.mastercellusv2.ui.theme.lightBlack
 import com.amzi.mastercellusv2.ui.theme.lightBlue
 import com.amzi.mastercellusv2.ui.theme.lightGrey
 import com.amzi.mastercellusv2.ui.theme.lightOrange
-import com.amzi.mastercellusv2.utility.KEY_HOMEAUTO_MACID
-import com.amzi.mastercellusv2.utility.KEY_MUSHROOM_MACID
+
 import com.android.mushroomapplication.R
+import com.example.demo.Utility.KEY_MUSHROOM_MACID
+import com.example.homeapplication.utility.KEY_HOMEAUTO_MACID
 
 @Composable
 fun HomeScreen(
@@ -197,7 +198,6 @@ fun HomeScreen(
                     }
                 )
             }
-
 
         }
         Spacer(modifier = Modifier.height(10.dp))
