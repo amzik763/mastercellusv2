@@ -274,7 +274,6 @@ fun HomeScreen(
                     onClick = {
                         var a = Intent(ct, com.android.mushroomapplication.MainActivity::class.java)
                         startActivity(ct, a, null)
-
 //                        mNavigator.navigateTo(Screens.Detail.passNameandID("abc", "amzad"))
                     }
                 )
@@ -284,6 +283,7 @@ fun HomeScreen(
         if (uiViewModel.showMushMacId) {
             MacIdMush(uiViewModel)
         }
+
     }
 }
 
@@ -375,6 +375,8 @@ fun MacIdHome(uiViewModel: UiViewmodel){
                         onClick = {
                             Log.d("Home Screen macId", "show mac Id")
                             uiViewModel.macId(KEY_HOMEAUTO_MACID, macIdHome)
+
+                            uiViewModel.toggleHomeMacIdVisibility()
                         }
                     )
                 }
@@ -382,7 +384,6 @@ fun MacIdHome(uiViewModel: UiViewmodel){
         }
     }
 }
-
 
 @Composable
 fun MacIdMush(uiViewModel: UiViewmodel){
@@ -471,6 +472,9 @@ fun MacIdMush(uiViewModel: UiViewmodel){
                         onClick = {
                             Log.d("Home Screen macId", "show mac Id")
                             uiViewModel.macId(KEY_MUSHROOM_MACID ,macIdMush)
+
+                            uiViewModel.toggleMushMacIdVisibility()
+
                         }
                     )
                 }

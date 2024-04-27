@@ -1,8 +1,7 @@
-package com.android.updatedsoftstarter.components
+package com.amzi.mastercellusv2.components
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Icon
 import androidx.compose.material.OutlinedTextField
@@ -11,12 +10,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun LoginInputText(
+fun InputText(
     modifier: Modifier = Modifier,
     text: String,
     label: String,
@@ -41,7 +38,7 @@ fun LoginInputText(
               painter = painterResource(id = iconResId),
               contentDescription = "Password Icon",
               modifier = Modifier
-                  .size(24.dp)
+                  .size(22.dp)
                   .fillMaxWidth()
           )
       }

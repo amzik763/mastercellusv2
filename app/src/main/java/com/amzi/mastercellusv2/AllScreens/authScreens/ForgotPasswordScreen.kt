@@ -37,7 +37,7 @@ import androidx.compose.ui.unit.sp
 import com.amzi.mastercellusv2.AllViewModels.RegisterViewModel
 import com.amzi.mastercellusv2.R
 import com.amzi.mastercellusv2.utility.showLogs
-import com.android.updatedsoftstarter.components.LoginInputText
+import com.amzi.mastercellusv2.components.InputText
 @Composable
 fun forgotPasswordScreen(viewModel: RegisterViewModel) {
 
@@ -70,7 +70,7 @@ fun forgotPasswordScreen(viewModel: RegisterViewModel) {
             )
         )
         Spacer(modifier = Modifier.height(20.dp))
-        LoginInputText(
+        InputText(
             modifier = Modifier
                 .padding(top = 9.dp, bottom = 8.dp),
             text = mobNum,

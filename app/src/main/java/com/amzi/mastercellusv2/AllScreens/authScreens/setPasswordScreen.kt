@@ -38,7 +38,7 @@ import androidx.compose.ui.unit.sp
 import com.amzi.mastercellusv2.AllViewModels.RegisterViewModel
 import com.amzi.mastercellusv2.R
 import com.amzi.mastercellusv2.utility.showLogs
-import com.android.updatedsoftstarter.components.LoginInputText
+import com.amzi.mastercellusv2.components.InputText
 
 
 
@@ -104,7 +104,7 @@ fun setPasswordScreen(viewModel: RegisterViewModel) {
         }
 
         Spacer(modifier = Modifier.height(10.dp))
-        LoginInputText(
+        InputText(
             modifier = Modifier.padding(
                 top = 9.dp,
                 bottom = 8.dp
@@ -134,7 +134,7 @@ fun setPasswordScreen(viewModel: RegisterViewModel) {
             )
         }
         Spacer(modifier = Modifier.height(10.dp))
-        LoginInputText(
+        InputText(
             modifier = Modifier.padding(
                 top = 9.dp,
                 bottom = 8.dp

@@ -40,7 +40,7 @@ import com.amzi.mastercellusv2.R
 import com.amzi.mastercellusv2.navgraphs.Screens
 import com.amzi.mastercellusv2.navgraphs.mNavigator
 import com.amzi.mastercellusv2.utility.showLogs
-import com.android.updatedsoftstarter.components.LoginInputText
+import com.amzi.mastercellusv2.components.InputText
 
 @Composable
 fun SignupScreen(viewModel: RegisterViewModel) {
@@ -78,7 +78,7 @@ fun SignupScreen(viewModel: RegisterViewModel) {
             )
         )
         Spacer(modifier = Modifier.height(12.dp))
-        LoginInputText(
+        InputText(
             modifier = Modifier
                 .padding(top = 9.dp, bottom = 8.dp),
             text = mobNum,
@@ -108,7 +108,7 @@ fun SignupScreen(viewModel: RegisterViewModel) {
         }
 
         Spacer(modifier = Modifier.height(10.dp))
-        LoginInputText(
+        InputText(
             modifier = Modifier.padding(
                 top = 9.dp,
                 bottom = 8.dp
@@ -138,7 +138,7 @@ fun SignupScreen(viewModel: RegisterViewModel) {
             )
         }
         Spacer(modifier = Modifier.height(10.dp))
-        LoginInputText(
+        InputText(
             modifier = Modifier.padding(
                 top = 9.dp,
                 bottom = 8.dp
