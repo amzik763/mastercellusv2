@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.dp
 import com.amzi.mastercellusv2.R
 
 @Composable
-fun InputText(
+fun WIInputText(
     modifier: Modifier = Modifier,
     text: String,
     label: String,
@@ -22,7 +22,6 @@ fun InputText(
     onTextChange: (String) -> Unit,
     onImeAction:() -> Unit = {},
     color: Color,
-    iconResId: Int,
     maxLength: Int,
     keyboardOptions: KeyboardOptions
 
@@ -34,14 +33,5 @@ fun InputText(
       maxLines = maxLine,
       label = { Text(text = label) },
       keyboardOptions = keyboardOptions,
-      leadingIcon = {
-          Icon(
-              painter = painterResource(id = iconResId),
-              contentDescription = "Password Icon",
-              modifier = Modifier
-                  .size(22.dp)
-                  .fillMaxWidth()
-          )
-      }
   )
 }

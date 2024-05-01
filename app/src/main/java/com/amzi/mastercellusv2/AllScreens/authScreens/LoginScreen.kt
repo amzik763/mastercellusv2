@@ -70,7 +70,6 @@ fun LoginScreen(viewModel: RegisterViewModel) {
             painter = painterResource(id = R.drawable.skaio),
             contentDescription = "Skaio Icon",
             tint = Color.Unspecified,
-
             modifier = Modifier.size(width = 220.dp, height = 55.dp)
         )
         Spacer(modifier = Modifier.height(35.dp))
@@ -83,8 +82,6 @@ fun LoginScreen(viewModel: RegisterViewModel) {
             )
         )
         Spacer(modifier = Modifier.height(20.dp))
-
-
 
         InputText(
             modifier = Modifier

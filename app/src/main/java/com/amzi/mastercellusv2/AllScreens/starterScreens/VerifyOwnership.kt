@@ -18,6 +18,7 @@ import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Checkbox
 import androidx.compose.material.CheckboxDefaults
 import androidx.compose.material.Icon
+import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -36,10 +37,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.amzi.mastercellusv2.R
 import com.amzi.mastercellusv2.components.InputText
+import com.amzi.mastercellusv2.components.WIInputText
 
 @Preview
 @Composable
-fun Header(){
+fun Verify(){
 
     Column( modifier = Modifier
 
@@ -47,12 +49,10 @@ fun Header(){
         .fillMaxHeight()
         .background(color = Color.White),
         horizontalAlignment = Alignment.CenterHorizontally) {
-
         Column(modifier = Modifier
             .padding(top = 80.dp)
             .fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.SpaceBetween) {
+            horizontalAlignment = Alignment.CenterHorizontally) {
 
             Icon(
                 painter = painterResource(id = R.drawable.skaio),
@@ -60,7 +60,6 @@ fun Header(){
                 tint = Color.Unspecified,
                 modifier = Modifier.size(width = 220.dp, height = 55.dp)
             )
-
             Text(
                 text = "Register Your Starter",
                 style = TextStyle(
@@ -69,25 +68,18 @@ fun Header(){
                     color = Color.Gray
                 ),
                 modifier = Modifier.padding(28.dp)
-
             )
         }
 
         Column (modifier = Modifier
-            .padding(top = 16.dp)
+            .padding(top = 36.dp)
             .fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceBetween){
 
-            DeviceCode()
+            Otp()
 
             Spacer(modifier = Modifier.height(12.dp))
-
-            GiveName()
-
-            Spacer(modifier = Modifier.height(20.dp))
-
-            Checkboxes()
 
             Button(
                 onClick = {},
@@ -102,22 +94,16 @@ fun Header(){
                 ),
             ) {
                 Text(
-                    text = "GET OTP",
+                    text = "VERIFY",
                     fontSize = 14.sp,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(horizontal = 30.dp)
                 )
             }
-            Row(modifier = Modifier.padding(top = 70.dp)){
+            Row(modifier = Modifier.padding(top = 200.dp)){
                 Text(
-                    text = "Don't have it? ",
+                    text = "Cancel",
                     style = TextStyle(fontSize = 12.sp),
-                    color = Color(0xFF7E8385)
-                )
-                Text(
-                    text = "purchase here",
-                    style = TextStyle(fontSize = 12.sp,
-                        fontWeight = FontWeight.Bold),
                     color = Color(0xFF7E8385)
                 )
             }
@@ -127,50 +113,27 @@ fun Header(){
 
 
 @Composable
-fun DeviceCode(){
-    var deviceCode by remember { mutableStateOf("") }
+fun Otp(){
+    var otp by remember { mutableStateOf("") }
 
-    InputText(
-        text = deviceCode,
-        label = "Device Code",
-        onTextChange = { deviceCode = it} ,
+    WIInputText(
+        text = otp,
+        label = "Enter OTP",
+        onTextChange = { otp = it} ,
         color = Color.Black,
-        iconResId = R.drawable.ic_device,
-        maxLength = 15,
+        maxLength = 4,
         modifier = Modifier.fillMaxWidth(),
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
     )
 
-    Message(message = "15 digit number printed on device",
-        text = "0/15"
+    Messages(message = "4 digit OTP sent to your mobile no*",
+        text = "0/4"
     )
-
-}
-
-@Composable
-fun GiveName(){
-    var giveName by remember { mutableStateOf("") }
-
-    InputText(
-        text = giveName,
-        label = "Give a Name",
-        onTextChange = { giveName = it} ,
-        color = Color.Black,
-        iconResId = R.drawable.ic_car,
-        maxLength = 20,
-        modifier = Modifier.fillMaxWidth(),
-        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
-    )
-
-    Message(message = "Example My Car optional",
-        text = "0/20"
-    )
-
 }
 
 
 @Composable
-fun Message(message: String, text: String){
+fun Messages(message: String, text: String){
     Row (modifier = Modifier
         .fillMaxWidth()
         .padding(start = 64.dp, end = 64.dp, top = 6.dp),
@@ -190,27 +153,5 @@ fun Message(message: String, text: String){
                 fontSize = 12.sp
             )
         )
-    }
-}
-
-
-@Composable
-fun Checkboxes(){
-
-    val checkbox = remember {
-        mutableStateOf(false)
-    }
-
-    Row (modifier = Modifier
-        .fillMaxWidth()
-        .padding(start = 48.dp),
-        verticalAlignment = Alignment.CenterVertically
-        ){
-        Checkbox(checked = checkbox.value,
-            onCheckedChange = {checkbox.value = it},
-            modifier = Modifier.padding(5.dp),
-            colors = CheckboxDefaults.colors(Color(64,224,208))
-        )
-        Text(text = "Set it Default?")
     }
 }
