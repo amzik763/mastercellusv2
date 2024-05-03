@@ -140,11 +140,9 @@ fun DeviceCode(){
         modifier = Modifier.fillMaxWidth(),
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
     )
-
     Message(message = "15 digit number printed on device",
         text = "0/15"
     )
-
 }
 
 @Composable
@@ -161,11 +159,9 @@ fun GiveName(){
         modifier = Modifier.fillMaxWidth(),
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
     )
-
     Message(message = "Example My Car optional",
         text = "0/20"
     )
-
 }
 
 
