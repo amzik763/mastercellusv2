@@ -187,7 +187,6 @@ fun setPasswordScreen(viewModel: RegisterViewModel) {
                     .align(Alignment.CenterHorizontally),
                 onClick = {
 
-                    registerViewModel.setPassword(password, otp.toInt())
 
                 }
             )

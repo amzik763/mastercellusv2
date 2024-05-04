@@ -52,7 +52,7 @@ fun NavGraphBuilder.authNavGraph(
 
         composable(route = Screens.Signup.route){
 
-            SignupScreen(viewModel = mRegisterViewModel)
+            SignupScreen()
         }
 
         composable(route = Screens.SetPassword.route){

@@ -30,6 +30,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -41,13 +42,13 @@ import com.amzi.mastercellusv2.navgraphs.Screens
 import com.amzi.mastercellusv2.navgraphs.mNavigator
 import com.amzi.mastercellusv2.utility.showLogs
 import com.amzi.mastercellusv2.components.InputText
+import com.amzi.mastercellusv2.utility.myComponents.registerViewModel
 
 @Composable
-fun SignupScreen(viewModel: RegisterViewModel) {
+fun SignupScreen() {
 
     //temporary
     showLogs("signup","called")
-    val registerViewModel = viewModel
     var mobNum by remember { mutableStateOf("") }
     var name by remember { mutableStateOf("") }
     var dob by remember { mutableStateOf("") }
@@ -84,8 +85,11 @@ fun SignupScreen(viewModel: RegisterViewModel) {
             text = mobNum,
             color = Color.Black,
             label = "Mobile Number",
+            maxLine = 1,
             iconResId = R.drawable.phone,
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+            keyboardOptions = KeyboardOptions(
+                imeAction = ImeAction.Done,
+                keyboardType = KeyboardType.Number),
             onTextChange = { mobNum = it },
             maxLength = 10
         )
@@ -116,10 +120,13 @@ fun SignupScreen(viewModel: RegisterViewModel) {
             text = name,
             color = Color.Black,
             label = "Full name",
+            maxLine = 1,
             iconResId = R.drawable.user,
             onTextChange = { name = it },
             maxLength = 20,
-            keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Text)
+            keyboardOptions = KeyboardOptions.Default.copy(
+                imeAction = ImeAction.Done,
+                keyboardType = KeyboardType.Text)
         )
         Spacer(modifier = Modifier.height(8.dp))
         Row{
@@ -127,14 +134,16 @@ fun SignupScreen(viewModel: RegisterViewModel) {
                 text = "Min 3 characters required*",
                 style = TextStyle(
                     color = Color(0xFF7E8385),
-                    fontSize = 12.sp)
+                    fontSize = 12.sp
+                )
             )
             Text(
                 text = " ",
                 modifier = Modifier.padding(start = 113.dp),
                 style = TextStyle(
                     color = Color(0xFF7E8385),
-                    fontSize = 13.sp)
+                    fontSize = 13.sp
+                )
             )
         }
         Spacer(modifier = Modifier.height(10.dp))
@@ -147,6 +156,7 @@ fun SignupScreen(viewModel: RegisterViewModel) {
             color = Color.Black,
             label = "Date of Birth",
             iconResId = R.drawable.calender,
+            maxLine = 1,
             onTextChange = { dob = it },
             maxLength = 20,
             keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Text)
@@ -157,14 +167,16 @@ fun SignupScreen(viewModel: RegisterViewModel) {
                 text = "Optional",
                 style = TextStyle(
                     color = Color(0xFF7E8385),
-                    fontSize = 12.sp)
+                    fontSize = 12.sp
+                )
             )
             Text(
                 text = "  ",
                 modifier = Modifier.padding(start = 210.dp),
                 style = TextStyle(
                     color = Color(0xFF7E8385),
-                    fontSize = 13.sp)
+                    fontSize = 13.sp
+                )
             )
         }
 
@@ -216,15 +228,10 @@ fun SignupScreen(viewModel: RegisterViewModel) {
                 color = Color(0xFF7E8385)
             )
         }
-
     }
 }
 @Composable
 @Preview(showBackground = true, showSystemUi = true)
 fun SignupScreenPreview(){
-
-//    SignupScreen(
-////        navHostController = rememberNavController()
-//    )
 
 }

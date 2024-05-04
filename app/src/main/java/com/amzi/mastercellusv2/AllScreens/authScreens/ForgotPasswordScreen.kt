@@ -121,7 +121,6 @@ fun forgotPasswordScreen(viewModel: RegisterViewModel) {
                     .padding(9.dp)
                     .align(Alignment.CenterHorizontally),
                 onClick = {
-                    registerViewModel.forgotPassword(mobNum)
                 }
             )
         }

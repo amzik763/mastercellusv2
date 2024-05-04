@@ -25,11 +25,6 @@ init {
 
     var authRepo:AuthRepo = authRepo
 
-    fun getUser(){
-        viewModelScope.launch {
-            authRepo.getUser()
-        }
-    }
 
     fun registerUser(mobNumt: String, name: String, dob: String) {
        mobNum = mobNumt
@@ -39,26 +34,5 @@ init {
             authRepo.registerUser(mobNumt,name,dob)
         }
 
-    }
-    fun setPassword(password : String, otp : Int){
-
-        viewModelScope.launch {
-            authRepo.setPassword(password,otp,mobNum)
-        }
-
-    }
-
-    fun forgotPassword(mobNum: String){
-        val mobNum2 = "+91$mobNum"
-        viewModelScope.launch {
-            authRepo.forgetPassword(mobNum2)
-        }
-
-    }
-    fun loginUser(mobNum : String,password: String,fcm_token :String){
-        val mobNum2 = "+91$mobNum"
-        viewModelScope.launch {
-            authRepo.loginUser(mobNum2,password,fcm_token)
-        }
     }
 }

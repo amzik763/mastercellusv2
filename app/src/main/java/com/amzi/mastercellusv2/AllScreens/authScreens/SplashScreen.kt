@@ -45,7 +45,6 @@ fun SplashScreen(
         mNavigator.navigateTo(Screens.Signup.route)
     }
 
-    showLogs()
 
     Box(contentAlignment = Alignment.Center,
         modifier = Modifier.background(color = Color(0xFFFFFFFF)).fillMaxSize()) {

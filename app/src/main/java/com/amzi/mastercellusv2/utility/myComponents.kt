@@ -15,8 +15,7 @@ import retrofit2.Response
 //@Singleton
 object myComponents {
 
-
-//  lateinit var mx: Context
+    //  lateinit var mx: Context
     lateinit var authAPI: AuthAPIs
     lateinit var authRepo: AuthRepo
 //    lateinit var mUiViewModelFactory: UiViewModelFactory
@@ -28,18 +27,8 @@ object myComponents {
 
 }
 
-
-//fun sendMsinviewmofel():Repository{
-//    return myrepo
-//}
-
-
-
 object responses{
 
 //    lateinit var loginResponse: Response<login_model>
-
-
-
 
 }
