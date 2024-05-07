@@ -203,7 +203,7 @@ fun SignupScreen() {
                     .align(Alignment.CenterHorizontally),
                 onClick = {
                     registerViewModel.registerUser(mobNum,name,dob)
-                    mNavigator.navigateTo(Screens.SetPassword.route)
+
                 }
             )
         }

@@ -35,4 +35,14 @@ init {
         }
 
     }
+
+    fun setPassword(mobileNum: String, otp: String, password: String, confirm_password: String){
+        mobNum = mobileNum
+        showLogs("PASSWORD: ",mobNum)
+
+        viewModelScope.launch{
+            authRepo.setPassword(mobileNum, otp, password, confirm_password)
+        }
+
+    }
 }

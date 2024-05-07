@@ -30,27 +30,29 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.amzi.mastercellusv2.AllViewModels.RegisterViewModel
 import com.amzi.mastercellusv2.R
 import com.amzi.mastercellusv2.utility.showLogs
 import com.amzi.mastercellusv2.components.InputText
-
+import com.amzi.mastercellusv2.utility.myComponents.registerViewModel
 
 
 @Composable
-fun setPasswordScreen(viewModel: RegisterViewModel) {
-    val registerViewModel = viewModel
+fun SetPasswordScreen() {
+
 
     showLogs("SetPassword: ", registerViewModel.mobNum)
 
     var mobNum by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
     var otp by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+    var confirmPassword by remember { mutableStateOf("") }
+
 
     Column(
         modifier = Modifier
@@ -78,6 +80,41 @@ fun setPasswordScreen(viewModel: RegisterViewModel) {
             )
         )
         Spacer(modifier = Modifier.height(12.dp))
+
+        InputText(
+            modifier = Modifier
+                .padding(top = 9.dp, bottom = 8.dp),
+            text = mobNum,
+            color = Color.Black,
+            label = "Mobile Number",
+            maxLine = 1,
+            iconResId = R.drawable.phone,
+            keyboardOptions = KeyboardOptions(
+                imeAction = ImeAction.Done,
+                keyboardType = KeyboardType.Number),
+            onTextChange = { mobNum = it },
+            maxLength = 10
+        )
+        Spacer(modifier = Modifier.height(8.dp))
+        Row{
+            Text(
+                text = "Required*",
+                modifier = Modifier.padding(start = 9.dp),
+                style = TextStyle(
+                    color = Color(0xFF7E8385),
+                    fontSize = 12.sp)
+            )
+            Text(
+                text = "0/10",
+                modifier = Modifier.padding(start = 179.dp),
+                style = TextStyle(
+                    color = Color(0xFF7E8385),
+                    fontSize = 13.sp)
+            )
+        }
+
+        Spacer(modifier = Modifier.height(10.dp))
+
         OutlinedTextField(
             value = otp,
             onValueChange = { otp = it },
@@ -139,11 +176,11 @@ fun setPasswordScreen(viewModel: RegisterViewModel) {
                 top = 9.dp,
                 bottom = 8.dp
             ),
-            text = password,
+            text = confirmPassword,
             color = Color.Black,
             label = "Confirm Password",
             iconResId = R.drawable.lock,
-            onTextChange = { password = it },
+            onTextChange = { confirmPassword = it },
             maxLength = 20,
             keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Text)
         )
@@ -186,8 +223,7 @@ fun setPasswordScreen(viewModel: RegisterViewModel) {
                     .padding(9.dp)
                     .align(Alignment.CenterHorizontally),
                 onClick = {
-
-
+                    registerViewModel.setPassword(mobNum, otp, password, confirmPassword)
                 }
             )
         }
@@ -214,7 +250,7 @@ fun setPasswordScreen(viewModel: RegisterViewModel) {
 }
 @Composable
 @Preview(showBackground = true, showSystemUi = true)
-fun setPasswordScreenPreview(){
+fun SetPasswordScreenPreview(){
 
 //    setPasswordScreen(
 ////        navHostController = rememberNavController()

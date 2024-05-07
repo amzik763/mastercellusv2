@@ -1,6 +1,5 @@
 package com.amzi.mastercellusv2.components
 
-import android.util.Log
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.KeyboardActions
@@ -14,9 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
-import com.amzi.mastercellusv2.R
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
@@ -33,6 +30,7 @@ fun InputText(
     keyboardOptions: KeyboardOptions
 
 ) {
+
     val limitedText = text.take(maxLength)
 
     val keyboardController = LocalSoftwareKeyboardController.current
@@ -57,5 +55,5 @@ fun InputText(
                   .fillMaxWidth()
           )
       }
-  )
+    )
 }
