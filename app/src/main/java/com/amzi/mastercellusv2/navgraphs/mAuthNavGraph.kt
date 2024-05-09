@@ -60,7 +60,7 @@ fun NavGraphBuilder.authNavGraph(
 
         composable(route = Screens.forgotPassword.route){
 
-            forgotPasswordScreen(viewModel = mRegisterViewModel)
+            forgotPasswordScreen()
         }
     }
 }

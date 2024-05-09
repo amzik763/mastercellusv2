@@ -55,4 +55,14 @@ init {
         }
 
     }
+
+    fun verify(mobileNum: String){
+        mobNum = mobileNum
+        showLogs("LOGIN: ",mobNum)
+
+        viewModelScope.launch{
+            authRepo.verify(mobileNum)
+        }
+
+    }
 }

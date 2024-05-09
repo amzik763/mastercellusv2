@@ -29,6 +29,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -38,12 +39,11 @@ import com.amzi.mastercellusv2.AllViewModels.RegisterViewModel
 import com.amzi.mastercellusv2.R
 import com.amzi.mastercellusv2.utility.showLogs
 import com.amzi.mastercellusv2.components.InputText
+import com.amzi.mastercellusv2.utility.myComponents
+
 @Composable
-fun forgotPasswordScreen(viewModel: RegisterViewModel) {
+fun forgotPasswordScreen() {
 
-    val registerViewModel = viewModel
-
-    showLogs("forgotPassword: ", registerViewModel.mobNum)
 
     var mobNum by remember { mutableStateOf("") }
     Column(
@@ -77,7 +77,9 @@ fun forgotPasswordScreen(viewModel: RegisterViewModel) {
             color = Color.Black,
             label = "Mobile Number",
             iconResId = R.drawable.phone,
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+            keyboardOptions = KeyboardOptions(
+                imeAction = ImeAction.Done,
+                keyboardType = KeyboardType.Number),
             onTextChange = { mobNum = it },
             maxLength = 10
         )
@@ -121,6 +123,9 @@ fun forgotPasswordScreen(viewModel: RegisterViewModel) {
                     .padding(9.dp)
                     .align(Alignment.CenterHorizontally),
                 onClick = {
+                    myComponents.registerViewModel.verify(mobNum)
+
+                    showLogs("VERIFY: ", "OPT SENT")
                 }
             )
         }

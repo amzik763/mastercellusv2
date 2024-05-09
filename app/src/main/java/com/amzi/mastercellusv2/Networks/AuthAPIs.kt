@@ -3,6 +3,7 @@ package com.amzi.mastercellusv2.Networks
 import com.amzi.mastercellusv2.models.RegisterResponse
 import com.amzi.mastercellusv2.models.SetPassword
 import com.amzi.mastercellusv2.models.loginResponse
+import com.amzi.mastercellusv2.models.verifyRes
 import retrofit2.Response
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -33,4 +34,10 @@ interface AuthAPIs {
         @Field("mobile_no") mobile_no: String,
         @Field("password") password: String
     ): Response<loginResponse>
+
+    @FormUrlEncoded
+    @POST("/starter_operator/forgot_password")
+    suspend fun verify(
+        @Field("mobile_no") mobile_no: String
+    ): Response<verifyRes>
 }

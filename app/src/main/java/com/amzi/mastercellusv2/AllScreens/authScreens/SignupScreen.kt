@@ -159,7 +159,9 @@ fun SignupScreen() {
             maxLine = 1,
             onTextChange = { dob = it },
             maxLength = 20,
-            keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Text)
+            keyboardOptions = KeyboardOptions(
+                imeAction = ImeAction.Done,
+                keyboardType = KeyboardType.Text)
         )
         Spacer(modifier = Modifier.height(8.dp))
         Row{

@@ -32,6 +32,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -90,7 +91,9 @@ fun LoginScreen(viewModel: RegisterViewModel) {
             color = Color.Black,
             label = "Mobile Number",
             iconResId = R.drawable.phone,
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+            keyboardOptions = KeyboardOptions(
+                imeAction = ImeAction.Done,
+                keyboardType = KeyboardType.Number),
             onTextChange = { mobNum = it },
             maxLength = 10
         )
@@ -114,7 +117,9 @@ fun LoginScreen(viewModel: RegisterViewModel) {
             iconResId = R.drawable.lock,
             onTextChange = { password = it },
             maxLength = 20,
-            keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Text)
+            keyboardOptions = KeyboardOptions(
+                imeAction = ImeAction.Done,
+                keyboardType = KeyboardType.Text)
         )
         Text(
             text = "0/20",
@@ -163,7 +168,9 @@ fun LoginScreen(viewModel: RegisterViewModel) {
             )
             Text(
                 text = "Reset Now",
-                modifier = Modifier.clickable { mNavigator.navigateTo(Screens.forgotPassword.route) },
+                modifier = Modifier.clickable {
+                    mNavigator.navigateTo(Screens.forgotPassword.route)
+                                              },
                 style = TextStyle(fontSize = 12.sp,
                     fontWeight = FontWeight.Bold),
                 color = Color(0xFF7E8385)

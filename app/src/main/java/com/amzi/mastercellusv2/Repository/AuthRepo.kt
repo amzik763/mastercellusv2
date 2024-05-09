@@ -75,7 +75,27 @@ class AuthRepo(authAPIs: AuthAPIs) {
             }else{
                 showLogs("LOGIN USER","Login unSuccessful" + loginResponse.errorBody().toString())
 
-//                showLogs("auth","Failed" + registerResponse.errorBody().toString())
+            }
+        }
+        catch (e:Exception){
+            showLogs("Error: ",e.toString())
+        }
+    }
+
+    suspend fun verify(mobile_no: String){
+
+        try{
+            val verifyRes = authAPI.verify(mobile_no)
+
+            if(verifyRes.isSuccessful){
+
+                showLogs("VERIFICATION","Verification Successful")
+
+                mNavigator.navigateTo(Screens.SetPassword.route)
+
+
+            }else{
+                showLogs("LOGIN USER","Login unSuccessful" + verifyRes.errorBody().toString())
 
             }
         }
@@ -83,4 +103,5 @@ class AuthRepo(authAPIs: AuthAPIs) {
             showLogs("Error: ",e.toString())
         }
     }
+
 }
