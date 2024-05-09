@@ -149,18 +149,8 @@ fun LoginScreen(viewModel: RegisterViewModel) {
                     .padding(9.dp)
                     .align(Alignment.CenterHorizontally),
                 onClick = {
-//                    mNavigator.navigateTo(mGraph.STARTER)
-                    if (
-                        (mobNum == "9416922877" && password == "cellus")||
-                        (mobNum == "9721174847" && password == "cellus") ||
-                        (mobNum == "8239172431" && password == "cellus"))
-                    {
-                        mNavigator.navigateTo(Screens.Home.route)
 
-                    } else{
-                        Toast.makeText(ct, "Login Unsuccessful", Toast.LENGTH_LONG).show()
-                    }
-//                    registerViewModel.loginUser(mobNum,password,fcm_token)
+                    registerViewModel.loginUser(mobNum, password)
                 }
             )
         }

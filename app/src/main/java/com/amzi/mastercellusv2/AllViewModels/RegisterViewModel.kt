@@ -45,4 +45,14 @@ init {
         }
 
     }
+
+    fun loginUser(mobileNum: String, password: String){
+        mobNum = mobileNum
+        showLogs("LOGIN: ",mobNum)
+
+        viewModelScope.launch{
+            authRepo.loginUser(mobileNum, password)
+        }
+
+    }
 }

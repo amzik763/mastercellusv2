@@ -33,14 +33,12 @@ class AuthRepo(authAPIs: AuthAPIs) {
                 showLogs("auth","Registration Failed" + registerResponse.errorBody().toString())
 
 //                showLogs("auth","Failed" + registerResponse.errorBody().toString())
-
-            0}
+            }
         }
         catch (e:Exception){
             showLogs("Error: ",e.toString())
         }
     }
-
     suspend fun setPassword(mobile_no: String, otp: String, password: String, confirm_password: String){
 
         try{
@@ -52,6 +50,30 @@ class AuthRepo(authAPIs: AuthAPIs) {
 
             }else{
                 showLogs("SET PASSWORD","Password not set" + setPasswordRes.errorBody().toString())
+
+//                showLogs("auth","Failed" + registerResponse.errorBody().toString())
+
+            }
+        }
+        catch (e:Exception){
+            showLogs("Error: ",e.toString())
+        }
+    }
+
+    suspend fun loginUser(mobile_no: String, password: String){
+
+        try{
+            val loginResponse = authAPI.loginUser(mobile_no, password)
+
+            if(loginResponse.isSuccessful){
+
+                showLogs("LOGIN USER","Login Successful")
+
+                mNavigator.navigateTo(Screens.Home.route)
+
+
+            }else{
+                showLogs("LOGIN USER","Login unSuccessful" + loginResponse.errorBody().toString())
 
 //                showLogs("auth","Failed" + registerResponse.errorBody().toString())
 

@@ -2,13 +2,10 @@ package com.amzi.mastercellusv2.Networks
 
 import com.amzi.mastercellusv2.models.RegisterResponse
 import com.amzi.mastercellusv2.models.SetPassword
-import com.amzi.mastercellusv2.models.model_forget_password
-import com.amzi.mastercellusv2.models.model_login
-import com.amzi.mastercellusv2.models.model_set_password
+import com.amzi.mastercellusv2.models.loginResponse
 import retrofit2.Response
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
-import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface AuthAPIs {
@@ -30,4 +27,10 @@ interface AuthAPIs {
         @Field("confirm_password") confirm_password: String
     ): Response<SetPassword>
 
+    @FormUrlEncoded
+    @POST("/starter_operator/login")
+    suspend fun loginUser(
+        @Field("mobile_no") mobile_no: String,
+        @Field("password") password: String
+    ): Response<loginResponse>
 }
