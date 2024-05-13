@@ -13,56 +13,51 @@ class RegisterViewModel(authRepo: AuthRepo) : ViewModel() {
 
 
     var mobNum = ""
-    var password =  ""
+    var password = ""
     var otp = ""
-//    var name =  mutableStateOf("")
-//    var dob =  mutableStateOf("")
 
+    init {
+        showLogs("ViewModel:", "Created")
+    }
 
-init {
-    showLogs("ViewModel:","Created")
-}
-
-    var authRepo:AuthRepo = authRepo
+    var authRepo: AuthRepo = authRepo
 
 
     fun registerUser(mobNumt: String, name: String, dob: String) {
-       mobNum = mobNumt
-        showLogs("ViewModel: register",mobNum)
+        mobNum = mobNumt
+        showLogs("ViewModel: register", mobNum)
 
         viewModelScope.launch {
-            authRepo.registerUser(mobNumt,name,dob)
+            authRepo.registerUser(mobNumt, name, dob)
         }
-
     }
 
-    fun setPassword(mobileNum: String, otp: String, password: String, confirm_password: String){
+    fun setPassword(mobileNum: String, otp: String, password: String, confirm_password: String) {
         mobNum = mobileNum
-        showLogs("PASSWORD: ",mobNum)
+        showLogs("PASSWORD: ", mobNum)
 
-        viewModelScope.launch{
+        viewModelScope.launch {
             authRepo.setPassword(mobileNum, otp, password, confirm_password)
         }
 
     }
 
-    fun loginUser(mobileNum: String, password: String){
+    fun loginUser(mobileNum: String, password: String) {
         mobNum = mobileNum
-        showLogs("LOGIN: ",mobNum)
+        showLogs("LOGIN: ", mobNum)
 
-        viewModelScope.launch{
+        viewModelScope.launch {
             authRepo.loginUser(mobileNum, password)
         }
-
     }
 
-    fun verify(mobileNum: String){
+    fun verify(mobileNum: String) {
         mobNum = mobileNum
-        showLogs("LOGIN: ",mobNum)
+        showLogs("LOGIN: ", mobNum)
 
-        viewModelScope.launch{
+        viewModelScope.launch {
             authRepo.verify(mobileNum)
         }
-
     }
 }
+

@@ -98,10 +98,13 @@ class AuthRepo(authAPIs: AuthAPIs) {
                 showLogs("LOGIN USER","Login unSuccessful" + verifyRes.errorBody().toString())
 
             }
+
         }
+
         catch (e:Exception){
+
             showLogs("Error: ",e.toString())
+
         }
     }
-
 }

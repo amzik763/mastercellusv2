@@ -40,4 +40,7 @@ interface AuthAPIs {
     suspend fun verify(
         @Field("mobile_no") mobile_no: String
     ): Response<verifyRes>
+
+
+
 }
