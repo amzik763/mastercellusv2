@@ -223,7 +223,7 @@ fun SetPasswordScreen() {
                     .padding(9.dp)
                     .align(Alignment.CenterHorizontally),
                 onClick = {
-                    registerViewModel.setPassword(mobNum, otp, password, confirmPassword)
+                    registerViewModel.setPassword("register",mobNum, otp, password, confirmPassword)
                 }
             )
         }

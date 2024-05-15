@@ -102,9 +102,31 @@ class AuthRepo(authAPIs: AuthAPIs) {
         }
 
         catch (e:Exception){
-
             showLogs("Error: ",e.toString())
+        }
+    }
 
+    suspend fun setPassword(register: String,mobile_no: String, otp: String, password: String, confirm_password: String){
+
+        try{
+            val setPasswordRes = authAPI.verifyOtpSetPassword(register, mobile_no, otp, password, confirm_password)
+
+            if(setPasswordRes.isSuccessful){
+
+                showLogs("Set Password","Password set Successfully")
+
+                mNavigator.navigateTo(Screens.SetPassword.route)
+
+
+            }else{
+                showLogs("Set Password","Password unSuccessful" + setPasswordRes.errorBody().toString())
+
+            }
+
+        }
+
+        catch (e:Exception){
+            showLogs("Error: ",e.toString())
         }
     }
 }
