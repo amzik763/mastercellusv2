@@ -20,7 +20,6 @@ import androidx.compose.ui.unit.dp
 import com.amzi.mastercellusv2.R
 import com.amzi.mastercellusv2.navgraphs.Screens
 import com.amzi.mastercellusv2.navgraphs.mNavigator
-import com.amzi.mastercellusv2.utility.showLogs
 import kotlinx.coroutines.delay
 
 @Composable

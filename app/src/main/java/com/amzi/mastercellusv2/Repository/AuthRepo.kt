@@ -4,6 +4,7 @@ import android.util.Log
 import com.amzi.mastercellusv2.Networks.AuthAPIs
 import com.amzi.mastercellusv2.navgraphs.Screens
 import com.amzi.mastercellusv2.navgraphs.mNavigator
+import com.amzi.mastercellusv2.utility.myComponents.navController
 import com.amzi.mastercellusv2.utility.showLogs
 
 class AuthRepo(authAPIs: AuthAPIs) {
@@ -27,7 +28,9 @@ class AuthRepo(authAPIs: AuthAPIs) {
 
                 Log.d("Register", "registerUser: Successful")
 
-                mNavigator.navigateTo(Screens.SetPassword.route)
+                navController.navigate(route = Screens.SetPassword.route + "/register")
+                showLogs("ROUTE","register")
+
 
             }else{
                 showLogs("auth","Registration Failed" + registerResponse.errorBody().toString())
@@ -39,6 +42,8 @@ class AuthRepo(authAPIs: AuthAPIs) {
             showLogs("Error: ",e.toString())
         }
     }
+
+/*
     suspend fun setPassword(mobile_no: String, otp: String, password: String, confirm_password: String){
 
         try{
@@ -59,6 +64,7 @@ class AuthRepo(authAPIs: AuthAPIs) {
             showLogs("Error: ",e.toString())
         }
     }
+*/
 
     suspend fun loginUser(mobile_no: String, password: String){
 
@@ -91,7 +97,9 @@ class AuthRepo(authAPIs: AuthAPIs) {
 
                 showLogs("VERIFICATION","Verification Successful")
 
-                mNavigator.navigateTo(Screens.SetPassword.route)
+                navController.navigate(route = Screens.SetPassword.route + "/change_password")
+                showLogs("ROUTE","change_password")
+
 
 
             }else{
@@ -115,11 +123,27 @@ class AuthRepo(authAPIs: AuthAPIs) {
 
                 showLogs("Set Password","Password set Successfully")
 
-                mNavigator.navigateTo(Screens.SetPassword.route)
+            }else{
+                showLogs("Set Password","Password unSuccessful" + setPasswordRes.errorBody().toString())
+            }
+        }
+        catch (e:Exception){
+            showLogs("Error: ",e.toString())
+        }
+    }
+
+    suspend fun changePassword(change_password: String,mobile_no: String, otp: String, password: String, confirm_password: String){
+
+        try{
+            val changePassword = authAPI.verifyOtpSetPassword(change_password,mobile_no,otp, password, confirm_password)
+
+            if(changePassword.isSuccessful){
+
+                showLogs("CHANGE PASSWORD","Password Changed Successful")
 
 
             }else{
-                showLogs("Set Password","Password unSuccessful" + setPasswordRes.errorBody().toString())
+                showLogs("CHANGE PASSWORD","Password not changed" + changePassword.errorBody().toString())
 
             }
 

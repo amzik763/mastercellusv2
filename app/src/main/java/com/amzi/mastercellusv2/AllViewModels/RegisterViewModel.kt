@@ -68,5 +68,14 @@ class RegisterViewModel(authRepo: AuthRepo) : ViewModel() {
             authRepo.setPassword(register, mobileNum, otp, password, confirm_password)
         }
     }
+
+    fun changePassword(change_password: String,mobileNum: String, otp: String, password: String, confirm_password: String) {
+        mobNum = mobileNum
+        showLogs("CHANGE PASSWORD: ", mobNum)
+
+        viewModelScope.launch {
+            authRepo.changePassword(change_password, mobileNum, otp, password, confirm_password)
+        }
+    }
 }
 

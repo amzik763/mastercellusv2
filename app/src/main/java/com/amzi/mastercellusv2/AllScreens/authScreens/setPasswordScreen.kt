@@ -43,7 +43,7 @@ import com.amzi.mastercellusv2.utility.myComponents.registerViewModel
 
 
 @Composable
-fun SetPasswordScreen() {
+fun SetPasswordScreen(mode: String) {
 
 
     showLogs("SetPassword: ", registerViewModel.mobNum)
@@ -223,8 +223,21 @@ fun SetPasswordScreen() {
                     .padding(9.dp)
                     .align(Alignment.CenterHorizontally),
                 onClick = {
-                    registerViewModel.setPassword("register",mobNum, otp, password, confirmPassword)
+
+                    showLogs("my mode",mode)
+
+                    if(mode == "register"){
+                        registerViewModel.setPassword("register",mobNum, otp, password, confirmPassword)
+                        showLogs("set password", "Password is set")
+                    }
+
+                    if (mode == "change_password"){
+                        registerViewModel.changePassword("change_password", mobNum,otp, password, confirmPassword)
+                        showLogs("change password", "Password is changed")
+
+                    }
                 }
+
             )
         }
         Row(modifier = Modifier.padding(top = 15.dp, start = 155.dp)) {
@@ -251,9 +264,7 @@ fun SetPasswordScreen() {
 @Composable
 @Preview(showBackground = true, showSystemUi = true)
 fun SetPasswordScreenPreview(){
-
 //    setPasswordScreen(
 ////        navHostController = rememberNavController()
 //    )
-
 }

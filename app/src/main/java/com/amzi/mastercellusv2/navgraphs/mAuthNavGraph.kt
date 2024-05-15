@@ -18,6 +18,7 @@ import com.amzi.mastercellusv2.Networks.AuthAPIs
 import com.amzi.mastercellusv2.Networks.RetrofitBuilder
 import com.amzi.mastercellusv2.Repository.AuthRepo
 import com.amzi.mastercellusv2.utility.mGraph
+import com.amzi.mastercellusv2.utility.showLogs
 
 fun NavGraphBuilder.authNavGraph(
     navController: NavHostController,
@@ -53,9 +54,15 @@ fun NavGraphBuilder.authNavGraph(
             SignupScreen()
         }
 
-        composable(route = Screens.SetPassword.route){
+//        composable(route = Screens.SetPassword.route){
+//
+//            SetPasswordScreen()
+//        }
 
-            SetPasswordScreen()
+        composable(route = Screens.SetPassword.route + "/{mode}") { navBackStackEntry ->
+            val mode = navBackStackEntry.arguments?.getString("mode") ?: "register"
+            showLogs("my mode in compose:",mode)
+            SetPasswordScreen(mode)
         }
 
         composable(route = Screens.forgotPassword.route){
