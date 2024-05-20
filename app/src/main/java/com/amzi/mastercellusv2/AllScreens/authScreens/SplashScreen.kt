@@ -44,7 +44,6 @@ fun SplashScreen(
         mNavigator.navigateTo(Screens.Signup.route)
     }
 
-
     Box(contentAlignment = Alignment.Center,
         modifier = Modifier.background(color = Color(0xFFFFFFFF)).fillMaxSize()) {
         Image(painter = painterResource(id = R.drawable.skaio),
@@ -59,8 +58,8 @@ fun SplashScreen(
 @Preview(showBackground = true, showSystemUi = true)
 fun AuthScreenPreview(){
 
-   SplashScreen(
-//       rememberNavController()
-   )
-
+    SplashScreen(
+//   rememberNavController()
+    )
 }
+

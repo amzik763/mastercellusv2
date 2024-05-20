@@ -3,6 +3,7 @@ package com.amzi.mastercellusv2.utility
 import androidx.navigation.NavHostController
 import com.amzi.mastercellusv2.AllViewModels.Factories.RegisterViewModelFactory
 import com.amzi.mastercellusv2.AllViewModels.RegisterViewModel
+import com.amzi.mastercellusv2.AllViewModels.UiViewmodel
 import com.amzi.mastercellusv2.Networks.AuthAPIs
 import com.amzi.mastercellusv2.Repository.AuthRepo
 
@@ -16,8 +17,8 @@ object myComponents {
     //  mx: Context
     lateinit var authAPI: AuthAPIs
     lateinit var authRepo: AuthRepo
-//    lateinit var mUiViewModelFactory: UiViewModelFactory
-//    lateinit var mUiViewModel: UiViewModel
+//    lateinit var mUiViewModelFactory:
+//    lateinit var mUiViewModel: UiViewmodel
     lateinit var registerViewModelFactory: RegisterViewModelFactory
     lateinit var registerViewModel: RegisterViewModel
 //  lateinit var networkMonitor: NetworkMonitor
