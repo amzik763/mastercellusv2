@@ -1,4 +1,4 @@
-package com.amzi.mastercellusv2.AllScreens.starterScreens
+package com.cti.softStarter.screens
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Button
@@ -28,18 +29,21 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.amzi.mastercellusv2.R
-import com.amzi.mastercellusv2.components.InputText
+import com.cti.softStarter.R
+import com.cti.softStarter.components.InputText
 
 @Preview
 @Composable
-fun Header(){
+fun RegisterStarter(){
 
     Column( modifier = Modifier
 
@@ -48,80 +52,51 @@ fun Header(){
         .background(color = Color.White),
         horizontalAlignment = Alignment.CenterHorizontally) {
 
-        Column(modifier = Modifier
-            .padding(top = 80.dp)
-            .fillMaxWidth(),
+        Header()
+
+        LazyColumn(
+            modifier = Modifier
+                .padding(top = 16.dp)
+                .fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.SpaceBetween) {
-
-            Icon(
-                painter = painterResource(id = R.drawable.skaio),
-                contentDescription = "Skaio Icon",
-                tint = Color.Unspecified,
-                modifier = Modifier.size(width = 220.dp, height = 55.dp)
-            )
-
-            Text(
-                text = "Register Your Starter",
-                style = TextStyle(
-                    fontSize = 30.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.Gray
-                ),
-                modifier = Modifier.padding(28.dp)
-
-            )
+            verticalArrangement = Arrangement.SpaceBetween
+        ) {
+            item { DeviceCode() }
+            item { Spacer(modifier = Modifier.height(12.dp)) }
+            item { GiveName() }
+            item { Spacer(modifier = Modifier.height(20.dp)) }
+            item { Checkboxes() }
+            item { GetOtp() }
+            item { PurchaseText() }
         }
+    }
+}
 
-        Column (modifier = Modifier
-            .padding(top = 16.dp)
-            .fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.SpaceBetween){
+@Composable
+fun Header(){
+    Column(modifier = Modifier
+        .padding(top = 80.dp)
+        .fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.SpaceBetween) {
 
-            DeviceCode()
+        Icon(
+            painter = painterResource(id = R.drawable.skaio),
+            contentDescription = "Skaio Icon",
+            tint = Color.Unspecified,
+            modifier = Modifier.size(width = 220.dp, height = 55.dp)
+        )
 
-            Spacer(modifier = Modifier.height(12.dp))
+        Text(
+            text = "Register Your Starter",
+            style = TextStyle(
+                fontSize = 30.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.Gray
+            ),
+            modifier = Modifier.padding(28.dp)
 
-            GiveName()
-
-            Spacer(modifier = Modifier.height(20.dp))
-
-            Checkboxes()
-
-            Button(
-                onClick = {},
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(start = 56.dp, end = 56.dp, top = 30.dp),
-                shape = RoundedCornerShape(8.dp),
-                border = BorderStroke(3.dp, Color.Blue),
-                colors = ButtonDefaults.buttonColors(
-                    contentColor = Color.White,
-                    backgroundColor = Color.Blue
-                ),
-            ) {
-                Text(
-                    text = "GET OTP",
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(horizontal = 30.dp)
-                )
-            }
-            Row(modifier = Modifier.padding(top = 70.dp)){
-                Text(
-                    text = "Don't have it? ",
-                    style = TextStyle(fontSize = 12.sp),
-                    color = Color(0xFF7E8385)
-                )
-                Text(
-                    text = "purchase here",
-                    style = TextStyle(fontSize = 12.sp,
-                        fontWeight = FontWeight.Bold),
-                    color = Color(0xFF7E8385)
-                )
-            }
-        }
+        )
     }
 }
 
@@ -189,7 +164,6 @@ fun Message(message: String, text: String){
     }
 }
 
-
 @Composable
 fun Checkboxes(){
 
@@ -209,4 +183,44 @@ fun Checkboxes(){
         )
         Text(text = "Set it Default?")
     }
+}
+
+@Composable
+fun GetOtp(){
+    Button(
+        onClick = {},
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 56.dp, end = 56.dp, top = 30.dp),
+        shape = RoundedCornerShape(8.dp),
+        border = BorderStroke(3.dp, Color.Blue),
+        colors = ButtonDefaults.buttonColors(
+            contentColor = Color.White,
+            backgroundColor = Color.Blue
+        ),
+    ) {
+        Text(
+            text = "GET OTP",
+            fontSize = 14.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(horizontal = 30.dp)
+        )
+    }
+}
+
+@Composable
+fun PurchaseText(){
+    Row(modifier = Modifier.padding(top = 70.dp)){
+        Text(
+            text = "Don't have it? ",
+            style = TextStyle(fontSize = 12.sp),
+            color = Color(0xFF7E8385)
+        )
+        Text(
+            text = "purchase here",
+            style = TextStyle(fontSize = 12.sp,
+                fontWeight = FontWeight.Bold),
+            color = Color(0xFF7E8385) )
+    }
+
 }
