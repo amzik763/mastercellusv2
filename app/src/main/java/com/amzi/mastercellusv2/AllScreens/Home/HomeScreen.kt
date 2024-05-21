@@ -64,7 +64,6 @@ import com.example.homeapplication.utility.KEY_HOMEAUTO_MACID
 
 @Composable
 fun HomeScreen(
-//  navHostController: NavHostController
     uiViewModel: UiViewmodel,
 ) {
     val ct = LocalContext.current
@@ -81,7 +80,6 @@ fun HomeScreen(
             horizontalArrangement = Arrangement.SpaceBetween){
             Image(
                 modifier = Modifier
-//                    .padding(8.dp)
                     .size(height = 64.dp, width = 64.dp),
                 painter = painterResource(id = R.drawable.skaio),
                 contentDescription = "My Icon",
@@ -89,7 +87,6 @@ fun HomeScreen(
             Row (verticalAlignment = Alignment.CenterVertically){
                 Image(
                     modifier = Modifier
-//                    .padding(8.dp)
                         .size(height = 22.dp, width = 36.dp),
                     painter = painterResource(id = com.amzi.mastercellusv2.R.drawable.usericon),
                     contentDescription = "User",
@@ -97,7 +94,6 @@ fun HomeScreen(
 
                 Image(
                     modifier = Modifier
-//                    .padding(8.dp)
                         .size(height = 27.dp, width = 32.dp)
                         .clickable {
                             activity?.finishAffinity()
@@ -128,7 +124,79 @@ fun HomeScreen(
         Spacer(modifier = Modifier.height(24.dp))
 
 
-        HomeAutomation(uiViewModel = UiViewmodel(ct))
+        Row(modifier = Modifier
+            .padding(start = 36.dp, end = 28.dp)
+            .fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween){
+            Row (
+                verticalAlignment = Alignment.CenterVertically){
+                Image(
+                    modifier = Modifier
+                        .size(height = 56.dp, width = 56.dp)
+                        .border(0.dp, lightGrey, shape = RoundedCornerShape(4.dp))
+                        .clip(RoundedCornerShape(4.dp)),
+                    painter = painterResource(id = com.amzi.mastercellusv2.R.drawable.homeicon),
+                    contentDescription = "Home",
+                    contentScale = ContentScale.Crop,
+                )
+
+                Column (modifier = Modifier
+                    .padding(start = 12.dp)
+                    .clickable {
+                        // Toggle showMacId when clicked
+                        uiViewModel.toggleHomeMacIdVisibility()
+
+                    }){
+                    Text(
+                        text = "Home Automation",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 16.sp,
+                        color = lightBlack,
+                    )
+                    Row{
+                        Text(
+                            text = uiViewModel.getMacId(KEY_HOMEAUTO_MACID),
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 10.sp,
+                            color = lightBlue,
+                            fontStyle = FontStyle.Italic
+                        )
+                        Text(
+                            text = "   Edit",
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 10.sp,
+                            color = Gray,
+                            fontStyle = FontStyle.Italic)
+                    }
+                }
+            }
+            Surface(
+                modifier = Modifier
+                    .padding(start = 16.dp)
+                    .size(width = 64.dp, height = 24.dp),
+                color = lightBlue,
+                shape = RoundedCornerShape(corner = CornerSize(8.dp)),
+                border = BorderStroke(width = 4.dp, color = lightBlue),
+            ) {
+                ClickableText(
+                    text = AnnotatedString("Open"),
+                    style = TextStyle(
+                        color = Color.White,
+                        fontSize = 9.sp,
+                        fontWeight = FontWeight.Bold,
+                        textAlign = TextAlign.Center
+                    ),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(6.dp),
+                    onClick = {
+                        mNavigator.navigateTo(Screens.HomeAutomation.route)
+                    }
+                )
+            }
+
+        }
 
         Spacer(modifier = Modifier.height(10.dp))
         if (uiViewModel.showHomeMacId) {
@@ -136,7 +204,79 @@ fun HomeScreen(
         }
         Spacer(modifier = Modifier.height(24.dp))
 
-        Mushroom(uiViewModel = UiViewmodel(ct))
+        Row(modifier = Modifier
+            .padding(start = 36.dp, end = 28.dp)
+            .fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween){
+            Row (verticalAlignment = Alignment.CenterVertically){
+                Image(
+                    modifier = Modifier
+//                    .padding(8.dp)
+                        .size(height = 56.dp, width = 56.dp)
+                        .border(0.dp, lightGrey, shape = RoundedCornerShape(4.dp))
+                        .clip(RoundedCornerShape(4.dp)),
+                    painter = painterResource(id = com.amzi.mastercellusv2.R.drawable.ic_mushroom),
+                    contentDescription = "Mushroom",
+                    contentScale = ContentScale.Crop,
+                )
+
+                Column (modifier = Modifier
+                    .padding(start = 12.dp)
+                    .clickable {
+                        uiViewModel.toggleMushMacIdVisibility()
+                    }){
+                    Text(
+                        text = "Mushroom",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 16.sp,
+                        color = lightBlack,
+                    )
+                    Row{
+                        Text(
+                            text = uiViewModel.getMacId(KEY_MUSHROOM_MACID),
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 10.sp,
+                            color = lightBlue,
+                            fontStyle = FontStyle.Italic
+                        )
+                        Text(
+                            text = "   Edit",
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 10.sp,
+                            color = Gray,
+                            fontStyle = FontStyle.Italic
+                        )
+                    }
+                }
+            }
+            Surface(
+                modifier = Modifier
+                    .padding(start = 16.dp)
+                    .size(width = 64.dp, height = 24.dp),
+                color = lightBlue,
+                shape = RoundedCornerShape(corner = CornerSize(8.dp)),
+                border = BorderStroke(width = 4.dp, color = lightBlue),
+            ) {
+                ClickableText(
+                    text = AnnotatedString("Open"),
+                    style = TextStyle(
+                        color = Color.White,
+                        fontSize = 9.sp,
+                        fontWeight = FontWeight.Bold,
+                        textAlign = TextAlign.Center
+                    ),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(6.dp),
+                    onClick = {
+                        val a = Intent(ct, com.android.mushroomapplication.MainActivity::class.java)
+                        startActivity(ct, a, null)
+//                        mNavigator.navigateTo(Screens.Detail.passNameandID("abc", "amzad"))
+                    }
+                )
+            }
+        }
 
         if (uiViewModel.showMushMacId) {
             MacIdMush(uiViewModel)
@@ -146,165 +286,6 @@ fun HomeScreen(
         Stater()
     }
 }
-
-@Composable
-fun HomeAutomation(uiViewModel: UiViewmodel){
-    Row(modifier = Modifier
-        .padding(start = 36.dp, end = 28.dp)
-        .fillMaxWidth(),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceBetween){
-        Row (
-            verticalAlignment = Alignment.CenterVertically){
-            Image(
-                modifier = Modifier
-//                    .padding(8.dp)
-                    .size(height = 56.dp, width = 56.dp)
-                    .border(0.dp, lightGrey, shape = RoundedCornerShape(4.dp))
-                    .clip(RoundedCornerShape(4.dp)),
-                painter = painterResource(id = com.amzi.mastercellusv2.R.drawable.homeicon),
-                contentDescription = "Home",
-                contentScale = ContentScale.Crop,
-            )
-
-            Column (modifier = Modifier
-                .padding(start = 12.dp)
-                .clickable {
-                    // Toggle showMacId when clicked
-                    uiViewModel.toggleHomeMacIdVisibility()
-
-                }){
-                Text(
-                    text = "Home Automation",
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 16.sp,
-                    color = lightBlack,
-                )
-                Row{
-                    Text(
-                        text = uiViewModel.getMacId(KEY_HOMEAUTO_MACID),
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 10.sp,
-                        color = lightBlue,
-                        fontStyle = FontStyle.Italic
-                    )
-                    Text(
-                        text = "   Edit",
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 10.sp,
-                        color = Gray,
-                        fontStyle = FontStyle.Italic)
-                }
-            }
-        }
-        Surface(
-            modifier = Modifier
-                .padding(start = 16.dp)
-                .size(width = 64.dp, height = 24.dp),
-            color = lightBlue,
-            shape = RoundedCornerShape(corner = CornerSize(8.dp)),
-            border = BorderStroke(width = 4.dp, color = lightBlue),
-        ) {
-            ClickableText(
-                text = AnnotatedString("Open"),
-                style = TextStyle(
-                    color = Color.White,
-                    fontSize = 9.sp,
-                    fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Center
-                ),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(6.dp),
-                onClick = {
-                    mNavigator.navigateTo(Screens.HomeAutomation.route)
-                }
-            )
-        }
-
-    }
-}
-
-@Composable
-fun Mushroom( uiViewModel: UiViewmodel){
-
-    val ct = LocalContext.current
-
-    Row(modifier = Modifier
-        .padding(start = 36.dp, end = 28.dp)
-        .fillMaxWidth(),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceBetween){
-        Row (verticalAlignment = Alignment.CenterVertically){
-            Image(
-                modifier = Modifier
-//                    .padding(8.dp)
-                    .size(height = 56.dp, width = 56.dp)
-                    .border(0.dp, lightGrey, shape = RoundedCornerShape(4.dp))
-                    .clip(RoundedCornerShape(4.dp)),
-                painter = painterResource(id = com.amzi.mastercellusv2.R.drawable.ic_mushroom),
-                contentDescription = "Mushroom",
-                contentScale = ContentScale.Crop,
-            )
-
-            Column (modifier = Modifier
-                .padding(start = 12.dp)
-                .clickable {
-                    uiViewModel.toggleMushMacIdVisibility()
-                }){
-                Text(
-                    text = "Mushroom",
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 16.sp,
-                    color = lightBlack,
-                )
-                Row{
-                    Text(
-                        text = uiViewModel.getMacId(KEY_MUSHROOM_MACID),
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 10.sp,
-                        color = lightBlue,
-                        fontStyle = FontStyle.Italic
-                    )
-                    Text(
-                        text = "   Edit",
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 10.sp,
-                        color = Gray,
-                        fontStyle = FontStyle.Italic
-                    )
-                }
-            }
-        }
-        Surface(
-            modifier = Modifier
-                .padding(start = 16.dp)
-                .size(width = 64.dp, height = 24.dp),
-            color = lightBlue,
-            shape = RoundedCornerShape(corner = CornerSize(8.dp)),
-            border = BorderStroke(width = 4.dp, color = lightBlue),
-        ) {
-            ClickableText(
-                text = AnnotatedString("Open"),
-                style = TextStyle(
-                    color = Color.White,
-                    fontSize = 9.sp,
-                    fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Center
-                ),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(6.dp),
-                onClick = {
-                    val a = Intent(ct, com.android.mushroomapplication.MainActivity::class.java)
-                    startActivity(ct, a, null)
-//                        mNavigator.navigateTo(Screens.Detail.passNameandID("abc", "amzad"))
-                }
-            )
-        }
-    }
-}
-
 
 @Composable
 fun MacIdHome(uiViewModel: UiViewmodel){
@@ -506,6 +487,8 @@ fun MacIdMush(uiViewModel: UiViewmodel){
 @Composable
 fun Stater (){
 
+    val ct = LocalContext.current
+
     Row(modifier = Modifier
         .padding(start = 36.dp, end = 28.dp)
         .fillMaxWidth(),
@@ -554,7 +537,9 @@ fun Stater (){
                     .fillMaxWidth()
                     .padding(6.dp),
                 onClick = {
-//                    mNavigator.navigateTo(Screens.HomeAutomation.route)
+
+                    val a = Intent(ct, com.cti.softStarter.MainActivity::class.java)
+                    startActivity(ct, a, null)
                 }
             )
         }

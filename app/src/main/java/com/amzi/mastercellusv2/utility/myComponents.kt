@@ -25,8 +25,6 @@ object myComponents {
     lateinit var navController:NavHostController
 }
 
-
-
 object responses{
 
 //    lateinit var loginResponse: Response<login_model>

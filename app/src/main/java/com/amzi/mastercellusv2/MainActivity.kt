@@ -104,84 +104,10 @@ class MainActivity : ComponentActivity() {
                 showLogs("temp",networkMonitor.checkNowForInternet().toString())
                 networkMonitor.registerNetworkCallback(networkCallback)
 
-/*
-                var wifiManager: WifiManager =
-                    applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
-                val locationManager = applicationContext.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-
-                val secondViewModel = viewModel<SecondViewModel>(
-                    factory = object : ViewModelProvider.Factory {
-                        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                            return SecondViewModel(
-                                context = applicationContext, wifiManager = wifiManager
-                            ) as T
-                        }
-                    }
-                )
-
-                requestPermissionLauncher = rememberLauncherForActivityResult(
-                    contract = ActivityResultContracts.RequestPermission()
-                ) { isGranted: Boolean ->
-                    if (isGranted) {
-                        // Permission granted, fetch Wi-Fi list
-                        Log.d("FETCHIGN", "List")
-//                    fetchWifiList(wifiManager, wifiList, applicationContext)
-
-                    } else {
-
-                        Log.d("FETCHIGN", "Not granted List")
-
-                        // Handle permission denied
-                        // You might want to show a message or take appropriate action
-                    }
                 }
-
-                LaunchedEffect(key1 = secondViewModel.checkPermission ) {
-                    Log.d("Perm: ", "Permission Launched")
-                    // Check and request permissions when the composable is first launched
-                    checkAndRequestPermissions(applicationContext, requestPermissionLauncher)
-                    Log.d("ABCd", wifiManager.isWifiEnabled.toString())
-                    if(wifiManager.isWifiEnabled){
-
-                        fetchWifiList(wifiManager, applicationContext,secondViewModel,thisActivity,locationManager)
-
-
-                    }else{
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                            val panelIntent = Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY)
-                            ActivityCompat.startActivityForResult(thisActivity, panelIntent, 3, null)
-                        } else {
-
-                        }
-                   }*/
-                }
-
-//                App(this, secondViewModel)
-//                mDialog(secondViewModel,wifiManager,thisActivity)
-//                Log.d("Launching", "App 2")
-//            WifiList(wifiManager,wifiList,requestPermissionLauncher)
-//                Spacer(modifier = Modifier.height(16.dp))
-
             }
         }
     }
-/*    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == 3) {
-            // The result is from the Wi-Fi settings activity
-            if (resultCode == Activity.RESULT_OK) {
-                Log.d("Wifi Turned On", "App 2")
-                // Wi-Fi was turned on successfully
-                // Add your logic here
-            } else {
-                Log.d("Wifi Not Turned On", "App 2")
-
-                // Wi-Fi was not turned on, or the user canceled the action
-                // Add your logic here
-            }
-        }
-    }*/
 
 @RequiresApi(Build.VERSION_CODES.Q)
 @Composable
@@ -303,24 +229,16 @@ fun fetchWifiList(
         Log.d("ABCD", "Please Grant Permission")
         Toast.makeText(thisActivity,"Accept Location Permission", Toast.LENGTH_LONG).show()
 
-//        checkAndRequestPermissions(context, )
         return
     }else{
         if(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)){
             Log.d("ABC", "Location Enabled")
             Toast.makeText(thisActivity,"Getting Wifi details", Toast.LENGTH_LONG).show()
 
-
-
         }else{
             Log.d("ABC", "Location Disabled")
             Toast.makeText(thisActivity,"Please Enable Location", Toast.LENGTH_LONG).show()
         }
-
-
-
-//        secondViewModel.showToast()
-
     }
     val sc = wifiManager.scanResults
     secondViewModel.wifiList.clear() // Clear existing list
@@ -334,8 +252,7 @@ fun fetchWifiList(
             secondViewModel.wifiList.add(result.SSID)
         }
     }
-//    val sc = wifiManager.scanResults
-//    wifiListState.value = sc
+
     try {
         Log.d("wifi name: ", sc.get(0).BSSID.toString())
         Log.d("wifi name: ", sc.get(0).BSSID.toString())

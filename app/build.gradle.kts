@@ -2,6 +2,9 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.devtools.ksp")
+    id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
+
 }
 
 android {
@@ -113,4 +116,12 @@ android {
 //        implementation("project(path: ':mqtt')")
         implementation(project(":mqtt"))
 
+// Hilt Dependency
+        implementation("com.google.dagger:hilt-android:2.51.1")
+        kapt("com.google.dagger:hilt-android-compiler:2.51.1")
+
+}
+
+kapt {
+    correctErrorTypes = true
 }
