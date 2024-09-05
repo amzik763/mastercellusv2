@@ -2,6 +2,12 @@ package com.example.demo.ui.mqtt
 
 import android.content.Context
 import android.util.Log
+import com.android.mushroomapplication.ui.mqtt.CONNECTION_CLEAN_SESSION
+import com.android.mushroomapplication.ui.mqtt.CONNECTION_KEEP_ALIVE_INTERVAL
+import com.android.mushroomapplication.ui.mqtt.CONNECTION_RECONNECT
+import com.android.mushroomapplication.ui.mqtt.CONNECTION_TIMEOUT
+import com.android.mushroomapplication.ui.mqtt.MQTT_HOST
+import com.android.mushroomapplication.ui.mqtt.MQTT_PORT
 import com.somsakelect.android.mqtt.MqttAndroidClient
 import org.eclipse.paho.client.mqttv3.*
 

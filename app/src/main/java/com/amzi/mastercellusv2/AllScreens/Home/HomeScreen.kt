@@ -57,6 +57,7 @@ import com.amzi.mastercellusv2.ui.theme.lightBlack
 import com.amzi.mastercellusv2.ui.theme.lightBlue
 import com.amzi.mastercellusv2.ui.theme.lightGrey
 import com.amzi.mastercellusv2.ui.theme.lightOrange
+import com.amzi.mastercellusv2.utility.myComponents.navController
 
 import com.android.mushroomapplication.R
 import com.example.demo.Utility.KEY_MUSHROOM_MACID
@@ -191,6 +192,7 @@ fun HomeScreen(
                         .fillMaxWidth()
                         .padding(6.dp),
                     onClick = {
+//                        navController.popBackStack()
                         mNavigator.navigateTo(Screens.HomeAutomation.route)
                     }
                 )
@@ -325,7 +327,6 @@ fun MacIdHome(uiViewModel: UiViewmodel){
 
             }
 
-
             Row (modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 16.dp, top = 4.dp, end = 24.dp, bottom = 12.dp),
@@ -374,7 +375,6 @@ fun MacIdHome(uiViewModel: UiViewmodel){
                         onClick = {
                             Log.d("Home Screen macId", "show mac Id")
                             uiViewModel.macId(KEY_HOMEAUTO_MACID, macIdHome)
-
                             uiViewModel.toggleHomeMacIdVisibility()
                         }
                     )
@@ -419,7 +419,6 @@ fun MacIdMush(uiViewModel: UiViewmodel){
             if (!uiViewModel.showMushMacId) {
 //                MacIdHome(uiViewModel)
                 //macIdMush = uiViewModel.getMacId(KEY_MUSHROOM_MACID)
-
             }
 //            macIdMush = uiViewModel.getMacId(KEY_MUSHROOM_MACID)
 

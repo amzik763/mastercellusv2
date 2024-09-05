@@ -13,7 +13,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.demo.Utility.KEY_MUSHROOM_MACID
 import com.example.demo.Utility.PREFERNCES_NAME
-import com.example.demo.Utility.sharedDataMushroom
+import com.android.mushroomapplication.Utility.SharedDataMushroom
 import com.example.demo.data.modelData
 import com.example.demo.ui.mqtt.ClientHelper
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -48,7 +48,7 @@ class SecondViewModel(
     val mqttClient = ClientHelper(context.applicationContext,this)
 
      //shared Preferences
-     val msharedDataMushroom =  sharedDataMushroom(context)
+     val msharedDataMushroom =  SharedDataMushroom(context)
 
          //wifi var
          var wname =  MutableStateFlow("Waiting..")

@@ -75,6 +75,7 @@ class AuthRepo(authAPIs: AuthAPIs) {
 
                 showLogs("LOGIN USER","Login Successful")
 
+//                navController.popBackStack()
                 mNavigator.navigateTo(Screens.Home.route)
 
 

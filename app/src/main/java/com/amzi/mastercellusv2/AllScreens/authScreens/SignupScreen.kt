@@ -3,6 +3,7 @@ package com.amzi.mastercellusv2.AllScreens.authScreens
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -93,7 +94,8 @@ fun SignupScreen() {
             maxLength = 10
         )
         Spacer(modifier = Modifier.height(8.dp))
-        Row{
+        Row(modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween){
             Text(
                 text = "Required*",
                 modifier = Modifier.padding(start = 9.dp),
@@ -102,7 +104,7 @@ fun SignupScreen() {
                     fontSize = 12.sp)
             )
             Text(
-                text = "0/10",
+                text = "${mobNum.length}/10",
                 modifier = Modifier.padding(start = 179.dp),
                 style = TextStyle(
                     color = Color(0xFF7E8385),

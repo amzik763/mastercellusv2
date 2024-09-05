@@ -220,7 +220,7 @@ fun PurchaseText(){
             text = "purchase here",
             style = TextStyle(fontSize = 12.sp,
                 fontWeight = FontWeight.Bold),
-            color = Color(0xFF7E8385) )
+            color = Color(0xFF7E8385)
+        )
     }
-
 }

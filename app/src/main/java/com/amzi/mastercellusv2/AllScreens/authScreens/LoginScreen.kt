@@ -43,6 +43,7 @@ import com.amzi.mastercellusv2.navgraphs.Screens
 import com.amzi.mastercellusv2.navgraphs.mNavigator
 import com.amzi.mastercellusv2.utility.showLogs
 import com.amzi.mastercellusv2.components.InputText
+import com.amzi.mastercellusv2.utility.myComponents.navController
 
 
 @Composable
@@ -97,7 +98,7 @@ fun LoginScreen(viewModel: RegisterViewModel) {
             maxLength = 10
         )
         Text(
-            text = "0/10",
+            text = "${mobNum.length}/10",
             modifier = Modifier.padding(start = 200.dp),
             style = TextStyle(
                 color = Color.Gray,
@@ -118,10 +119,11 @@ fun LoginScreen(viewModel: RegisterViewModel) {
             maxLength = 20,
             keyboardOptions = KeyboardOptions(
                 imeAction = ImeAction.Done,
-                keyboardType = KeyboardType.Text)
+                keyboardType = KeyboardType.Text
+            )
         )
         Text(
-            text = "0/20",
+            text = "${password.length}/20",
             modifier = Modifier.padding(start = 200.dp),
             style = TextStyle(
                 color = Color.Gray,
@@ -168,8 +170,10 @@ fun LoginScreen(viewModel: RegisterViewModel) {
             Text(
                 text = "Reset Now",
                 modifier = Modifier.clickable {
-                    mNavigator.navigateTo(Screens.forgotPassword.route)
-                                              },
+
+//                    navController.popBackStack()
+//                    mNavigator.navigateTo(Screens.forgotPassword.route)
+                },
                 style = TextStyle(fontSize = 12.sp,
                     fontWeight = FontWeight.Bold),
                 color = Color(0xFF7E8385)

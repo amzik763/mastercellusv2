@@ -24,7 +24,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.homeapplication.screen.FanAcScreen
 import com.example.homeapplication.screen.HomeScreen
-import com.example.homeapplication.screen.LedBulbScreen
+import com.android.homeapplication.screen.LedBulbScreen
 import com.example.homeapplication.viewModel.HomeAppViewModel
 
 @Composable
@@ -96,6 +96,7 @@ fun Navigation (context: Context) {
                                     navController.popBackStack(it,true)
                                 }
 
+                                navController.popBackStack()
                                 navController.navigate(it.route){
                                     launchSingleTop = true
                                 }

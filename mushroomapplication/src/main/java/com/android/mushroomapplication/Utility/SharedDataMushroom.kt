@@ -1,13 +1,12 @@
-package com.example.demo.Utility
+package com.android.mushroomapplication.Utility
 
 import android.content.Context
 import android.content.SharedPreferences
 import com.example.demo.data.PresetData
 
-class sharedDataMushroom(context:Context) {
+class SharedDataMushroom(context:Context) {
     private val sharedPrefFile = "myPresetData"
     val sharedPreferences: SharedPreferences = context.getSharedPreferences(sharedPrefFile, Context.MODE_PRIVATE)
-
 
     fun commitPreset(ptemp:String,phum:String,pco2:String){
         val editor:SharedPreferences.Editor =  sharedPreferences.edit()
@@ -24,7 +23,8 @@ class sharedDataMushroom(context:Context) {
     }
 
     fun setIsFirst(){
-        val editor:SharedPreferences.Editor =  sharedPreferences.edit()
+        val editor:SharedPreferences.Editor =
+            sharedPreferences.edit()
         editor.putString("isFirstTime","SET")
         editor.apply()
         editor.commit()

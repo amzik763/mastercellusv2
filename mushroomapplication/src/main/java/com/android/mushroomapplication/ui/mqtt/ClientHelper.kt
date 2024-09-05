@@ -2,7 +2,11 @@ package com.example.demo.ui.mqtt
 
 import android.content.Context
 import android.util.Log
-import com.example.demo.Utility.sharedDataMushroom
+import com.android.mushroomapplication.ui.mqtt.CONNECTION_CLEAN_SESSION
+import com.android.mushroomapplication.ui.mqtt.CONNECTION_KEEP_ALIVE_INTERVAL
+import com.android.mushroomapplication.ui.mqtt.CONNECTION_RECONNECT
+import com.android.mushroomapplication.ui.mqtt.CONNECTION_TIMEOUT
+import com.android.mushroomapplication.Utility.SharedDataMushroom
 import com.example.demo.data.PresetData
 import com.example.demo.data.modelData
 import com.example.demo.viewmodels.SecondViewModel
@@ -51,7 +55,7 @@ class ClientHelper(context: Context?, secondViewModel: SecondViewModel) {
         maxtemp2: MutableStateFlow<String>,
         maxhum2: MutableStateFlow<String>,
         maxco22: MutableStateFlow<String>,
-        msharedDataMushroom: sharedDataMushroom
+        msharedDataMushroom: SharedDataMushroom
 
     ){
         val serverURI = serverUri

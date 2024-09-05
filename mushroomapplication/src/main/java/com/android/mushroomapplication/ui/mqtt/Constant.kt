@@ -1,4 +1,4 @@
-package com.example.demo.ui.mqtt
+package com.android.mushroomapplication.ui.mqtt
 
 // Solace PubSub+ Broker Options
 
