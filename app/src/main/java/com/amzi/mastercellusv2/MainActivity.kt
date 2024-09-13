@@ -1,9 +1,7 @@
 package com.amzi.mastercellusv2
 
 import android.Manifest
-import android.app.Activity
 import android.content.Context
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.LocationManager
 import android.net.ConnectivityManager
@@ -11,41 +9,25 @@ import android.net.Network
 import android.net.wifi.WifiManager
 import android.os.Build
 import android.os.Bundle
-import android.provider.Settings
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.ManagedActivityResultLauncher
-import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
 import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
-import androidx.compose.material.Button
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.core.app.ActivityCompat
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.amzi.mastercellusv2.AllViewModels.Factories.RegisterViewModelFactory
 import com.amzi.mastercellusv2.AllViewModels.RegisterViewModel
-import com.amzi.mastercellusv2.Networks.AuthAPIs
-import com.amzi.mastercellusv2.Networks.RetrofitBuilder
+import com.amzi.mastercellusv2.networks.AuthAPIs
+import com.amzi.mastercellusv2.networks.RetrofitBuilder
 import com.amzi.mastercellusv2.Repository.AuthRepo
 import com.amzi.mastercellusv2.navgraphs.setUpNavGraph
 import com.amzi.mastercellusv2.ui.theme.Mastercellusv2Theme
@@ -58,7 +40,6 @@ import com.amzi.mastercellusv2.utility.myComponents.registerViewModelFactory
 import com.amzi.mastercellusv2.utility.showLogs
 import com.amzi.mastercellusv2.utility.showSnackBarNow
 import com.amzi.mastercellusv2.utility.snacks
-import com.android.homeapplication.Test
 import com.example.demo.dialogBox.CustomDialog
 import com.example.demo.dialogBox.networkDialog
 import com.example.demo.ui.mushroom.Energy
@@ -66,7 +47,6 @@ import com.example.demo.ui.mushroom.Title
 import com.example.demo.ui.mushroom.Title2
 import com.example.demo.viewmodels.SecondViewModel
 import com.example.demo.wifi.StringList
-import com.example.homeapplication.navigation.Navigation
 
 class MainActivity : ComponentActivity() {
 

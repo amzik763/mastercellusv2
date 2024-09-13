@@ -1,5 +1,6 @@
-package com.amzi.mastercellusv2.Networks
+package com.amzi.mastercellusv2.networks
 
+import android.provider.ContactsContract.CommonDataKinds.Email
 import com.amzi.mastercellusv2.models.RegisterResponse
 import com.amzi.mastercellusv2.models.SetPassword
 import com.amzi.mastercellusv2.models.VerifyRegisterRes
@@ -11,6 +12,13 @@ import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
 
 interface AuthAPIs {
+
+    @FormUrlEncoded
+    @POST("/master/api/login")
+    suspend fun login(
+        @Field("email") email: String,
+        @Field("password") password: String
+    ): Response<String>
 
     @FormUrlEncoded
     @POST("/starter_operator/Register")
@@ -53,7 +61,4 @@ interface AuthAPIs {
     suspend fun verify(
         @Field("mobile_no") mobile_no: String
     ): Response<verifyRes>
-
-
-
 }

@@ -1,4 +1,4 @@
-package com.example.homeapplication.navigation
+package com.android.homeapplication.navigation
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -25,6 +25,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.homeapplication.screen.FanAcScreen
 import com.example.homeapplication.screen.HomeScreen
 import com.android.homeapplication.screen.LedBulbScreen
+import com.example.homeapplication.navigation.NavigationItem
 import com.example.homeapplication.viewModel.HomeAppViewModel
 
 @Composable
@@ -101,10 +102,11 @@ fun Navigation (context: Context) {
                                     launchSingleTop = true
                                 }
                             }
-                        })
+                        }
+                    )   
                 }
             }
         }) {
-        NavigationController(navController ,context  )
+        NavigationController(navController ,context)
     }
 }

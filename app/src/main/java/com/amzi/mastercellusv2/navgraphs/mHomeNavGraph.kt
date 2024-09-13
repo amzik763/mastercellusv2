@@ -13,7 +13,7 @@ import com.amzi.mastercellusv2.AllScreens.Home.HomeScreen
 import com.amzi.mastercellusv2.AllScreens.starterScreens.MainStarterScreen
 import com.amzi.mastercellusv2.AllViewModels.UiViewmodel
 import com.amzi.mastercellusv2.utility.mGraph
-import com.example.homeapplication.navigation.Navigation
+import com.android.homeapplication.navigation.Navigation
 
 fun NavGraphBuilder.homeNavGraph(
     navController: NavHostController

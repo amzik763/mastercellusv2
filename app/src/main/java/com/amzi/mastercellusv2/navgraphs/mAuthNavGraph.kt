@@ -13,8 +13,8 @@ import com.amzi.mastercellusv2.AllScreens.authScreens.SplashScreen
 import com.amzi.mastercellusv2.AllScreens.authScreens.forgotPasswordScreen
 import com.amzi.mastercellusv2.AllViewModels.Factories.RegisterViewModelFactory
 import com.amzi.mastercellusv2.AllViewModels.RegisterViewModel
-import com.amzi.mastercellusv2.Networks.AuthAPIs
-import com.amzi.mastercellusv2.Networks.RetrofitBuilder
+import com.amzi.mastercellusv2.networks.AuthAPIs
+import com.amzi.mastercellusv2.networks.RetrofitBuilder
 import com.amzi.mastercellusv2.Repository.AuthRepo
 import com.amzi.mastercellusv2.utility.mGraph
 import com.amzi.mastercellusv2.utility.showLogs

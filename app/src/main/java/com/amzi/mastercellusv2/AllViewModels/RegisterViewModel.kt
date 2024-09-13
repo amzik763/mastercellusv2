@@ -2,11 +2,8 @@ package com.amzi.mastercellusv2.AllViewModels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.amzi.mastercellusv2.Networks.AuthAPIs
-import com.amzi.mastercellusv2.Networks.RetrofitBuilder.instance
 import com.amzi.mastercellusv2.Repository.AuthRepo
 import com.amzi.mastercellusv2.utility.showLogs
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
 class RegisterViewModel(authRepo: AuthRepo) : ViewModel() {
@@ -48,6 +45,14 @@ class RegisterViewModel(authRepo: AuthRepo) : ViewModel() {
 
         viewModelScope.launch {
             authRepo.loginUser(mobileNum, password)
+        }
+    }
+
+    fun login(email: String, password: String) {
+        showLogs("LOGIN: ", mobNum)
+
+        viewModelScope.launch {
+            authRepo.login(email, password)
         }
     }
 

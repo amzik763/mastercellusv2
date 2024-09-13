@@ -93,7 +93,7 @@ fun LoginScreen(viewModel: RegisterViewModel) {
             iconResId = R.drawable.phone,
             keyboardOptions = KeyboardOptions(
                 imeAction = ImeAction.Done,
-                keyboardType = KeyboardType.Number),
+                keyboardType = KeyboardType.Text),
             onTextChange = { mobNum = it },
             maxLength = 10
         )
@@ -155,8 +155,7 @@ fun LoginScreen(viewModel: RegisterViewModel) {
                     .padding(9.dp)
                     .align(Alignment.CenterHorizontally),
                 onClick = {
-
-                    registerViewModel.loginUser(mobNum, password)
+                    registerViewModel.login(mobNum, password)
                 }
             )
         }

@@ -1,7 +1,7 @@
 package com.amzi.mastercellusv2.Repository
 
 import android.util.Log
-import com.amzi.mastercellusv2.Networks.AuthAPIs
+import com.amzi.mastercellusv2.networks.AuthAPIs
 import com.amzi.mastercellusv2.navgraphs.Screens
 import com.amzi.mastercellusv2.navgraphs.mNavigator
 import com.amzi.mastercellusv2.utility.myComponents.navController
@@ -150,6 +150,28 @@ class AuthRepo(authAPIs: AuthAPIs) {
 
         }
 
+        catch (e:Exception){
+            showLogs("Error: ",e.toString())
+        }
+    }
+
+    suspend fun login(email: String, password: String){
+
+        try{
+            val loginResponse = authAPI.login(email, password)
+
+            if(loginResponse.isSuccessful){
+
+                showLogs("LOGIN USER","Login Successful")
+
+                mNavigator.navigateTo(Screens.Home.route)
+
+
+            }else{
+                showLogs("LOGIN USER","Login unSuccessful" + loginResponse.errorBody().toString())
+
+            }
+        }
         catch (e:Exception){
             showLogs("Error: ",e.toString())
         }
