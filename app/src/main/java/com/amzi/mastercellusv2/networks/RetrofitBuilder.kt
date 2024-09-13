@@ -10,28 +10,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
-/*fun storeTokens(context: Context, accessToken: String, refreshToken: String) {
-
-    // Generate or retrieve a master key
-    val masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
-
-    // Initialize EncryptedSharedPreferences
-    val sharedPreferences = EncryptedSharedPreferences.create(
-        "secure_prefs", // file name
-        masterKeyAlias, // master key
-        context,
-        EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
-        EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
-    )
-
-    // Store the tokens
-    with(sharedPreferences.edit()) {
-        putString("access_token", accessToken)
-        putString("refresh_token", refreshToken)
-        apply()
-    }
-}*/
-
 class MyCookieJar : CookieJar {
     private val cookieStore: HashMap<String, List<Cookie>> = HashMap()
 
@@ -68,37 +46,4 @@ object RetrofitBuilder {
             .build()
     }
 }
-
-/*
-fun createRetrofitClient(context: Context): Retrofit {
-    // Retrieve the access token from EncryptedSharedPreferences
-    val sharedPreferences = EncryptedSharedPreferences.create(
-        "secure_prefs",
-        MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC),
-        context,
-        EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
-        EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
-    )
-
-    val accessToken = sharedPreferences.getString("access_token", null)
-
-    // Build OkHttp client with cookieJar and an interceptor that adds the Authorization header
-    val client = OkHttpClient.Builder()
-        .addInterceptor { chain: Interceptor.Chain ->
-            val request = chain.request().newBuilder()
-                .addHeader("Authorization", "Bearer $accessToken")
-                .build()
-            chain.proceed(request)
-        }
-        .cookieJar(MyCookieJar()) // Add custom CookieJar here
-        .build()
-
-    // Build and return the Retrofit instance
-    return Retrofit.Builder()
-        .baseUrl("http://192.168.1.5:8000") // Replace with your actual API base URL
-        .client(client)
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
-}
-*/
 

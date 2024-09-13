@@ -23,7 +23,7 @@ import org.eclipse.paho.client.mqttv3.MqttMessage
     var bulbsState = mutableListOf<Boolean>()
     var acState = mutableListOf<Boolean>()//fan and ac state
 
-    init {
+    init{
         viewModelScope.launch {
             Log.d("not","find me if u can")
             startFetchingData()
@@ -68,6 +68,7 @@ import org.eclipse.paho.client.mqttv3.MqttMessage
 //      mqttClient.publish("bulb/${id}", message)
 //        mqttClient.publish("HA/70:04:1D:55:92:48/$/command", message)
 //    }
+
     fun bulbSwitch(id: Int) {
 
 
@@ -105,6 +106,7 @@ import org.eclipse.paho.client.mqttv3.MqttMessage
 //                             else "UPDATE_HOME_AUTOMATION_DATA=0,0,0"
 //        mqttClient.publish("HA/70:04:1D:55:92:48/$/command", message)
 // }
+        
     fun acSwitch(id: Int) {
 
         val homeMac = getMacId(KEY_HOMEAUTO_MACID)

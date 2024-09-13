@@ -78,7 +78,6 @@ dependencies {
 
     //Viewmodel
     val lifecycle_version = "2.6.2"
-
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
     // ViewModel utilities for Compose
@@ -103,7 +102,7 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp:4.9.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.0")
 
-
+    implementation("androidx.annotation:annotation:1.5.0")
     //systemUI
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.30.1")
 }
