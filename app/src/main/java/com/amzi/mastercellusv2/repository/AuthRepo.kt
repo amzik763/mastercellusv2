@@ -1,4 +1,4 @@
-package com.amzi.mastercellusv2.Repository
+package com.amzi.mastercellusv2.repository
 
 import android.util.Log
 import com.amzi.mastercellusv2.networks.AuthAPIs
@@ -169,6 +169,9 @@ class AuthRepo(authAPIs: AuthAPIs) {
 
             }else{
                 showLogs("LOGIN USER","Login unSuccessful" + loginResponse.errorBody().toString())
+
+                showLogs("LOGIN USER","Login unSuccessful")
+
 
             }
         }

@@ -28,7 +28,7 @@ import com.amzi.mastercellusv2.AllViewModels.Factories.RegisterViewModelFactory
 import com.amzi.mastercellusv2.AllViewModels.RegisterViewModel
 import com.amzi.mastercellusv2.networks.AuthAPIs
 import com.amzi.mastercellusv2.networks.RetrofitBuilder
-import com.amzi.mastercellusv2.Repository.AuthRepo
+import com.amzi.mastercellusv2.repository.AuthRepo
 import com.amzi.mastercellusv2.navgraphs.setUpNavGraph
 import com.amzi.mastercellusv2.ui.theme.Mastercellusv2Theme
 import com.amzi.mastercellusv2.utility.NetworkMonitor
@@ -71,7 +71,11 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         Log.d("Launching", "App 1")
         var thisActivity = this;
-        authAPI = RetrofitBuilder.instance.create(AuthAPIs::class.java)
+
+//        authAPI = RetrofitBuilder.instance.create(AuthAPIs::class.java)
+
+        authAPI = RetrofitBuilder.create(this).create(AuthAPIs::class.java)
+
         authRepo = AuthRepo(authAPI)
         registerViewModelFactory = RegisterViewModelFactory(authRepo)
         registerViewModel = registerViewModelFactory.create(RegisterViewModel::class.java)

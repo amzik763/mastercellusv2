@@ -15,17 +15,18 @@ import com.amzi.mastercellusv2.AllViewModels.Factories.RegisterViewModelFactory
 import com.amzi.mastercellusv2.AllViewModels.RegisterViewModel
 import com.amzi.mastercellusv2.networks.AuthAPIs
 import com.amzi.mastercellusv2.networks.RetrofitBuilder
-import com.amzi.mastercellusv2.Repository.AuthRepo
+import com.amzi.mastercellusv2.repository.AuthRepo
 import com.amzi.mastercellusv2.utility.mGraph
+import com.amzi.mastercellusv2.utility.myComponents.authAPI
 import com.amzi.mastercellusv2.utility.showLogs
 
 fun NavGraphBuilder.authNavGraph(
     navController: NavHostController,
 ){
 
-    val authAPI: AuthAPIs by lazy {
-        RetrofitBuilder.instance.create(AuthAPIs::class.java)
-    }
+//    val authAPI: AuthAPIs by lazy {
+//        RetrofitBuilder.instance.create(AuthAPIs::class.java)
+//    }
        val authRepo:AuthRepo = AuthRepo(authAPI)
     val viewModelFactory = RegisterViewModelFactory(authRepo)
     val mRegisterViewModel: RegisterViewModel = viewModelFactory.create(RegisterViewModel::class.java)

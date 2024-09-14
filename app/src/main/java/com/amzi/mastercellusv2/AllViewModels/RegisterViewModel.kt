@@ -2,7 +2,7 @@ package com.amzi.mastercellusv2.AllViewModels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.amzi.mastercellusv2.Repository.AuthRepo
+import com.amzi.mastercellusv2.repository.AuthRepo
 import com.amzi.mastercellusv2.utility.showLogs
 import kotlinx.coroutines.launch
 

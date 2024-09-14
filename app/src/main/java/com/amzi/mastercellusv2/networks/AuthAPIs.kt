@@ -1,10 +1,10 @@
 package com.amzi.mastercellusv2.networks
 
-import android.provider.ContactsContract.CommonDataKinds.Email
+import com.amzi.mastercellusv2.models.LoginResponse
 import com.amzi.mastercellusv2.models.RegisterResponse
 import com.amzi.mastercellusv2.models.SetPassword
 import com.amzi.mastercellusv2.models.VerifyRegisterRes
-import com.amzi.mastercellusv2.models.loginResponse
+import com.amzi.mastercellusv2.models.loginResponsePre
 import com.amzi.mastercellusv2.models.verifyRes
 import retrofit2.Response
 import retrofit2.http.Field
@@ -18,7 +18,7 @@ interface AuthAPIs {
     suspend fun login(
         @Field("email") email: String,
         @Field("password") password: String
-    ): Response<String>
+    ): Response<LoginResponse>
 
     @FormUrlEncoded
     @POST("/starter_operator/Register")
@@ -54,7 +54,7 @@ interface AuthAPIs {
     suspend fun loginUser(
         @Field("mobile_no") mobile_no: String,
         @Field("password") password: String
-    ): Response<loginResponse>
+    ): Response<loginResponsePre>
 
     @FormUrlEncoded
     @POST("/starter_operator/forgot_password")
