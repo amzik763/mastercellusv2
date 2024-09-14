@@ -95,10 +95,10 @@ fun LoginScreen(viewModel: RegisterViewModel) {
                 imeAction = ImeAction.Done,
                 keyboardType = KeyboardType.Text),
             onTextChange = { mobNum = it },
-            maxLength = 10
+            maxLength = 30
         )
         Text(
-            text = "${mobNum.length}/10",
+            text = "${mobNum.length}/30",
             modifier = Modifier.padding(start = 200.dp),
             style = TextStyle(
                 color = Color.Gray,
