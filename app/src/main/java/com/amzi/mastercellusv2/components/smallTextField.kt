@@ -3,7 +3,6 @@ package com.amzi.mastercellusv2.components
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -12,7 +11,6 @@ import androidx.compose.material.LocalTextStyle
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
@@ -24,7 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun InputText(
+fun SmallInputText(
     modifier: Modifier = Modifier,
     text: String,
     label: String,
@@ -43,35 +41,35 @@ fun InputText(
     val keyboardController = LocalSoftwareKeyboardController.current
 
     OutlinedTextField(value = text,
-      onValueChange = {val newText = it.take(maxLength)
+        onValueChange = {val newText = it.take(maxLength)
             onTextChange(newText)},
-      maxLines = maxLine,
-      label = { Text(text = label,
-          style = TextStyle(
-              fontSize = 12.sp
-          ),) },
+        maxLines = maxLine,
+        label = { Text(text = label,
+            style = TextStyle(
+                fontSize = 12.sp
+            ),) },
         keyboardOptions = keyboardOptions,
         keyboardActions =  KeyboardActions(onDone = {
             onImeAction()
             keyboardController?.hide()
 
         }),
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier.fillMaxWidth(0.5f)
             .height(55.dp),
         textStyle = LocalTextStyle.current.copy(
             fontWeight = FontWeight.SemiBold,
             color = color,
             fontSize = 12.sp
         ),
-      trailingIcon = {
-          Icon(
-              painter = painterResource(id = iconResId),
-              contentDescription = "Password Icon",
-              modifier = Modifier
-                  .size(19.dp)
-                  .fillMaxWidth()
-          )
-      },
+   /*     trailingIcon = {
+            Icon(
+                painter = painterResource(id = iconResId),
+                contentDescription = "Password Icon",
+                modifier = Modifier
+                    .size(19.dp)
+                    .fillMaxWidth()
+            )
+        },*/
         shape = RoundedCornerShape(16.dp)
     )
 }

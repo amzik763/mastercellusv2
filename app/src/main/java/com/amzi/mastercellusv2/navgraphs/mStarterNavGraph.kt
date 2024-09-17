@@ -5,9 +5,9 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.amzi.mastercellusv2.AllScreens.starterScreens.StarterDetailScreen
-import com.amzi.mastercellusv2.AllScreens.starterScreens.StarterHomeScreen
-import com.amzi.mastercellusv2.AllScreens.starterScreens.StarterScreen
+import com.amzi.mastercellusv2.allScreens.starterScreens.StarterDetailScreen
+import com.amzi.mastercellusv2.allScreens.starterScreens.StarterHomeScreen
+import com.amzi.mastercellusv2.allScreens.starterScreens.StarterScreen
 import com.amzi.mastercellusv2.utility.mGraph
 
 class mStarterNavigator(){

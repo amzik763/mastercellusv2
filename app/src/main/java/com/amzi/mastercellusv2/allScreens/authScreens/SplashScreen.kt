@@ -1,4 +1,4 @@
-package com.amzi.mastercellusv2.AllScreens.authScreens
+package com.amzi.mastercellusv2.allScreens.authScreens
 
 import android.view.animation.OvershootInterpolator
 import androidx.compose.animation.core.tween

@@ -1,4 +1,4 @@
-package com.amzi.mastercellusv2.AllScreens.Home
+package com.amzi.mastercellusv2.allScreens.Home
 
 import android.util.Log
 import androidx.compose.foundation.clickable

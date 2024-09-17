@@ -6,15 +6,13 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import androidx.navigation.navigation
-import com.amzi.mastercellusv2.AllScreens.authScreens.LoginScreen
-import com.amzi.mastercellusv2.AllScreens.authScreens.SetPasswordScreen
-import com.amzi.mastercellusv2.AllScreens.authScreens.SignupScreen
-import com.amzi.mastercellusv2.AllScreens.authScreens.SplashScreen
-import com.amzi.mastercellusv2.AllScreens.authScreens.forgotPasswordScreen
+import com.amzi.mastercellusv2.allScreens.authScreens.LoginScreen
+import com.amzi.mastercellusv2.allScreens.authScreens.SetPasswordScreen
+import com.amzi.mastercellusv2.allScreens.authScreens.RegisterScreen
+import com.amzi.mastercellusv2.allScreens.authScreens.SplashScreen
+import com.amzi.mastercellusv2.allScreens.authScreens.forgotPasswordScreen
 import com.amzi.mastercellusv2.AllViewModels.Factories.RegisterViewModelFactory
 import com.amzi.mastercellusv2.AllViewModels.RegisterViewModel
-import com.amzi.mastercellusv2.networks.AuthAPIs
-import com.amzi.mastercellusv2.networks.RetrofitBuilder
 import com.amzi.mastercellusv2.repository.AuthRepo
 import com.amzi.mastercellusv2.utility.mGraph
 import com.amzi.mastercellusv2.utility.myComponents.authAPI
@@ -51,7 +49,7 @@ fun NavGraphBuilder.authNavGraph(
 
         composable(route = Screens.Signup.route){
 
-            SignupScreen()
+            RegisterScreen()
         }
 
 //        composable(route = Screens.SetPassword.route){

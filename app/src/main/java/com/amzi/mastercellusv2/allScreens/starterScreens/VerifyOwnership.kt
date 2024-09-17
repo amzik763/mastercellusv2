@@ -1,4 +1,4 @@
-package com.amzi.mastercellusv2.AllScreens.starterScreens
+package com.amzi.mastercellusv2.allScreens.starterScreens
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background

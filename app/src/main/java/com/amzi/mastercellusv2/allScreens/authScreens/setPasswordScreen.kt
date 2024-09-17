@@ -1,9 +1,7 @@
-package com.amzi.mastercellusv2.AllScreens.authScreens
+package com.amzi.mastercellusv2.allScreens.authScreens
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -17,6 +15,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Icon
+import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -38,20 +37,22 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.amzi.mastercellusv2.R
-import com.amzi.mastercellusv2.navgraphs.Screens
-import com.amzi.mastercellusv2.navgraphs.mNavigator
 import com.amzi.mastercellusv2.utility.showLogs
 import com.amzi.mastercellusv2.components.InputText
 import com.amzi.mastercellusv2.utility.myComponents.registerViewModel
 
-@Composable
-fun SignupScreen() {
 
-    //temporary
-    showLogs("signup","called")
+@Composable
+fun SetPasswordScreen(mode: String) {
+
+
+    showLogs("SetPassword: ", registerViewModel.mobNum)
+
     var mobNum by remember { mutableStateOf("") }
-    var name by remember { mutableStateOf("") }
-    var dob by remember { mutableStateOf("") }
+    var otp by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+    var confirmPassword by remember { mutableStateOf("") }
+
 
     Column(
         modifier = Modifier
@@ -71,7 +72,7 @@ fun SignupScreen() {
         )
         Spacer(modifier = Modifier.height(35.dp))
         Text(
-            text = "Register",
+            text = "Set Password",
             style = TextStyle(
                 fontSize = 39.sp,
                 fontWeight = FontWeight.Bold,
@@ -79,6 +80,7 @@ fun SignupScreen() {
             )
         )
         Spacer(modifier = Modifier.height(12.dp))
+
         InputText(
             modifier = Modifier
                 .padding(top = 9.dp, bottom = 8.dp),
@@ -94,8 +96,7 @@ fun SignupScreen() {
             maxLength = 10
         )
         Spacer(modifier = Modifier.height(8.dp))
-        Row(modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween){
+        Row{
             Text(
                 text = "Required*",
                 modifier = Modifier.padding(start = 9.dp),
@@ -104,8 +105,35 @@ fun SignupScreen() {
                     fontSize = 12.sp)
             )
             Text(
-                text = "${mobNum.length}/10",
+                text = "0/10",
                 modifier = Modifier.padding(start = 179.dp),
+                style = TextStyle(
+                    color = Color(0xFF7E8385),
+                    fontSize = 13.sp)
+            )
+        }
+
+        Spacer(modifier = Modifier.height(10.dp))
+
+        OutlinedTextField(
+            value = otp,
+            onValueChange = { otp = it },
+            label = { Text(text = "Enter OTP") },
+            maxLines = 1,
+
+            )
+        Spacer(modifier = Modifier.height(8.dp))
+        Row{
+            Text(
+                text = "4 digit OTP sent to your mobile no*",
+                modifier = Modifier.padding(start = 9.dp),
+                style = TextStyle(
+                    color = Color(0xFF7E8385),
+                    fontSize = 12.sp)
+            )
+            Text(
+                text = "0/4",
+                modifier = Modifier.padding(start = 44.dp),
                 style = TextStyle(
                     color = Color(0xFF7E8385),
                     fontSize = 13.sp)
@@ -118,33 +146,28 @@ fun SignupScreen() {
                 top = 9.dp,
                 bottom = 8.dp
             ),
-            text = name,
+            text = password,
             color = Color.Black,
-            label = "Full name",
-            maxLine = 1,
-            iconResId = R.drawable.user,
-            onTextChange = { name = it },
+            label = "New Password",
+            iconResId = R.drawable.lock,
+            onTextChange = { password = it },
             maxLength = 20,
-            keyboardOptions = KeyboardOptions.Default.copy(
-                imeAction = ImeAction.Done,
-                keyboardType = KeyboardType.Text)
+            keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Text)
         )
         Spacer(modifier = Modifier.height(8.dp))
         Row{
             Text(
-                text = "Min 3 characters required*",
+                text = "Min 8 characters are required*",
                 style = TextStyle(
                     color = Color(0xFF7E8385),
-                    fontSize = 12.sp
-                )
+                    fontSize = 12.sp)
             )
             Text(
-                text = " ",
-                modifier = Modifier.padding(start = 113.dp),
+                text = "0/20",
+                modifier = Modifier.padding(start = 70.dp),
                 style = TextStyle(
                     color = Color(0xFF7E8385),
-                    fontSize = 13.sp
-                )
+                    fontSize = 13.sp)
             )
         }
         Spacer(modifier = Modifier.height(10.dp))
@@ -153,33 +176,28 @@ fun SignupScreen() {
                 top = 9.dp,
                 bottom = 8.dp
             ),
-            text = dob,
+            text = confirmPassword,
             color = Color.Black,
-            label = "Date of Birth",
-            iconResId = R.drawable.calender,
-            maxLine = 1,
-            onTextChange = { dob = it },
+            label = "Confirm Password",
+            iconResId = R.drawable.lock,
+            onTextChange = { confirmPassword = it },
             maxLength = 20,
-            keyboardOptions = KeyboardOptions(
-                imeAction = ImeAction.Done,
-                keyboardType = KeyboardType.Text)
+            keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Text)
         )
         Spacer(modifier = Modifier.height(8.dp))
         Row{
             Text(
-                text = "Optional",
+                text = "Required*",
                 style = TextStyle(
                     color = Color(0xFF7E8385),
-                    fontSize = 12.sp
-                )
+                    fontSize = 12.sp)
             )
             Text(
-                text = "  ",
-                modifier = Modifier.padding(start = 210.dp),
+                text = "0/20",
+                modifier = Modifier.padding(start = 179.dp),
                 style = TextStyle(
                     color = Color(0xFF7E8385),
-                    fontSize = 13.sp
-                )
+                    fontSize = 13.sp)
             )
         }
 
@@ -193,7 +211,7 @@ fun SignupScreen() {
             border = BorderStroke(width = 1.dp, color = Color.LightGray)
         ) {
             ClickableText(
-                text = AnnotatedString("Register Now"),
+                text = AnnotatedString("SET"),
                 style = TextStyle(
                     color = Color.White,
                     fontSize = 15.sp,
@@ -205,36 +223,48 @@ fun SignupScreen() {
                     .padding(9.dp)
                     .align(Alignment.CenterHorizontally),
                 onClick = {
-                    registerViewModel.registerUser(mobNum,name,dob)
 
+                    showLogs("my mode",mode)
+
+                    if(mode == "register"){
+                        registerViewModel.setPassword("register",mobNum, otp, password, confirmPassword)
+                        showLogs("set password", "Password is set")
+                    }
+
+                    if (mode == "change_password"){
+                        registerViewModel.changePassword("change_password", mobNum,otp, password, confirmPassword)
+                        showLogs("change password", "Password is changed")
+
+                    }
                 }
+
             )
+        }
+        Row(modifier = Modifier.padding(top = 15.dp, start = 155.dp)) {
+            Text(
+                text = "Resend OTP in 30 sec",
+                style = TextStyle(fontSize = 12.sp),
+                color = Color(0xFF7E8385)
+            )
+
         }
 
-        Row {
-            Text(
-                modifier = Modifier.padding(top = 60.dp),
-                text = "Already have an account?",
-                style = TextStyle(
-                    fontSize = 12.sp,
-                ),
-                color = Color(0xFF7E8385)
-            )
-            Text(
-                modifier = Modifier.padding(top = 60.dp)
-                    .clickable { mNavigator.navigateTo(Screens.Login.route)},
-                text = "Login now",
-                style = TextStyle(
-                    fontSize = 12.sp,
-                    fontWeight = FontWeight.Bold
-                ),
-                color = Color(0xFF7E8385)
-            )
-        }
+        Text(
+            modifier = Modifier.padding(top = 60.dp),
+            text = "Cancel",
+            style = TextStyle(
+                fontSize = 12.sp,
+            ),
+            color = Color(0xFF7E8385)
+        )
+
+
     }
 }
 @Composable
 @Preview(showBackground = true, showSystemUi = true)
-fun SignupScreenPreview(){
-
+fun SetPasswordScreenPreview(){
+//    setPasswordScreen(
+////        navHostController = rememberNavController()
+//    )
 }

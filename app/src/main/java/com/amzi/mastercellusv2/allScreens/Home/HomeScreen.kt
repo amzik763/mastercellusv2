@@ -1,4 +1,4 @@
-package com.amzi.mastercellusv2.AllScreens.Home
+package com.amzi.mastercellusv2.allScreens.Home
 
 import android.app.Activity
 import android.content.Intent
@@ -57,7 +57,6 @@ import com.amzi.mastercellusv2.ui.theme.lightBlack
 import com.amzi.mastercellusv2.ui.theme.lightBlue
 import com.amzi.mastercellusv2.ui.theme.lightGrey
 import com.amzi.mastercellusv2.ui.theme.lightOrange
-import com.amzi.mastercellusv2.utility.myComponents.navController
 
 import com.android.mushroomapplication.R
 import com.example.demo.Utility.KEY_MUSHROOM_MACID

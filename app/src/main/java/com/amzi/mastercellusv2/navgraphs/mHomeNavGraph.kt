@@ -8,9 +8,9 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import androidx.navigation.navigation
-import com.amzi.mastercellusv2.AllScreens.Home.DetailsScreen
-import com.amzi.mastercellusv2.AllScreens.Home.HomeScreen
-import com.amzi.mastercellusv2.AllScreens.starterScreens.MainStarterScreen
+import com.amzi.mastercellusv2.allScreens.Home.DetailsScreen
+import com.amzi.mastercellusv2.allScreens.Home.HomeScreen
+import com.amzi.mastercellusv2.allScreens.starterScreens.MainStarterScreen
 import com.amzi.mastercellusv2.AllViewModels.UiViewmodel
 import com.amzi.mastercellusv2.utility.mGraph
 import com.android.homeapplication.navigation.Navigation

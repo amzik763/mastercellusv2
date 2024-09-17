@@ -1,4 +1,4 @@
-package com.amzi.mastercellusv2.AllScreens.starterScreens
+package com.amzi.mastercellusv2.allScreens.starterScreens
 
 import android.util.Log
 import androidx.compose.foundation.layout.RowScope
