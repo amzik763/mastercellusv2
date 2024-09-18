@@ -22,6 +22,14 @@ interface AuthAPIs {
 
     @FormUrlEncoded
     @POST("/starter_operator/Register")
+    suspend fun register(
+        @Field("mobile_no") mobile_no: String,
+        @Field("username") username: String,
+        @Field("date_of_birth") date_of_birth: String
+    ): Response<RegisterResponse>
+
+    @FormUrlEncoded
+    @POST("/starter_operator/Register")
     suspend fun registerUser(
         @Field("mobile_no") mobile_no: String,
         @Field("username") username: String,

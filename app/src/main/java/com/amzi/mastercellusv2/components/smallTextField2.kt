@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun SmallInputText(
+fun SmallInputText2(
 //    modifier: Modifier = Modifier,
     text: String,
     label: String,
@@ -56,7 +56,6 @@ fun SmallInputText(
 
         }),
         modifier = Modifier
-            .fillMaxWidth(0.48f)
             .height(55.dp),
         textStyle = LocalTextStyle.current.copy(
             fontWeight = FontWeight.SemiBold,

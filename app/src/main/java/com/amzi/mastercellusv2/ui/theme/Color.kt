@@ -13,7 +13,7 @@ val mBlue = Color(0xFF396DD5)
 
 val lightOrange = Color(0xFFFFA630)
 val orange = Color(0xFFF17720)
-val blue = Color(0xFF0474BA)
+val blue = Color(0xFF4A7CE5)
 val lightBlue = Color(0xFF00A7E1)
 val lightBlack  = Color(0xFF0E0E0E)
 val Grey = Color(0xFFD9D9D9)

@@ -11,12 +11,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Icon
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -27,7 +25,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -38,24 +35,29 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.amzi.mastercellusv2.R
+import com.amzi.mastercellusv2.components.CustomButton
 import com.amzi.mastercellusv2.components.Header
+import com.amzi.mastercellusv2.components.InputText
+import com.amzi.mastercellusv2.components.SmallInputText
+import com.amzi.mastercellusv2.components.SmallInputText2
 import com.amzi.mastercellusv2.navgraphs.Screens
 import com.amzi.mastercellusv2.navgraphs.mNavigator
-import com.amzi.mastercellusv2.utility.showLogs
-import com.amzi.mastercellusv2.components.InputText
+import com.amzi.mastercellusv2.ui.theme.blue
+import com.amzi.mastercellusv2.ui.theme.lightBlack
+import com.amzi.mastercellusv2.ui.theme.orange
 import com.amzi.mastercellusv2.utility.mFont
-import com.amzi.mastercellusv2.utility.myComponents.registerViewModel
 import com.example.demo.ui.theme.Grey
+import com.example.demo.ui.theme.pureWhite
 
 @Preview
 @Composable
 fun RegisterScreen() {
 
-    //temporary
-    showLogs("signup","called")
+    var username by remember { mutableStateOf("") }
+    var firstName by remember { mutableStateOf("") }
+    var lastName by remember { mutableStateOf("") }
+    var email by remember { mutableStateOf("") }
     var mobNum by remember { mutableStateOf("") }
-    var name by remember { mutableStateOf("") }
-    var dob by remember { mutableStateOf("") }
 
     Column(
         modifier = Modifier
@@ -67,16 +69,88 @@ fun RegisterScreen() {
         Header(text1 = "Register",
             text2 = "Join our community and experience seamless integration of our devices")
 
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(24.dp))
 
         Text(text = "Basic",
             style = TextStyle(
-                fontSize = 12.sp,
+                fontSize = 13.sp,
                 fontWeight = FontWeight.Bold,
                 color = Grey,
                 fontFamily = mFont.outfitRegular
-            ),
-            modifier = Modifier.padding(end = 46.dp)
+            )
+        )
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        InputText(
+            modifier = Modifier
+                .padding(top = 9.dp, bottom = 8.dp),
+            text = username,
+            color = Color.Black,
+            label = "Username",
+            maxLine = 1,
+            iconResId = R.drawable.person,
+            keyboardOptions = KeyboardOptions(
+                imeAction = ImeAction.Done,
+                keyboardType = KeyboardType.Text),
+            onTextChange = { username = it },
+            maxLength = 10
+        )
+
+        Spacer(modifier = Modifier.height(8.dp))
+        Row (modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(16.dp)){
+            SmallInputText(
+                text = firstName,
+                color = Color.Black,
+                label = "First Name",
+                maxLine = 1,
+                keyboardOptions = KeyboardOptions(
+                    imeAction = ImeAction.Done,
+                    keyboardType = KeyboardType.Text),
+                onTextChange = { firstName = it },
+                maxLength = 10
+            )
+
+            SmallInputText2(
+                text = lastName,
+                color = Color.Black,
+                label = "Last Name",
+                maxLine = 1,
+                keyboardOptions = KeyboardOptions(
+                    imeAction = ImeAction.Done,
+                    keyboardType = KeyboardType.Text),
+                onTextChange = { lastName = it },
+                maxLength = 10
+            )
+        }
+
+        Spacer(modifier = Modifier.height(28.dp))
+
+        Text(text = "Account",
+            style = TextStyle(
+                fontSize = 13.sp,
+                fontWeight = FontWeight.Bold,
+                color = Grey,
+                fontFamily = mFont.outfitRegular
+            )
+        )
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        InputText(
+            modifier = Modifier
+                .padding(top = 9.dp, bottom = 8.dp),
+            text = email,
+            color = Color.Black,
+            label = "Email Id",
+            maxLine = 1,
+            iconResId = R.drawable.email,
+            keyboardOptions = KeyboardOptions(
+                imeAction = ImeAction.Done,
+                keyboardType = KeyboardType.Text),
+            onTextChange = { email = it },
+            maxLength = 10
         )
 
         Spacer(modifier = Modifier.height(8.dp))
@@ -96,107 +170,45 @@ fun RegisterScreen() {
             maxLength = 10
         )
 
-        Spacer(modifier = Modifier.height(8.dp))
-        InputText(
-            modifier = Modifier.padding(
-                top = 9.dp,
-                bottom = 8.dp
-            ),
-            text = name,
-            color = Color.Black,
-            label = "Full name",
-            maxLine = 1,
-            iconResId = R.drawable.user,
-            onTextChange = { name = it },
-            maxLength = 20,
-            keyboardOptions = KeyboardOptions.Default.copy(
-                imeAction = ImeAction.Done,
-                keyboardType = KeyboardType.Text)
+
+        Spacer(modifier = Modifier.height(28.dp))
+
+        Text(text = "Click Register to proceed",
+            style = TextStyle(
+                fontSize = 12.sp,
+                fontWeight = FontWeight.SemiBold,
+                color = Grey,
+                fontFamily = mFont.outfitRegular
+            )
         )
 
-        Spacer(modifier = Modifier.height(10.dp))
-        InputText(
-            modifier = Modifier.padding(
-                top = 9.dp,
-                bottom = 8.dp
-            ),
-            text = dob,
-            color = Color.Black,
-            label = "Date of Birth",
-            iconResId = R.drawable.calender,
-            maxLine = 1,
-            onTextChange = { dob = it },
-            maxLength = 20,
-            keyboardOptions = KeyboardOptions(
-                imeAction = ImeAction.Done,
-                keyboardType = KeyboardType.Text)
-        )
-        Spacer(modifier = Modifier.height(8.dp))
-        Row{
-            Text(
-                text = "Optional",
-                style = TextStyle(
-                    color = Color(0xFF7E8385),
-                    fontSize = 12.sp
-                )
-            )
-            Text(
-                text = "  ",
-                modifier = Modifier.padding(start = 210.dp),
-                style = TextStyle(
-                    color = Color(0xFF7E8385),
-                    fontSize = 13.sp
-                )
-            )
+        Spacer(modifier = Modifier.height(12.dp))
+
+        CustomButton("Register"){
+
         }
-
-        Spacer(modifier = Modifier.height(30.dp))
-        Surface(
-            modifier = Modifier
-                .padding(start = 50.dp, end = 50.dp),
-//            color = Color(0xFF0E86BD),
-            color = Color.Blue,
-            shape = RoundedCornerShape(corner = CornerSize(6.dp)),
-            border = BorderStroke(width = 1.dp, color = Color.LightGray)
-        ) {
-            ClickableText(
-                text = AnnotatedString("Register Now"),
-                style = TextStyle(
-                    color = Color.White,
-                    fontSize = 15.sp,
-                    fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Center
-                ),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(9.dp)
-                    .align(Alignment.CenterHorizontally),
-                onClick = {
-                    registerViewModel.registerUser(mobNum,name,dob)
-
-                }
-            )
-        }
-
-        Row {
+        Row  (modifier = Modifier.padding(top = 30.dp)){
             Text(
-                modifier = Modifier.padding(top = 60.dp),
+
                 text = "Already have an account?",
                 style = TextStyle(
                     fontSize = 12.sp,
+                    fontFamily = mFont.outfitRegular,
+                    fontWeight = FontWeight.SemiBold
+
                 ),
-                color = Color(0xFF7E8385)
+                color = lightBlack
             )
             Text(
                 modifier = Modifier
-                    .padding(top = 60.dp)
                     .clickable { mNavigator.navigateTo(Screens.Login.route) },
-                text = "Login now",
+                text = " Login",
                 style = TextStyle(
                     fontSize = 12.sp,
-                    fontWeight = FontWeight.Bold
+                    fontFamily = mFont.outfitRegular,
+                    fontWeight = FontWeight.SemiBold
                 ),
-                color = Color(0xFF7E8385)
+                color = orange
             )
         }
     }
