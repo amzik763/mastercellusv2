@@ -33,7 +33,7 @@ fun StarterScreen(
             fontSize = MaterialTheme.typography.h3.fontSize,
             color = Purple40,
             modifier = Modifier.clickable {
-                mNavigator.navigateTo(Screens.Signup.route)
+                mNavigator.navigateTo(Screens.Register.route)
 //                navHostController.navigate(Screens.Auth.route)
 //                {
 //                    popUpTo(Screens.Home.route){

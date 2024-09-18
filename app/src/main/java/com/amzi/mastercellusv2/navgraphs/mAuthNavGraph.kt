@@ -31,7 +31,7 @@ fun NavGraphBuilder.authNavGraph(
 
 
     navigation(
-        startDestination = Screens.Login.route,
+        startDestination = Screens.Register.route,
         route = mGraph.AUTH
     ){
 
@@ -43,14 +43,15 @@ fun NavGraphBuilder.authNavGraph(
             SplashScreen()
         }
 
+        composable(route = Screens.Register.route){
+            RegisterScreen()
+        }
+
         composable(route = Screens.Login.route){
             LoginScreen(viewModel = mRegisterViewModel)
         }
 
-        composable(route = Screens.Signup.route){
 
-            RegisterScreen()
-        }
 
 //        composable(route = Screens.SetPassword.route){
 //

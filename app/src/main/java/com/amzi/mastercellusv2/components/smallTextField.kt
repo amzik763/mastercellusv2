@@ -11,6 +11,7 @@ import androidx.compose.material.Icon
 import androidx.compose.material.LocalTextStyle
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
+import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -21,6 +22,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.homeapplication.ui.theme.lightOrange
 
 @Composable
 fun SmallInputText(
@@ -41,7 +43,13 @@ fun SmallInputText(
 
     val keyboardController = LocalSoftwareKeyboardController.current
 
-    OutlinedTextField(value = text,
+    OutlinedTextField(
+        colors = TextFieldDefaults.outlinedTextFieldColors(
+            focusedBorderColor = lightOrange,
+            unfocusedBorderColor = Color.Gray,
+            focusedLabelColor = Color.DarkGray
+        ),
+        value = text,
         onValueChange = {val newText = it.take(maxLength)
             onTextChange(newText)},
         maxLines = maxLine,

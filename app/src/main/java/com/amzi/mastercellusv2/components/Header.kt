@@ -37,7 +37,7 @@ fun Header(text1 : String, text2 : String){
             modifier = Modifier.size(width = 150.dp, height = 55.dp)
         )
 
-        Spacer(modifier = Modifier.height(26.dp))
+        Spacer(modifier = Modifier.height(32.dp))
 
         Text(text = text1,
             style = TextStyle(

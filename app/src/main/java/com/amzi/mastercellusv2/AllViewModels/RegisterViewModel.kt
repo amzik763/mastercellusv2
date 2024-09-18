@@ -20,6 +20,31 @@ class RegisterViewModel(authRepo: AuthRepo) : ViewModel() {
     var authRepo: AuthRepo = authRepo
 
 
+    //    fun setPassword(mobileNum: String, otp: String, password: String, confirm_password: String) {
+//        mobNum = mobileNum
+//        showLogs("PASSWORD: ", mobNum)
+//
+//        viewModelScope.launch {
+//            authRepo.setPassword(mobileNum, otp, password, confirm_password)
+//        }
+//
+    fun login(email: String, password: String) {
+        showLogs("LOGIN: ", mobNum)
+
+        viewModelScope.launch {
+            authRepo.login(email, password)
+        }
+    }
+
+    fun register(mobile_number: String, email: String, username: String, fName: String, lName: String) {
+        mobNum = mobile_number
+        showLogs("ViewModel: register", mobNum)
+
+        viewModelScope.launch {
+            authRepo.register(mobile_number, email, username, fName, lName)
+        }
+    }
+
     fun registerUser(mobNumt: String, name: String, dob: String) {
         mobNum = mobNumt
         showLogs("ViewModel: register", mobNum)
@@ -29,32 +54,9 @@ class RegisterViewModel(authRepo: AuthRepo) : ViewModel() {
         }
     }
 
-//    fun setPassword(mobileNum: String, otp: String, password: String, confirm_password: String) {
-//        mobNum = mobileNum
-//        showLogs("PASSWORD: ", mobNum)
-//
-//        viewModelScope.launch {
-//            authRepo.setPassword(mobileNum, otp, password, confirm_password)
-//        }
-//
+
+
 //    }
-
-    fun loginUser(mobileNum: String, password: String) {
-        mobNum = mobileNum
-        showLogs("LOGIN: ", mobNum)
-
-        viewModelScope.launch {
-            authRepo.loginUser(mobileNum, password)
-        }
-    }
-
-    fun login(email: String, password: String) {
-        showLogs("LOGIN: ", mobNum)
-
-        viewModelScope.launch {
-            authRepo.login(email, password)
-        }
-    }
 
     fun verify(mobileNum: String) {
         mobNum = mobileNum

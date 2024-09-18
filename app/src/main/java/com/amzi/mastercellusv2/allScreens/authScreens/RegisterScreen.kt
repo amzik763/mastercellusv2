@@ -46,6 +46,8 @@ import com.amzi.mastercellusv2.ui.theme.blue
 import com.amzi.mastercellusv2.ui.theme.lightBlack
 import com.amzi.mastercellusv2.ui.theme.orange
 import com.amzi.mastercellusv2.utility.mFont
+import com.amzi.mastercellusv2.utility.myComponents
+import com.amzi.mastercellusv2.utility.showLogs
 import com.example.demo.ui.theme.Grey
 import com.example.demo.ui.theme.pureWhite
 
@@ -66,10 +68,12 @@ fun RegisterScreen() {
             .background(color = Color.White)
             .padding(start = 12.dp, top = 16.dp, end = 12.dp)
     ) {
-        Header(text1 = "Register",
-            text2 = "Join our community and experience seamless integration of our devices")
 
-        Spacer(modifier = Modifier.height(24.dp))
+        Header(text1 = "Register",
+            text2 = "Join our community and experience seamless integration of our devices"
+        )
+
+        Spacer(modifier = Modifier.height(26.dp))
 
         Text(text = "Basic",
             style = TextStyle(
@@ -80,7 +84,7 @@ fun RegisterScreen() {
             )
         )
 
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(10.dp))
 
         InputText(
             modifier = Modifier
@@ -94,10 +98,10 @@ fun RegisterScreen() {
                 imeAction = ImeAction.Done,
                 keyboardType = KeyboardType.Text),
             onTextChange = { username = it },
-            maxLength = 10
+            maxLength = 30
         )
 
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(10.dp))
         Row (modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(16.dp)){
             SmallInputText(
@@ -109,7 +113,7 @@ fun RegisterScreen() {
                     imeAction = ImeAction.Done,
                     keyboardType = KeyboardType.Text),
                 onTextChange = { firstName = it },
-                maxLength = 10
+                maxLength = 15
             )
 
             SmallInputText2(
@@ -121,7 +125,7 @@ fun RegisterScreen() {
                     imeAction = ImeAction.Done,
                     keyboardType = KeyboardType.Text),
                 onTextChange = { lastName = it },
-                maxLength = 10
+                maxLength = 15
             )
         }
 
@@ -136,7 +140,7 @@ fun RegisterScreen() {
             )
         )
 
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(10.dp))
 
         InputText(
             modifier = Modifier
@@ -150,10 +154,10 @@ fun RegisterScreen() {
                 imeAction = ImeAction.Done,
                 keyboardType = KeyboardType.Text),
             onTextChange = { email = it },
-            maxLength = 10
+            maxLength = 30
         )
 
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(10.dp))
 
         InputText(
             modifier = Modifier
@@ -182,12 +186,14 @@ fun RegisterScreen() {
             )
         )
 
-        Spacer(modifier = Modifier.height(12.dp))
+        Spacer(modifier = Modifier.height(16.dp))
 
         CustomButton("Register"){
-
+            myComponents.registerViewModel.register(username, firstName, lastName, email, mobNum)
+            showLogs("Register", "Registered User")
         }
-        Row  (modifier = Modifier.padding(top = 30.dp)){
+
+        Row  (modifier = Modifier.padding(top = 32.dp)){
             Text(
 
                 text = "Already have an account?",

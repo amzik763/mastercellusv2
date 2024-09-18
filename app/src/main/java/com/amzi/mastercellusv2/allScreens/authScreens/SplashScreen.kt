@@ -41,7 +41,7 @@ fun SplashScreen(
                 })
         )
         delay(3000L)
-        mNavigator.navigateTo(Screens.Signup.route)
+        mNavigator.navigateTo(Screens.Register.route)
     }
 
     Box(contentAlignment = Alignment.Center,

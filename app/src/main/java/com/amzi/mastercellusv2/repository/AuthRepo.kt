@@ -17,6 +17,56 @@ class AuthRepo(authAPIs: AuthAPIs) {
     val authAPI = authAPIs
 
 
+
+    suspend fun register(mobile_number: String, email: String, username: String, fName: String, lName: String){
+
+        try{
+            val registerResponse = authAPI.register(mobile_number, email, username, fName, lName)
+
+            if(registerResponse.isSuccessful){
+
+                showLogs("auth","Registration Successful")
+
+                Log.d("Register", "registerUser: Successful")
+
+//                navController.navigate(route = Screens.SetPassword.route + "/register")
+                showLogs("ROUTE","register")
+
+
+            }else{
+                showLogs("auth","Registration Failed" + registerResponse.errorBody().toString())
+            }
+        }
+        catch (e:Exception){
+            showLogs("Error: ",e.toString())
+        }
+    }
+
+    suspend fun login(email: String, password: String){
+
+        try{
+            val loginResponse = authAPI.login(email, password)
+
+            if(loginResponse.isSuccessful){
+
+                showLogs("LOGIN USER","Login Successful")
+
+                mNavigator.navigateTo(Screens.Home.route)
+
+
+            }else{
+                showLogs("LOGIN USER","Login unSuccessful" + loginResponse.errorBody().toString())
+
+                showLogs("LOGIN USER","Login unSuccessful")
+
+
+            }
+        }
+        catch (e:Exception){
+            showLogs("Error: ",e.toString())
+        }
+    }
+
     suspend fun registerUser(mobile_no: String, username: String, date_of_birth: String){
 
         try{
@@ -65,29 +115,6 @@ class AuthRepo(authAPIs: AuthAPIs) {
         }
     }
 */
-
-    suspend fun loginUser(mobile_no: String, password: String){
-
-        try{
-            val loginResponse = authAPI.loginUser(mobile_no, password)
-
-            if(loginResponse.isSuccessful){
-
-                showLogs("LOGIN USER","Login Successful")
-
-//                navController.popBackStack()
-                mNavigator.navigateTo(Screens.Home.route)
-
-
-            }else{
-                showLogs("LOGIN USER","Login unSuccessful" + loginResponse.errorBody().toString())
-
-            }
-        }
-        catch (e:Exception){
-            showLogs("Error: ",e.toString())
-        }
-    }
 
     suspend fun verify(mobile_no: String){
 
@@ -155,28 +182,4 @@ class AuthRepo(authAPIs: AuthAPIs) {
         }
     }
 
-    suspend fun login(email: String, password: String){
-
-        try{
-            val loginResponse = authAPI.login(email, password)
-
-            if(loginResponse.isSuccessful){
-
-                showLogs("LOGIN USER","Login Successful")
-
-                mNavigator.navigateTo(Screens.Home.route)
-
-
-            }else{
-                showLogs("LOGIN USER","Login unSuccessful" + loginResponse.errorBody().toString())
-
-                showLogs("LOGIN USER","Login unSuccessful")
-
-
-            }
-        }
-        catch (e:Exception){
-            showLogs("Error: ",e.toString())
-        }
-    }
 }
