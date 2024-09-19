@@ -39,7 +39,6 @@ fun SmallInputText(
 
 ) {
 
-    val widthDP = LocalConfiguration.current.screenWidthDp.dp
 
     val keyboardController = LocalSoftwareKeyboardController.current
 

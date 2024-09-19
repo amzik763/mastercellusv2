@@ -24,8 +24,8 @@ import androidx.core.app.ActivityCompat
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.amzi.mastercellusv2.AllViewModels.Factories.RegisterViewModelFactory
-import com.amzi.mastercellusv2.AllViewModels.RegisterViewModel
+import com.amzi.mastercellusv2.allViewModels.Factories.RegisterViewModelFactory
+import com.amzi.mastercellusv2.allViewModels.RegisterViewModel
 import com.amzi.mastercellusv2.networks.AuthAPIs
 import com.amzi.mastercellusv2.networks.RetrofitBuilder
 import com.amzi.mastercellusv2.repository.AuthRepo

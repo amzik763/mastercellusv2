@@ -37,7 +37,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.amzi.mastercellusv2.AllViewModels.RegisterViewModel
+import com.amzi.mastercellusv2.allViewModels.RegisterViewModel
 import com.amzi.mastercellusv2.R
 import com.amzi.mastercellusv2.utility.showLogs
 import com.amzi.mastercellusv2.components.InputText

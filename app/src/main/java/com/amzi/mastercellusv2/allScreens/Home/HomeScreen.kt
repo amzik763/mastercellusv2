@@ -49,7 +49,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat.startActivity
-import com.amzi.mastercellusv2.AllViewModels.UiViewmodel
+import com.amzi.mastercellusv2.allViewModels.UiViewmodel
 import com.amzi.mastercellusv2.navgraphs.Screens
 import com.amzi.mastercellusv2.navgraphs.mNavigator
 import com.amzi.mastercellusv2.ui.theme.Grey

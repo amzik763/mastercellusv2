@@ -17,6 +17,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
@@ -30,6 +31,7 @@ import com.amzi.mastercellusv2.R
 import com.amzi.mastercellusv2.components.CustomButton
 import com.amzi.mastercellusv2.components.Header
 import com.amzi.mastercellusv2.components.InputText
+import com.amzi.mastercellusv2.components.PasswordTextFiled
 import com.amzi.mastercellusv2.components.SmallInputText
 import com.amzi.mastercellusv2.components.SmallInputText2
 import com.amzi.mastercellusv2.navgraphs.Screens
@@ -43,13 +45,13 @@ import com.example.demo.ui.theme.Grey
 
 @Preview
 @Composable
-fun RegisterScreen() {
+fun Verification(){
 
     var username by remember { mutableStateOf("") }
-    var firstName by remember { mutableStateOf("") }
-    var lastName by remember { mutableStateOf("") }
-    var email by remember { mutableStateOf("") }
     var mobNum by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+    var confirmPassword by remember { mutableStateOf("") }
+    var otp by remember { mutableStateOf("") }
 
     Column(
         modifier = Modifier
@@ -59,22 +61,11 @@ fun RegisterScreen() {
             .padding(start = 12.dp, top = 16.dp, end = 12.dp)
     ) {
 
-        Header(text1 = "Register",
+        Header(text1 = "Verification",
             text2 = "Join our community and experience seamless integration of our devices"
         )
 
-        Spacer(modifier = Modifier.height(26.dp))
-
-        Text(text = "Basic",
-            style = TextStyle(
-                fontSize = 13.sp,
-                fontWeight = FontWeight.Bold,
-                color = Grey,
-                fontFamily = mFont.outfitRegular
-            )
-        )
-
-        Spacer(modifier = Modifier.height(10.dp))
+        Spacer(modifier = Modifier.height(36.dp))
 
         InputText(
             modifier = Modifier
@@ -88,62 +79,6 @@ fun RegisterScreen() {
                 imeAction = ImeAction.Done,
                 keyboardType = KeyboardType.Text),
             onTextChange = { username = it },
-            maxLength = 30
-        )
-
-        Spacer(modifier = Modifier.height(10.dp))
-        Row (modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(16.dp)){
-            SmallInputText(
-                text = firstName,
-                color = Color.Black,
-                label = "First Name",
-                maxLine = 1,
-                keyboardOptions = KeyboardOptions(
-                    imeAction = ImeAction.Done,
-                    keyboardType = KeyboardType.Text),
-                onTextChange = { firstName = it },
-                maxLength = 15
-            )
-
-            SmallInputText2(
-                text = lastName,
-                color = Color.Black,
-                label = "Last Name",
-                maxLine = 1,
-                keyboardOptions = KeyboardOptions(
-                    imeAction = ImeAction.Done,
-                    keyboardType = KeyboardType.Text),
-                onTextChange = { lastName = it },
-                maxLength = 15
-            )
-        }
-
-        Spacer(modifier = Modifier.height(28.dp))
-
-        Text(text = "Account",
-            style = TextStyle(
-                fontSize = 13.sp,
-                fontWeight = FontWeight.Bold,
-                color = Grey,
-                fontFamily = mFont.outfitRegular
-            )
-        )
-
-        Spacer(modifier = Modifier.height(10.dp))
-
-        InputText(
-            modifier = Modifier
-                .padding(top = 9.dp, bottom = 8.dp),
-            text = email,
-            color = Color.Black,
-            label = "Enter email Id",
-            maxLine = 1,
-            iconResId = R.drawable.email,
-            keyboardOptions = KeyboardOptions(
-                imeAction = ImeAction.Done,
-                keyboardType = KeyboardType.Text),
-            onTextChange = { email = it },
             maxLength = 30
         )
 
@@ -166,7 +101,81 @@ fun RegisterScreen() {
 
         Spacer(modifier = Modifier.height(28.dp))
 
-        Text(text = "Click Register to proceed",
+        Text(text = "Password",
+            style = TextStyle(
+                fontSize = 13.sp,
+                fontWeight = FontWeight.Bold,
+                color = Grey,
+                fontFamily = mFont.outfitRegular
+            )
+        )
+
+        Spacer(modifier = Modifier.height(10.dp))
+
+        PasswordTextFiled(
+            modifier = Modifier
+                .padding(top = 9.dp, bottom = 8.dp),
+            text = password,
+            color = Color.Black,
+            label = "Password",
+            maxLine = 1,
+            iconResId = R.drawable.email,
+            keyboardOptions = KeyboardOptions(
+                imeAction = ImeAction.Done,
+                keyboardType = KeyboardType.Text),
+            onTextChange = { password = it },
+            maxLength = 30
+        )
+
+        Spacer(modifier = Modifier.height(10.dp))
+
+        PasswordTextFiled(
+            modifier = Modifier
+                .padding(top = 9.dp, bottom = 8.dp),
+            text = confirmPassword,
+            color = Color.Black,
+            label = "Confirm Password",
+            maxLine = 1,
+            iconResId = R.drawable.email,
+            keyboardOptions = KeyboardOptions(
+                imeAction = ImeAction.Done,
+                keyboardType = KeyboardType.Text),
+            onTextChange = { confirmPassword = it },
+            maxLength = 30
+        )
+
+        Spacer(modifier = Modifier.height(10.dp))
+
+        Row(modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(36.dp))
+        {
+
+            SmallInputText(
+                text = otp,
+                color = Color.Black,
+                label = "Enter OTP",
+                maxLine = 1,
+                keyboardOptions = KeyboardOptions(
+                    imeAction = ImeAction.Done,
+                    keyboardType = KeyboardType.Text),
+                onTextChange = { otp = it },
+                maxLength = 15
+            )
+
+            Text(text = "Resend OTP in 00:44",
+                style = TextStyle(
+                    fontSize = 12.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = Grey,
+                    fontFamily = mFont.outfitRegular
+                )
+            )
+        }
+
+        Spacer(modifier = Modifier.height(28.dp))
+
+        Text(text = "Click Verify to proceed",
             style = TextStyle(
                 fontSize = 12.sp,
                 fontWeight = FontWeight.SemiBold,
@@ -177,9 +186,12 @@ fun RegisterScreen() {
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        CustomButton("Register"){
-            myComponents.registerViewModel.register(username = username, fName =  firstName, lName = lastName, email = email, mobile_number =  mobNum)
-            showLogs("Register", "Registered User")
+        CustomButton("Verify"){
+
+            myComponents.registerViewModel.verify(mobNum, password, confirmPassword, otp)
+
+            showLogs("VERIFICATION", "Screen verified")
+
         }
 
         Row  (modifier = Modifier.padding(top = 32.dp)){

@@ -1,4 +1,4 @@
-package com.amzi.mastercellusv2.AllViewModels
+package com.amzi.mastercellusv2.allViewModels
 
 import android.content.Context
 import android.content.SharedPreferences

@@ -7,12 +7,11 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import androidx.navigation.navigation
 import com.amzi.mastercellusv2.allScreens.authScreens.LoginScreen
-import com.amzi.mastercellusv2.allScreens.authScreens.SetPasswordScreen
 import com.amzi.mastercellusv2.allScreens.authScreens.RegisterScreen
 import com.amzi.mastercellusv2.allScreens.authScreens.SplashScreen
-import com.amzi.mastercellusv2.allScreens.authScreens.forgotPasswordScreen
-import com.amzi.mastercellusv2.AllViewModels.Factories.RegisterViewModelFactory
-import com.amzi.mastercellusv2.AllViewModels.RegisterViewModel
+import com.amzi.mastercellusv2.allScreens.authScreens.Verification
+import com.amzi.mastercellusv2.allViewModels.Factories.RegisterViewModelFactory
+import com.amzi.mastercellusv2.allViewModels.RegisterViewModel
 import com.amzi.mastercellusv2.repository.AuthRepo
 import com.amzi.mastercellusv2.utility.mGraph
 import com.amzi.mastercellusv2.utility.myComponents.authAPI
@@ -47,25 +46,12 @@ fun NavGraphBuilder.authNavGraph(
             RegisterScreen()
         }
 
+        composable(route = Screens.Verification.route){
+            Verification()
+        }
+
         composable(route = Screens.Login.route){
             LoginScreen(viewModel = mRegisterViewModel)
-        }
-
-
-
-//        composable(route = Screens.SetPassword.route){
-//
-//            SetPasswordScreen()
-//        }
-
-        composable(route = Screens.SetPassword.route + "/{mode}") { navBackStackEntry ->
-            val mode = navBackStackEntry.arguments?.getString("mode") ?: "register"
-            showLogs("my mode in compose:",mode)
-            SetPasswordScreen(mode)
-        }
-
-        composable(route = Screens.forgotPassword.route){
-            forgotPasswordScreen()
         }
     }
 }

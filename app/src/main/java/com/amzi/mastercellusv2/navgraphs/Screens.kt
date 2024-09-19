@@ -23,8 +23,9 @@ sealed class Screens(val route:String) {
             return "splash?id=$id"
         }
     }
-    object Login: Screens("login")
     object Register : Screens("register")
+    object Verification : Screens("Verify")
+    object Login: Screens("login")
 
     object SetPassword: Screens("setPassword")
     object forgotPassword: Screens("forgotPassword")

@@ -1,5 +1,5 @@
 package com.amzi.mastercellusv2.models
 
-data class VerifyRegisterRes(
+data class VerifyResponse(
     val message: String
 )
