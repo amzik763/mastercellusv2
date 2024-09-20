@@ -28,7 +28,8 @@ class AuthRepo(authAPIs: AuthAPIs) {
 
                 Log.d("Register", "registerUser: Successful")
 
-                navController.navigate(Screens.Verification.route)
+//                navController.navigate(Screens.Verification.route)
+                navController.navigate(Screens.Verification.route + "?username=$username&mobile_number=$mobile_number")
 
                 showLogs("ROUTE","register")
 
@@ -58,63 +59,12 @@ class AuthRepo(authAPIs: AuthAPIs) {
                 showLogs("LOGIN USER","Login unSuccessful" + loginResponse.errorBody().toString())
 
                 showLogs("LOGIN USER","Login unSuccessful")
-
-
             }
         }
         catch (e:Exception){
             showLogs("Error: ",e.toString())
         }
     }
-
-/*    suspend fun registerUser(mobile_no: String, username: String, date_of_birth: String){
-
-        try{
-            val registerResponse = authAPI.registerUser(mobile_no, username, date_of_birth)
-
-            if(registerResponse.isSuccessful){
-
-                showLogs("auth","Registration Successful")
-
-                Log.d("Register", "registerUser: Successful")
-
-                navController.navigate(route = Screens.SetPassword.route + "/register")
-                showLogs("ROUTE","register")
-
-
-            }else{
-                showLogs("auth","Registration Failed" + registerResponse.errorBody().toString())
-
-//                showLogs("auth","Failed" + registerResponse.errorBody().toString())
-            }
-        }
-        catch (e:Exception){
-            showLogs("Error: ",e.toString())
-        }
-    }*/
-
-/*
-    suspend fun setPassword(mobile_no: String, otp: String, password: String, confirm_password: String){
-
-        try{
-            val setPasswordRes = authAPI.setPassword(mobile_no, otp, password, confirm_password)
-
-            if(setPasswordRes.isSuccessful){
-
-                showLogs("SET PASSWORD","Password set Successfully")
-
-            }else{
-                showLogs("SET PASSWORD","Password not set" + setPasswordRes.errorBody().toString())
-
-//                showLogs("auth","Failed" + registerResponse.errorBody().toString())
-
-            }
-        }
-        catch (e:Exception){
-            showLogs("Error: ",e.toString())
-        }
-    }
-*/
 
     suspend fun verify( mobile_number: String, password: String, password_confirm: String, otp: String){
 
@@ -125,10 +75,7 @@ class AuthRepo(authAPIs: AuthAPIs) {
 
                 showLogs("VERIFICATION","Verification Successful")
 
-//                navController.navigate(route = Screens.SetPassword.route + "/change_password")
-//                showLogs("ROUTE","change_password")
-
-
+                mNavigator.navigateTo(Screens.Login.route)
 
             }else{
                 showLogs("VERIFICATION","Verification unSuccessful" + verifyRes.errorBody().toString())
@@ -141,7 +88,4 @@ class AuthRepo(authAPIs: AuthAPIs) {
             showLogs("Error: ",e.toString())
         }
     }
-
-
-
 }

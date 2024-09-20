@@ -1,5 +1,6 @@
 package com.amzi.mastercellusv2.allViewModels
 
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.amzi.mastercellusv2.repository.AuthRepo
@@ -9,9 +10,9 @@ import kotlinx.coroutines.launch
 class RegisterViewModel(authRepo: AuthRepo) : ViewModel() {
 
 
-    var mobNum = ""
-    var password = ""
-    var otp = ""
+    // Use mutableStateOf to track UI-related state changes
+    var username = mutableStateOf("")
+    var mobNum = mutableStateOf("")
 
     init {
         showLogs("ViewModel:", "Created")
@@ -20,7 +21,7 @@ class RegisterViewModel(authRepo: AuthRepo) : ViewModel() {
     var authRepo: AuthRepo = authRepo
 
     fun login(email: String, password: String) {
-        showLogs("LOGIN: ", mobNum)
+        showLogs("LOGIN: ", mobNum.value)
 
         viewModelScope.launch {
             authRepo.login(email, password)
@@ -28,30 +29,21 @@ class RegisterViewModel(authRepo: AuthRepo) : ViewModel() {
     }
 
     fun register(username: String, fName: String, lName: String, email: String, mobile_number: String) {
-        mobNum = mobile_number
-        showLogs("ViewModel: register", mobNum)
+        mobNum.value = mobile_number
+        showLogs("ViewModel: register", mobNum.value)
 
         viewModelScope.launch {
             authRepo.register(username =  username, fName =  fName,lName= lName, email =  email, mobile_number = mobile_number)
+
+            // Store username and mobile number for verification
+            this@RegisterViewModel.username.value = username
+            this@RegisterViewModel.mobNum.value = mobile_number
         }
     }
 
-/*    fun registerUser(mobNumt: String, name: String, dob: String) {
-        mobNum = mobNumt
-        showLogs("ViewModel: register", mobNum)
-
-        viewModelScope.launch {
-            authRepo.registerUser(mobNumt, name, dob)
-        }
-    }*/
-
-
-
-//    }
-
     fun verify(mobileNum: String, password: String, password_confirm: String, otp: String) {
-        mobNum = mobileNum
-        showLogs("LOGIN: ", mobNum)
+        mobNum.value = mobileNum
+        showLogs("LOGIN: ", mobNum.value)
 
         viewModelScope.launch {
             authRepo.verify(mobileNum, password, password_confirm, otp)

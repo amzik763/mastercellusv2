@@ -37,14 +37,6 @@ interface AuthAPIs {
     ): Response<LoginResponse>
 
 
-    @FormUrlEncoded
-    @POST("/starter_operator/verify_otp_and_set_password")
-    suspend fun setPassword(
-        @Field("mobile_no") mobile_no: String,
-        @Field("otp") otp: String,
-        @Field("password") password: String,
-        @Field("confirm_password") confirm_password: String
-    ): Response<SetPassword>
 
 }
 

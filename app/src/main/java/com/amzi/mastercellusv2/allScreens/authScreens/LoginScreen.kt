@@ -49,7 +49,7 @@ fun LoginScreen(viewModel: RegisterViewModel) {
     val ct = LocalContext.current
     val registerViewModel = viewModel
 
-    showLogs("login: ", registerViewModel.mobNum)
+    showLogs("login: ", registerViewModel.mobNum.toString())
 
     var mobNum by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }

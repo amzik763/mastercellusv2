@@ -23,6 +23,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -182,7 +183,7 @@ fun RegisterScreen() {
             showLogs("Register", "Registered User")
         }
 
-        Row  (modifier = Modifier.padding(top = 32.dp)){
+        Row  (modifier = Modifier.padding(top = 28.dp)){
             Text(
 
                 text = "Already have an account?",
@@ -205,5 +206,24 @@ fun RegisterScreen() {
                 color = orange
             )
         }
+
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        Text(
+
+            text = "Go to Verification",
+            style = TextStyle(
+                fontSize = 13.sp,
+                fontFamily = mFont.outfitRegular,
+                fontWeight = FontWeight.SemiBold
+            ),
+            modifier = Modifier.fillMaxWidth()
+                .clickable {
+                    mNavigator.navigateTo(Screens.Verification.route)
+                },
+            textAlign = TextAlign.Center,
+            color = orange
+        )
     }
 }

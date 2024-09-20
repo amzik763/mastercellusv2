@@ -39,23 +39,6 @@ class MyCookieJar : CookieJar {
     }
 }
 
-/*object RetrofitBuilder {
-    private const val BASE_URL = "http://192.168.1.5:8000"
-    val instance: Retrofit by lazy {
-        val loggingInterceptor = HttpLoggingInterceptor()
-        loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
-        val okHttpClient = OkHttpClient.Builder()
-            .addInterceptor(loggingInterceptor)
-            .cookieJar(MyCookieJar()) // Use custom CookieJar
-            .build()
-        Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .client(okHttpClient)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-    }
-}*/
-
 object RetrofitBuilder {
     private const val BASE_URL = "http://192.168.1.5:8000"
 

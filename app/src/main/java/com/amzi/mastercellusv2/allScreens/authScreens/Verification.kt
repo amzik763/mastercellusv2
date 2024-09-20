@@ -24,6 +24,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -42,13 +43,14 @@ import com.amzi.mastercellusv2.utility.mFont
 import com.amzi.mastercellusv2.utility.myComponents
 import com.amzi.mastercellusv2.utility.showLogs
 import com.example.demo.ui.theme.Grey
+import com.example.demo.ui.theme.red
 
 @Preview
 @Composable
 fun Verification(){
 
-    var username by remember { mutableStateOf("") }
-    var mobNum by remember { mutableStateOf("") }
+    var username by remember { mutableStateOf(myComponents.registerViewModel.username.value) }
+    var mobNum by remember { mutableStateOf(myComponents.registerViewModel.mobNum.value) }
     var password by remember { mutableStateOf("") }
     var confirmPassword by remember { mutableStateOf("") }
     var otp by remember { mutableStateOf("") }
@@ -144,14 +146,26 @@ fun Verification(){
             maxLength = 30
         )
 
+        Spacer(modifier = Modifier.height(4.dp))
+
+        if (password != confirmPassword) {
+            Text(
+                text = "Passwords do not match",
+                style = TextStyle(
+                    fontSize = 11.sp,
+                    fontFamily = mFont.outfitRegular,
+                ),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(end = 8.dp),
+                textAlign = TextAlign.End,
+                color = red
+            )
+        }
+
         Spacer(modifier = Modifier.height(10.dp))
 
-        Row(modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(36.dp))
-        {
-
-            SmallInputText(
+        SmallInputText(
                 text = otp,
                 color = Color.Black,
                 label = "Enter OTP",
@@ -162,16 +176,6 @@ fun Verification(){
                 onTextChange = { otp = it },
                 maxLength = 15
             )
-
-            Text(text = "Resend OTP in 00:44",
-                style = TextStyle(
-                    fontSize = 12.sp,
-                    fontWeight = FontWeight.SemiBold,
-                    color = Grey,
-                    fontFamily = mFont.outfitRegular
-                )
-            )
-        }
 
         Spacer(modifier = Modifier.height(28.dp))
 
