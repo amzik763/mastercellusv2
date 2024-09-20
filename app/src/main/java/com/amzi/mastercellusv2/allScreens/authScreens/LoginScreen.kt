@@ -37,11 +37,15 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.amzi.mastercellusv2.allViewModels.RegisterViewModel
 import com.amzi.mastercellusv2.R
-import com.amzi.mastercellusv2.utility.showLogs
+import com.amzi.mastercellusv2.allViewModels.RegisterViewModel
 import com.amzi.mastercellusv2.components.InputText
+import com.amzi.mastercellusv2.utility.TokenStorage
 import com.amzi.mastercellusv2.utility.myComponents
+import com.amzi.mastercellusv2.utility.showLogs
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 @Composable
@@ -167,7 +171,52 @@ fun LoginScreen(viewModel: RegisterViewModel) {
             Text(
                 text = "Reset Now",
                 modifier = Modifier.clickable {
-                    showLogs("PROTECTEDDDDDDDDDDD", "PROTECTED API CALLED SUCCESSFUL")
+                    showLogs("PROTECTEDDDDDDDDDDD", "PROTECTED API CALLED")
+                    CoroutineScope(Dispatchers.IO).launch{
+
+                        try {
+                            // Retrieve the access token
+                            val accessToken = TokenStorage.getToken(context = ct)
+
+                            // Log the raw access token for debugging
+                            showLogs("PROTECTED", "Raw Access Token: ${accessToken?.first ?: "No Token Found"}")
+
+                            // Ensure the access token is not null, remove all whitespace, and trim
+                            val token = accessToken?.first?.replace("\\s".toRegex(), "")?.trim()
+
+                            // Log the formatted token
+                            showLogs("DEBUG", "Formatted Token: '$token'")
+
+                            if (token.isNullOrBlank()) {
+                                showLogs("ERROR", "Access token is missing or empty.")
+                                return@launch
+                            }
+
+                            // Append "Bearer " before the token with only one space
+                            val authorizationHeader = "Bearer $token"
+
+                            // Log the complete Authorization header
+                            showLogs("DEBUG", "Authorization Header: '$authorizationHeader'")
+
+                            // Make the API call with the Authorization header
+                            val response = myComponents.otherAPI.protected(authorizationHeader)
+
+                            if (response.isSuccessful) {
+                                // Handle success
+                                val result = response.body()
+                                showLogs("SUCCESS", "Protected API response: $result")
+                            } else {
+                                // Handle failure and log the error body
+                                val error = response.errorBody()?.string()
+                                showLogs("ERROR", "Protected API error: $error")
+                            }
+                        } catch (e: Exception) {
+                            showLogs("EXCEPTION", "Exception occurred: ${e.message}")
+                            e.printStackTrace()
+                        }
+
+
+                    }
 //                    navController.popBackStack()
 //                    mNavigator.navigateTo(Screens.forgotPassword.route)
                 },

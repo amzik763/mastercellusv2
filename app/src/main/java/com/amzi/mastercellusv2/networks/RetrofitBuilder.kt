@@ -32,10 +32,13 @@ class MyCookieJar(private val context: Context) : CookieJar {
 
         if (accessToken != null && refreshToken != null) {
             // Save tokens securely
-            TokenStorage.saveToken(context, accessToken!!, refreshToken!!)
+//            TokenStorage.saveToken(context, accessToken!!, refreshToken!!)
             // Optionally log tokens
             Log.d("COOKIES", "Access Token: $accessToken")
             Log.d("COOKIES", "Refresh Token: $refreshToken")
+
+            Log.d("COOKIES", "Access Token: ${TokenStorage.getToken(context)?.first}")
+            Log.d("COOKIES", "Access Token: ${TokenStorage.getToken(context)?.second}")
         }
     }
 

@@ -28,7 +28,7 @@ fun NavGraphBuilder.authNavGraph(
 //    val authAPI: AuthAPIs by lazy {
 //        RetrofitBuilder.instance.create(AuthAPIs::class.java)
 //    }
-       val authRepo:AuthRepo = AuthRepo(authAPI, context , myComponents.otherAPI)
+       val authRepo:AuthRepo = AuthRepo(authAPI, context)
     val viewModelFactory = RegisterViewModelFactory(authRepo)
     val mRegisterViewModel: RegisterViewModel = viewModelFactory.create(RegisterViewModel::class.java)
 

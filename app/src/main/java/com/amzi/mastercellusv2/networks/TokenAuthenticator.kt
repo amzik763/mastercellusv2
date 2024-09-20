@@ -50,6 +50,7 @@ class TokenAuthenticator(private val context: Context) : Authenticator {
         return if (newToken != null) {
             // Save the new tokens securely
             TokenStorage.saveToken(context, newToken.access, newToken.refresh)
+            Log.d("TOKEN AUTHENTICATOR", "CALLED")
 
             // Retry the original request with the new access token
             response.request.newBuilder()

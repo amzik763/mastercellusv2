@@ -14,12 +14,12 @@ object TokenStorage {
         val editor = sharedPreferences.edit()
 
         // Encrypt the tokens
-        val encryptedAccessToken = EncryptionUtil.encrypt(accessToken)
-        val encryptedRefreshToken = EncryptionUtil.encrypt(refreshToken)
+//        val encryptedAccessToken = EncryptionUtil.encrypt(accessToken)
+//        val encryptedRefreshToken = EncryptionUtil.encrypt(refreshToken)
 
         // Save encrypted tokens to SharedPreferences
-        editor.putString(ACCESS_TOKEN_KEY, encryptedAccessToken)
-        editor.putString(REFRESH_TOKEN_KEY, encryptedRefreshToken)
+        editor.putString(ACCESS_TOKEN_KEY, accessToken)
+        editor.putString(REFRESH_TOKEN_KEY, refreshToken)
         editor.apply()
     }
 
@@ -33,9 +33,9 @@ object TokenStorage {
         return if (encryptedAccessToken != null && encryptedRefreshToken != null) {
             try {
                 // Decrypt the tokens
-                val accessToken = EncryptionUtil.decrypt(encryptedAccessToken)
-                val refreshToken = EncryptionUtil.decrypt(encryptedRefreshToken)
-                Pair(accessToken, refreshToken)
+//                val accessToken = EncryptionUtil.decrypt(encryptedAccessToken)
+//                val refreshToken = EncryptionUtil.decrypt(encryptedRefreshToken)
+                Pair(encryptedAccessToken, encryptedRefreshToken)
             } catch (e: Exception) {
                 e.printStackTrace()
                 null

@@ -39,7 +39,7 @@ object EncryptionUtil {
         return (keyStore.getKey(KEY_ALIAS, null) as SecretKey)
     }
 
-    // Encrypt the data
+/*    // Encrypt the data
     fun encrypt(data: String): String {
         val cipher = Cipher.getInstance(AES_MODE)
         cipher.init(Cipher.ENCRYPT_MODE, getSecretKey())
@@ -63,5 +63,5 @@ object EncryptionUtil {
         cipher.init(Cipher.DECRYPT_MODE, getSecretKey(), gcmSpec)
         val decryptedBytes = cipher.doFinal(encryptedBytes)
         return String(decryptedBytes, Charsets.UTF_8)
-    }
+    }*/
 }
