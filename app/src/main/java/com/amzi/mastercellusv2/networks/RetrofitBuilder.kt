@@ -2,6 +2,7 @@ package com.amzi.mastercellusv2.networks
 
 import android.content.Context
 import android.util.Log
+import com.amzi.mastercellusv2.utility.TokenStorage
 import okhttp3.Cookie
 import okhttp3.CookieJar
 import okhttp3.HttpUrl
@@ -11,7 +12,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
-class MyCookieJar : CookieJar {
+class MyCookieJar(private val context: Context) : CookieJar {
     private val cookieStore: HashMap<String, List<Cookie>> = HashMap()
 
     override fun saveFromResponse(url: HttpUrl, cookies: List<Cookie>) {
@@ -23,14 +24,19 @@ class MyCookieJar : CookieJar {
         var refreshToken: String? = null
 
         cookies.forEach { cookie ->
-            when {
-                cookie.name == "access" -> accessToken = cookie.value
-                cookie.name == "refresh" -> refreshToken = cookie.value
+            when (cookie.name) {
+                "access" -> accessToken = cookie.value
+                "refresh" -> refreshToken = cookie.value
             }
         }
-        // Log the access and refresh tokens
-        Log.d("COOKIES", "Access Token: $accessToken")
-        Log.d("COOKIES", "Refresh Token: $refreshToken")
+
+        if (accessToken != null && refreshToken != null) {
+            // Save tokens securely
+            TokenStorage.saveToken(context, accessToken!!, refreshToken!!)
+            // Optionally log tokens
+            Log.d("COOKIES", "Access Token: $accessToken")
+            Log.d("COOKIES", "Refresh Token: $refreshToken")
+        }
     }
 
     override fun loadForRequest(url: HttpUrl): List<Cookie> {
@@ -39,21 +45,25 @@ class MyCookieJar : CookieJar {
     }
 }
 
+
 object RetrofitBuilder {
-    private const val BASE_URL = "http://192.168.1.5:8000"
+    private const val BASE_URL = "http://192.168.1.5:8000" // Replace with your actual base URL
 
     fun create(context: Context): Retrofit {
-        val loggingInterceptor = HttpLoggingInterceptor()
-        loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+        // Logging interceptor for debugging
+        val loggingInterceptor = HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        }
 
-        // Add AuthInterceptor and TokenAuthenticator
+        // Build the OkHttpClient with interceptors and authenticator
         val okHttpClient = OkHttpClient.Builder()
             .addInterceptor(loggingInterceptor)
-            .addInterceptor(AuthInterceptor(context)) // Attach access token
-            .authenticator(TokenAuthenticator(context)) // Automatically refresh token
-            .cookieJar(MyCookieJar()) // Use custom CookieJar
+            .addInterceptor(AuthInterceptor(context)) // Adds the Authorization header
+            .authenticator(TokenAuthenticator(context)) // Handles token refresh
+            .cookieJar(MyCookieJar(context)) // Optional: Manage cookies if needed
             .build()
 
+        // Build and return the Retrofit instance
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(okHttpClient)
@@ -61,7 +71,6 @@ object RetrofitBuilder {
             .build()
     }
 }
-
 
 
 

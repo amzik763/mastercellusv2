@@ -28,6 +28,7 @@ class RegisterViewModel(authRepo: AuthRepo) : ViewModel() {
         }
     }
 
+
     fun register(username: String, fName: String, lName: String, email: String, mobile_number: String) {
         mobNum.value = mobile_number
         showLogs("ViewModel: register", mobNum.value)

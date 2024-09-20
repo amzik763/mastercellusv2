@@ -41,6 +41,7 @@ import com.amzi.mastercellusv2.allViewModels.RegisterViewModel
 import com.amzi.mastercellusv2.R
 import com.amzi.mastercellusv2.utility.showLogs
 import com.amzi.mastercellusv2.components.InputText
+import com.amzi.mastercellusv2.utility.myComponents
 
 
 @Composable
@@ -166,7 +167,7 @@ fun LoginScreen(viewModel: RegisterViewModel) {
             Text(
                 text = "Reset Now",
                 modifier = Modifier.clickable {
-
+                    showLogs("PROTECTEDDDDDDDDDDD", "PROTECTED API CALLED SUCCESSFUL")
 //                    navController.popBackStack()
 //                    mNavigator.navigateTo(Screens.forgotPassword.route)
                 },

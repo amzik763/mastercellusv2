@@ -32,11 +32,9 @@ interface AuthAPIs {
     @FormUrlEncoded
     @POST("/master/api/login")
     suspend fun login(
-        @Field("email") email: String,
+        @Field("username_or_mobile") username_or_mobile: String,
         @Field("password") password: String
     ): Response<LoginResponse>
-
-
 
 }
 

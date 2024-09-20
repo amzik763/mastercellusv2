@@ -1,5 +1,6 @@
 package com.amzi.mastercellusv2.navgraphs
 
+import android.content.Context
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -14,17 +15,20 @@ import com.amzi.mastercellusv2.allViewModels.Factories.RegisterViewModelFactory
 import com.amzi.mastercellusv2.allViewModels.RegisterViewModel
 import com.amzi.mastercellusv2.repository.AuthRepo
 import com.amzi.mastercellusv2.utility.mGraph
+import com.amzi.mastercellusv2.utility.myComponents
 import com.amzi.mastercellusv2.utility.myComponents.authAPI
 import com.amzi.mastercellusv2.utility.showLogs
 
 fun NavGraphBuilder.authNavGraph(
     navController: NavHostController,
+    context: Context
 ){
+
 
 //    val authAPI: AuthAPIs by lazy {
 //        RetrofitBuilder.instance.create(AuthAPIs::class.java)
 //    }
-       val authRepo:AuthRepo = AuthRepo(authAPI)
+       val authRepo:AuthRepo = AuthRepo(authAPI, context , myComponents.otherAPI)
     val viewModelFactory = RegisterViewModelFactory(authRepo)
     val mRegisterViewModel: RegisterViewModel = viewModelFactory.create(RegisterViewModel::class.java)
 

@@ -1,13 +1,18 @@
 package com.amzi.mastercellusv2.repository
 
+import android.content.Context
 import android.util.Log
-import com.amzi.mastercellusv2.networks.AuthAPIs
 import com.amzi.mastercellusv2.navgraphs.Screens
 import com.amzi.mastercellusv2.navgraphs.mNavigator
+import com.amzi.mastercellusv2.networks.AuthAPIs
+import com.amzi.mastercellusv2.networks.OtherAPIs
+import com.amzi.mastercellusv2.utility.TokenStorage
 import com.amzi.mastercellusv2.utility.myComponents.navController
 import com.amzi.mastercellusv2.utility.showLogs
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
-class AuthRepo(authAPIs: AuthAPIs) {
+class AuthRepo(authAPIs: AuthAPIs,private val context: Context) {
 
     init {
         showLogs("Repo:","Created")
@@ -15,8 +20,6 @@ class AuthRepo(authAPIs: AuthAPIs) {
 
 
     val authAPI = authAPIs
-
-
 
     suspend fun register(username: String, fName: String, lName: String, email: String, mobile_number: String){
 
@@ -36,29 +39,6 @@ class AuthRepo(authAPIs: AuthAPIs) {
 
             }else{
                 showLogs("auth","Registration Failed" + registerResponse.errorBody().toString())
-            }
-        }
-        catch (e:Exception){
-            showLogs("Error: ",e.toString())
-        }
-    }
-
-    suspend fun login(email: String, password: String){
-
-        try{
-            val loginResponse = authAPI.login(email, password)
-
-            if(loginResponse.isSuccessful){
-
-                showLogs("LOGIN USER","Login Successful")
-
-                mNavigator.navigateTo(Screens.Home.route)
-
-
-            }else{
-                showLogs("LOGIN USER","Login unSuccessful" + loginResponse.errorBody().toString())
-
-                showLogs("LOGIN USER","Login unSuccessful")
             }
         }
         catch (e:Exception){
@@ -87,5 +67,38 @@ class AuthRepo(authAPIs: AuthAPIs) {
         catch (e:Exception){
             showLogs("Error: ",e.toString())
         }
+    }
+
+
+    suspend fun login(email: String, password: String): Result<String> {
+        return withContext(Dispatchers.IO) {
+            try {
+                val loginResponse = authAPI.login(email, password)
+
+                if (loginResponse.isSuccessful) {
+                    loginResponse.body()?.let { loginRes ->
+                        // Save tokens securely
+                        TokenStorage.saveToken(context, loginRes.access, loginRes.refresh)
+                        Log.d("AuthRepo", "Login Successful")
+                        Result.success("Login Successful")
+                    } ?: run {
+                        Log.e("AuthRepo", "Login failed: Empty response body")
+                        Result.failure(Exception("Empty response body"))
+                    }
+                } else {
+                    val errorMsg = loginResponse.errorBody()?.string() ?: "Login Failed"
+                    Log.e("AuthRepo", "Login Unsuccessful: $errorMsg")
+                    Result.failure(Exception(errorMsg))
+                }
+            } catch (e: Exception) {
+                Log.e("AuthRepo", "Error during login: ${e.message}")
+                Result.failure(e)
+            }
+        }
+    }
+
+    // Optional: Logout function to clear tokens
+    fun logout() {
+        TokenStorage.clearToken(context)
     }
 }

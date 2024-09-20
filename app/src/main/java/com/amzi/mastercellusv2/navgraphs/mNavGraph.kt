@@ -2,6 +2,7 @@ package com.amzi.mastercellusv2.navgraphs
 
 import android.util.Log
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import com.amzi.mastercellusv2.utility.mGraph
@@ -30,7 +31,7 @@ fun setUpNavGraph(
 //    navController: NavHostController,
 
 ){
-
+val context = LocalContext.current
     NavHost(navController = navController,
         startDestination = mGraph.AUTH,
         route = mGraph.ROOT){
@@ -41,7 +42,7 @@ fun setUpNavGraph(
 //        composable(route = Screens.Home.route){
 //            HomeScreen()
 //        }
-        authNavGraph(navController )
+        authNavGraph(navController, context )
 
     }
 }
