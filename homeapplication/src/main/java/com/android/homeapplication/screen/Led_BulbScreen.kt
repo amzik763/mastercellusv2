@@ -35,14 +35,15 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.homeapplication.screen.data.Category
-import com.example.homeapplication.screen.data.categoryList3
-import com.example.homeapplication.screen.data.categoryList4
-import com.example.homeapplication.screen.data.categoryList5
-import com.example.homeapplication.screen.data.categoryList6
+import com.android.homeapplication.screen.data.Category
+import com.android.homeapplication.screen.data.categoryList3
+import com.android.homeapplication.screen.data.categoryList4
+import com.android.homeapplication.screen.data.categoryList5
+import com.android.homeapplication.screen.data.categoryList6
 import com.example.homeapplication.ui.theme.lightBlack
 import com.example.homeapplication.ui.theme.lightOrange
-import com.example.homeapplication.viewModel.HomeAppViewModel
+import com.android.homeapplication.viewModel.HomeAppViewModel
+
 
 @Composable
 fun LedBulbScreen(context :Context,viewModel: HomeAppViewModel){
@@ -198,6 +199,7 @@ fun BulbRow1(
             modifier = Modifier
                 .size(60.dp)
                 .padding(end = 9.dp)
-                .align(Alignment.BottomEnd))
+                .align(Alignment.BottomEnd)
+        )
     }
 }

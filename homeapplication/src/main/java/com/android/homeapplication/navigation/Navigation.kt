@@ -22,11 +22,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.homeapplication.screen.FanAcScreen
-import com.example.homeapplication.screen.HomeScreen
+import com.android.homeapplication.screen.HomeScreen
 import com.android.homeapplication.screen.LedBulbScreen
 import com.example.homeapplication.navigation.NavigationItem
-import com.example.homeapplication.viewModel.HomeAppViewModel
+import com.example.homeapplication.screen.FanAcScreen
+import com.android.homeapplication.viewModel.HomeAppViewModel
 
 @Composable
 fun NavigationController (navController: NavHostController, context: Context){
@@ -42,7 +42,8 @@ fun NavigationController (navController: NavHostController, context: Context){
     )
     NavHost(navController = navController, startDestination = NavigationItem.HomeScreen.route){
         composable (NavigationItem.HomeScreen.route) {
-            HomeScreen(navController
+            HomeScreen(
+//                navController
 //                viewModel
             )
         }

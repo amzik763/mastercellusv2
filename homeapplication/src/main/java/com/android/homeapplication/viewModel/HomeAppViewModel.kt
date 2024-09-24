@@ -1,4 +1,4 @@
-package com.example.homeapplication.viewModel
+package com.android.homeapplication.viewModel
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -14,8 +14,7 @@ import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken
 import org.eclipse.paho.client.mqttv3.MqttCallbackExtended
 import org.eclipse.paho.client.mqttv3.MqttMessage
 
-//class HomeAppViewModel(context:Context):ViewModel(){
-    class HomeAppViewModel(private val context: Context):ViewModel(){
+class HomeAppViewModel(private val context: Context):ViewModel(){
 
         val mContext = context
 
@@ -60,23 +59,13 @@ import org.eclipse.paho.client.mqttv3.MqttMessage
         })
     }
 
-//    fun bulbSwitch(id: Int) {
-//        bulbsState[id] = !bulbsState[id] // as button triggered state should be change
-//        Log.w("tag","${bulbsState[id].toString()}")
-//        val message = if (bulbsState[id]) "UPDATE_HOME_AUTOMATION_DATA=${id},0,0"
-//                             else "UPDATE_HOME_AUTOMATION_DATA=0,0,0"
-//      mqttClient.publish("bulb/${id}", message)
-//        mqttClient.publish("HA/70:04:1D:55:92:48/$/command", message)
-//    }
-
     fun bulbSwitch(id: Int) {
-
 
         val homeMac = getMacId(KEY_HOMEAUTO_MACID)
 
         try {
             bulbsState[id] = !bulbsState[id] // Toggle the state for the given ID
-            Log.w("tag", "${bulbsState[id].toString()}")
+            Log.w("tag", bulbsState[id].toString())
 
             // Calculate the sum of all IDs
             val sumOfIds = bulbsState.indices.sumBy { if (bulbsState[it]) it else 0 }
@@ -98,15 +87,7 @@ import org.eclipse.paho.client.mqttv3.MqttMessage
         }
     }
 
-    //switch for fan and ac
-//    fun acSwitch(id: Int) {
-//        acState.add(id,!acState[id]) // as button triggered state should be change
-//        Log.w("tag","${acState[id].toString()}")
-//        val message = if (acState[id]) "UPDATE_HOME_AUTOMATION_DATA=${id},0,0"
-//                             else "UPDATE_HOME_AUTOMATION_DATA=0,0,0"
-//        mqttClient.publish("HA/70:04:1D:55:92:48/$/command", message)
-// }
-        
+
     fun acSwitch(id: Int) {
 
         val homeMac = getMacId(KEY_HOMEAUTO_MACID)
@@ -130,15 +111,8 @@ import org.eclipse.paho.client.mqttv3.MqttMessage
 
 
         //SHARED PREFERENCES
-
         private val sharedPreferences: SharedPreferences
             get() = mContext.getSharedPreferences(PREFERNCES_NAME, Context.MODE_PRIVATE)
-
-        /*fun macId(key: String, macId: String) {
-            val editor: SharedPreferences.Editor = sharedPreferences.edit()
-            editor.putString(key, macId)
-            editor.apply()
-        }*/
 
         fun getMacId(key: String): String {
             return sharedPreferences.getString(key, "Not Registered") ?: "Not Registered"

@@ -1,8 +1,8 @@
-package com.amzi.mastercellusv2.utility
+package com.android.homeapplication.utility
 
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
-import com.amzi.mastercellusv2.R
+import com.android.homeapplication.R
 
 object mFont {
 

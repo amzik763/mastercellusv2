@@ -1,4 +1,4 @@
-package com.example.homeapplication.screen
+package com.android.homeapplication.screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -22,18 +22,18 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
 import com.android.homeapplication.R
-import com.example.homeapplication.navigation.NavigationItem
+import com.android.homeapplication.components.Header
 import com.example.homeapplication.ui.theme.lightBlack
 import com.example.homeapplication.ui.theme.lightGrey
 import com.example.homeapplication.ui.theme.lightOrange
 
 //@Preview
 @Composable
-fun HomeScreen(navController: NavHostController){
+fun HomeScreen(/*navController: NavHostController*/){
   Column (
       Modifier
           .fillMaxSize()
@@ -88,8 +88,8 @@ fun HomeScreen(navController: NavHostController){
                   .padding(start = 24.dp, end = 24.dp)
                   .border(1.dp, color = lightGrey, shape = RoundedCornerShape(8.dp))
                   .clickable {
-                      navController.popBackStack()
-                      navController.navigate(NavigationItem.LedBulbScreen.route)
+//                      navController.popBackStack()
+//                      navController.navigate(NavigationItem.LedBulbScreen.route)
                   }
           ){
               Image(
@@ -119,8 +119,8 @@ fun HomeScreen(navController: NavHostController){
                   .padding(start = 24.dp, end = 24.dp)
                   .border(1.dp, color = lightGrey, shape = RoundedCornerShape(8.dp))
                   .clickable {
-                      navController.popBackStack()
-                      navController.navigate(NavigationItem.FanAcScreen.route)
+//                      navController.popBackStack()
+//                      navController.navigate(NavigationItem.FanAcScreen.route)
                   }
           ){
               Image(
@@ -150,8 +150,8 @@ fun HomeScreen(navController: NavHostController){
                   .padding(start = 24.dp, end = 24.dp)
                   .border(1.dp, color = lightGrey, shape = RoundedCornerShape(8.dp))
                   .clickable {
-                      navController.popBackStack()
-                      navController.navigate(NavigationItem.FanAcScreen.route)
+//                      navController.popBackStack()
+//                      navController.navigate(NavigationItem.FanAcScreen.route)
                   }
           ){
               Image(
@@ -164,8 +164,28 @@ fun HomeScreen(navController: NavHostController){
                   contentDescription = "Home",
                   contentScale = ContentScale.Crop,
               )
+
+
           }
       }
   }
+}
+
+@Preview
+@Composable
+fun Home(){
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .fillMaxSize()
+            .background(color = Color.White)
+            .padding(start = 12.dp, top = 16.dp, end = 12.dp)
+    ) {
+
+        Header(
+            text1 = "Controller",
+            text2 = "Tap on buttons to control the particular product"
+        )
+    }
 }
 

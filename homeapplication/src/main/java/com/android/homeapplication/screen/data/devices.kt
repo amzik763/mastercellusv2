@@ -1,4 +1,4 @@
-package com.example.homeapplication.screen.data
+package com.android.homeapplication.screen.data
 
 import androidx.annotation.DrawableRes
 import androidx.compose.ui.graphics.Color
