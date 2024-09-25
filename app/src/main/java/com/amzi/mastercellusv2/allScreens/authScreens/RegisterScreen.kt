@@ -220,7 +220,7 @@ fun RegisterScreen() {
             ),
             modifier = Modifier.fillMaxWidth()
                 .clickable {
-                    mNavigator.navigateTo(Screens.Verification.route)
+                    mNavigator.navigateTo(Screens.DeviceList.route)
                 },
             textAlign = TextAlign.Center,
             color = orange

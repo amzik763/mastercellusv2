@@ -49,20 +49,13 @@ class AuthRepo(authAPIs: AuthAPIs,private val context: Context) {
 
         try{
             val verifyRes = authAPI.verify(mobile_number, password, password_confirm, otp)
-
             if(verifyRes.isSuccessful){
-
                 showLogs("VERIFICATION","Verification Successful")
-
                 mNavigator.navigateTo(Screens.Login.route)
-
             }else{
                 showLogs("VERIFICATION","Verification unSuccessful" + verifyRes.errorBody().toString())
-
             }
-
         }
-
         catch (e:Exception){
             showLogs("Error: ",e.toString())
         }
@@ -79,6 +72,7 @@ class AuthRepo(authAPIs: AuthAPIs,private val context: Context) {
                         // Save tokens securely
                         TokenStorage.saveToken(context, loginRes.access, loginRes.refresh)
                         Log.d("AuthRepo", "Login Successful")
+                        Log.d("AuthRepo", loginResponse.body().toString())
                         Result.success("Login Successful")
                     } ?: run {
                         Log.e("AuthRepo", "Login failed: Empty response body")

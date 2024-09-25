@@ -25,6 +25,8 @@ sealed class Screens(val route:String) {
     }
     object Register : Screens("register")
     object Verification : Screens("Verify")
+    object DeviceList : Screens("devicelist")
+    object DeviceRegister : Screens("deviceRegister")
     object Login: Screens("login")
 
     object SetPassword: Screens("setPassword")

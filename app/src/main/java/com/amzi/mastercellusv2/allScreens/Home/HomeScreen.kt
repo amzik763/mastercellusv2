@@ -217,7 +217,7 @@ fun HomeScreen(
                         .size(height = 56.dp, width = 56.dp)
                         .border(0.dp, lightGrey, shape = RoundedCornerShape(4.dp))
                         .clip(RoundedCornerShape(4.dp)),
-                    painter = painterResource(id = com.amzi.mastercellusv2.R.drawable.ic_mushroom),
+                    painter = painterResource(id = com.amzi.mastercellusv2.R.drawable.ic_mushroom_old),
                     contentDescription = "Mushroom",
                     contentScale = ContentScale.Crop,
                 )

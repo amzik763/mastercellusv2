@@ -7,6 +7,8 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import androidx.navigation.navigation
+import com.amzi.mastercellusv2.allScreens.authScreens.DeviceList
+import com.amzi.mastercellusv2.allScreens.authScreens.DeviceRegistration
 import com.amzi.mastercellusv2.allScreens.authScreens.LoginScreen
 import com.amzi.mastercellusv2.allScreens.authScreens.RegisterScreen
 import com.amzi.mastercellusv2.allScreens.authScreens.SplashScreen
@@ -56,6 +58,14 @@ fun NavGraphBuilder.authNavGraph(
 
         composable(route = Screens.Login.route){
             LoginScreen(viewModel = mRegisterViewModel)
+        }
+
+        composable(route = Screens.DeviceList.route){
+            DeviceList(viewModel = mRegisterViewModel)
+        }
+
+        composable(route = Screens.DeviceRegister.route){
+            DeviceRegistration(viewModel = mRegisterViewModel)
         }
     }
 }
