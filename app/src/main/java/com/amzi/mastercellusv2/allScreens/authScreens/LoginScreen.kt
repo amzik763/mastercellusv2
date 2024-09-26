@@ -1,6 +1,5 @@
 package com.amzi.mastercellusv2.allScreens.authScreens
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -10,45 +9,37 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CornerSize
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Icon
-import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.amzi.mastercellusv2.R
-import com.amzi.mastercellusv2.allViewModels.RegisterViewModel
+import com.amzi.mastercellusv2.components.CustomButton
+import com.amzi.mastercellusv2.components.Header
 import com.amzi.mastercellusv2.components.InputText
-import com.amzi.mastercellusv2.utility.TokenStorage
-import com.amzi.mastercellusv2.utility.myComponents
-import com.amzi.mastercellusv2.utility.showLogs
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.amzi.mastercellusv2.components.PasswordTextFiled
+import com.amzi.mastercellusv2.navgraphs.Screens
+import com.amzi.mastercellusv2.navgraphs.mNavigator
+import com.amzi.mastercellusv2.ui.theme.lightBlack
+import com.amzi.mastercellusv2.ui.theme.orange
+import com.amzi.mastercellusv2.utility.mFont
+import com.amzi.mastercellusv2.utility.myComponents.registerViewModel
+import com.example.demo.ui.theme.Grey
 
 
-@Composable
+/*@Composable
 fun LoginScreen(viewModel: RegisterViewModel) {
 
     val ct = LocalContext.current
@@ -58,7 +49,6 @@ fun LoginScreen(viewModel: RegisterViewModel) {
 
     var mobNum by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
-    var fcm_token by remember { mutableStateOf("") }
 
     Column(
         modifier = Modifier
@@ -240,11 +230,118 @@ fun LoginScreen(viewModel: RegisterViewModel) {
 
         }
     }
-}
-@Composable
-@Preview(showBackground = true, showSystemUi = true)
-fun LoginScreenPreview(){
+}*/
 
-//    LoginScreen()
+//@Preview
+@Composable
+fun LoginScreen(){
+    var username_mobNum by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .fillMaxSize()
+            .background(color = Color.White)
+            .padding(start = 12.dp, top = 16.dp, end = 12.dp)
+    ) {
+
+        Header(
+            text1 = "Login",
+            text2 = "Welcome back to  our community and continue experiencing"
+        )
+
+        Spacer(modifier = Modifier.height(26.dp))
+
+        InputText(
+            modifier = Modifier
+                .padding(top = 9.dp, bottom = 8.dp),
+            text = username_mobNum,
+            color = Color.Black,
+            label = "Username",
+            maxLine = 1,
+            iconResId = R.drawable.person,
+            keyboardOptions = KeyboardOptions(
+                imeAction = ImeAction.Done,
+                keyboardType = KeyboardType.Text),
+            onTextChange = { username_mobNum = it },
+            maxLength = 30
+        )
+
+        Spacer(modifier = Modifier.height(10.dp))
+
+        PasswordTextFiled(
+            modifier = Modifier
+                .padding(top = 9.dp, bottom = 8.dp),
+            text = password,
+            color = Color.Black,
+            label = "Password",
+            maxLine = 1,
+            iconResId = R.drawable.email,
+            keyboardOptions = KeyboardOptions(
+                imeAction = ImeAction.Done,
+                keyboardType = KeyboardType.Text),
+            onTextChange = { password = it },
+            maxLength = 30
+        )
+        Spacer(modifier = Modifier.height(28.dp))
+
+        Text(text = "Click Login to proceed",
+            style = TextStyle(
+                fontSize = 12.sp,
+                fontWeight = FontWeight.SemiBold,
+                color = Grey,
+                fontFamily = mFont.outfitRegular
+            )
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        CustomButton("Login"){
+
+            registerViewModel.login(username_mobNum, password)
+
+        }
+
+        Row  (modifier = Modifier.padding(top = 18.dp)){
+            Text(
+
+                text = "Do not have an account?",
+                style = TextStyle(
+                    fontSize = 13.sp,
+                    fontFamily = mFont.outfitRegular,
+                    fontWeight = FontWeight.SemiBold
+                ),
+                color = lightBlack
+            )
+            Text(
+                modifier = Modifier
+                    .clickable { mNavigator.navigateTo(Screens.Register.route) },
+                text = " Register",
+                style = TextStyle(
+                    fontSize = 12.sp,
+                    fontFamily = mFont.outfitRegular,
+                    fontWeight = FontWeight.SemiBold
+                ),
+                color = orange
+            )
+        }
+
+        Spacer(modifier = Modifier.height(28.dp))
+
+        Text(
+
+            text = "Forgot Password?",
+            style = TextStyle(
+                fontSize = 13.sp,
+                fontFamily = mFont.outfitRegular,
+                fontWeight = FontWeight.SemiBold
+            ),
+            modifier = Modifier.fillMaxWidth()
+                .clickable {},
+            textAlign = TextAlign.Center,
+            color = orange
+        )
+    }
 
 }

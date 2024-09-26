@@ -39,7 +39,6 @@ import com.amzi.mastercellusv2.components.Header
 import com.amzi.mastercellusv2.navgraphs.Screens
 import com.amzi.mastercellusv2.navgraphs.mNavigator
 import com.amzi.mastercellusv2.ui.theme.lightBlack
-import com.amzi.mastercellusv2.ui.theme.lightGrey
 import com.amzi.mastercellusv2.ui.theme.orange
 import com.amzi.mastercellusv2.utility.mFont
 import com.amzi.mastercellusv2.utility.myComponents
@@ -56,11 +55,11 @@ fun DeviceList(
     var password by remember { mutableStateOf("") }
     var confirmPassword by remember { mutableStateOf("") }
     var otp by remember { mutableStateOf("") }
-    var myDeviceList = mutableListOf<deviceListResponse>()
+    var myDeviceList = mutableListOf<DeviceListResponse>()
 
-    myDeviceList.add(deviceListResponse("Greenhouse","G3:FC:4M:E3:L5:2P:PR:E9"))
-    myDeviceList.add(deviceListResponse("Greenhouse","H2:3M:H2:M5:OP:L5:2P:PR:E9"))
-    myDeviceList.add(deviceListResponse("Mushroom","PR:FD:3M:H2:M5:OP:TX:9F"))
+    myDeviceList.add(DeviceListResponse("Greenhouse","G3:FC:4M:E3:L5:2P:PR:E9"))
+    myDeviceList.add(DeviceListResponse("Greenhouse","H2:3M:H2:M5:OP:L5:2P:PR:E9"))
+    myDeviceList.add(DeviceListResponse("Mushroom","PR:FD:3M:H2:M5:OP:TX:9F"))
 
 
     Column(
@@ -117,7 +116,7 @@ fun DeviceList(
 }
 
 @Composable
-fun DeviceItem(index: Int, item: deviceListResponse) {
+fun DeviceItem(index: Int, item: DeviceListResponse) {
         Column(modifier = Modifier.fillMaxWidth().height(70.dp)) {
             Row {
 
@@ -137,7 +136,7 @@ fun DeviceItem(index: Int, item: deviceListResponse) {
 
                 Spacer(modifier = Modifier.width(8.dp))
 
-                Column(){
+                Column{
                     Text(item.mac.toString(), style = TextStyle(
                         fontSize = 13.sp,
                         fontFamily = mFont.outfitBold2,
@@ -157,8 +156,8 @@ fun DeviceItem(index: Int, item: deviceListResponse) {
         }
 }
 
-data class deviceListResponse
+data class DeviceListResponse
     (
         val name:String? = "",
         val mac:String? = ""
-        )
+    )

@@ -68,6 +68,7 @@ class AuthRepo(authAPIs: AuthAPIs,private val context: Context) {
                 val loginResponse = authAPI.login(email, password)
 
                 if (loginResponse.isSuccessful) {
+
                     loginResponse.body()?.let { loginRes ->
                         // Save tokens securely
                         TokenStorage.saveToken(context, loginRes.access, loginRes.refresh)
@@ -76,8 +77,16 @@ class AuthRepo(authAPIs: AuthAPIs,private val context: Context) {
                         Result.success("Login Successful")
                     } ?: run {
                         Log.e("AuthRepo", "Login failed: Empty response body")
+
+                        // Switch to Main thread to handle UI-related actions like navigation
+                        withContext(Dispatchers.Main) {
+                            // Navigate to the DeviceList screen on the main thread
+                            mNavigator.navigateTo(Screens.DeviceList.route)
+                        }
+
                         Result.failure(Exception("Empty response body"))
                     }
+
                 } else {
                     val errorMsg = loginResponse.errorBody()?.string() ?: "Login Failed"
                     Log.e("AuthRepo", "Login Unsuccessful: $errorMsg")
@@ -89,6 +98,7 @@ class AuthRepo(authAPIs: AuthAPIs,private val context: Context) {
             }
         }
     }
+
 
     // Optional: Logout function to clear tokens
     fun logout() {

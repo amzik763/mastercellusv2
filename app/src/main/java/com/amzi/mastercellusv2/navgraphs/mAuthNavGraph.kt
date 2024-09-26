@@ -17,9 +17,7 @@ import com.amzi.mastercellusv2.allViewModels.Factories.RegisterViewModelFactory
 import com.amzi.mastercellusv2.allViewModels.RegisterViewModel
 import com.amzi.mastercellusv2.repository.AuthRepo
 import com.amzi.mastercellusv2.utility.mGraph
-import com.amzi.mastercellusv2.utility.myComponents
 import com.amzi.mastercellusv2.utility.myComponents.authAPI
-import com.amzi.mastercellusv2.utility.showLogs
 
 fun NavGraphBuilder.authNavGraph(
     navController: NavHostController,
@@ -57,7 +55,7 @@ fun NavGraphBuilder.authNavGraph(
         }
 
         composable(route = Screens.Login.route){
-            LoginScreen(viewModel = mRegisterViewModel)
+            LoginScreen()
         }
 
         composable(route = Screens.DeviceList.route){

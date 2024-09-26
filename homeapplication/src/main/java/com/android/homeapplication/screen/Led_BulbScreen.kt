@@ -40,9 +40,9 @@ import com.android.homeapplication.screen.data.categoryList3
 import com.android.homeapplication.screen.data.categoryList4
 import com.android.homeapplication.screen.data.categoryList5
 import com.android.homeapplication.screen.data.categoryList6
+import com.android.homeapplication.viewModel.HomeAppViewModel
 import com.example.homeapplication.ui.theme.lightBlack
 import com.example.homeapplication.ui.theme.lightOrange
-import com.android.homeapplication.viewModel.HomeAppViewModel
 
 
 @Composable
@@ -83,11 +83,7 @@ Column {
 }
 @Composable
 fun LedText(){
-    Column (
-//        modifier = Modifier.verticalScroll(rememberScrollState()),
-
-        )
-    {
+    Column () {
         Text(
             modifier = Modifier.padding(start = 16.dp, top = 16.dp),
             text = "My Home",
@@ -162,7 +158,7 @@ fun BulbRow1(
     category: Category,
     viewModel: HomeAppViewModel
 ){
-    var clr = remember {
+    val clr = remember {
         mutableStateOf<Boolean>(viewModel.bulbsState[category.id])
     }
     Box(modifier = Modifier
@@ -170,7 +166,7 @@ fun BulbRow1(
         .clickable {
             viewModel.bulbSwitch(category.id)
             clr.value = !clr.value
-        } // Call the provided onClick callback
+        }
         .background(
             if (clr.value) Color(255, 255, 153) else category.color,
             RoundedCornerShape(8.dp)
