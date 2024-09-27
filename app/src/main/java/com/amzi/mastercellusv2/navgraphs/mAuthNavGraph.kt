@@ -13,11 +13,7 @@ import com.amzi.mastercellusv2.allScreens.authScreens.LoginScreen
 import com.amzi.mastercellusv2.allScreens.authScreens.RegisterScreen
 import com.amzi.mastercellusv2.allScreens.authScreens.SplashScreen
 import com.amzi.mastercellusv2.allScreens.authScreens.Verification
-import com.amzi.mastercellusv2.allViewModels.Factories.RegisterViewModelFactory
-import com.amzi.mastercellusv2.allViewModels.RegisterViewModel
-import com.amzi.mastercellusv2.repository.AuthRepo
 import com.amzi.mastercellusv2.utility.mGraph
-import com.amzi.mastercellusv2.utility.myComponents.authAPI
 
 fun NavGraphBuilder.authNavGraph(
     navController: NavHostController,
@@ -28,9 +24,10 @@ fun NavGraphBuilder.authNavGraph(
 //    val authAPI: AuthAPIs by lazy {
 //        RetrofitBuilder.instance.create(AuthAPIs::class.java)
 //    }
-       val authRepo:AuthRepo = AuthRepo(authAPI, context)
-    val viewModelFactory = RegisterViewModelFactory(authRepo)
-    val mRegisterViewModel: RegisterViewModel = viewModelFactory.create(RegisterViewModel::class.java)
+       /* val authRepo:AuthRepo = AuthRepo(authAPI, context)
+        val homeAutoRepo: HomeAutoRepo = HomeAutoRepo(homeAutoApi)
+        val viewModelFactory = RegisterViewModelFactory(authRepo, homeAutoRepo)
+        val mRegisterViewModel: RegisterViewModel = viewModelFactory.create(RegisterViewModel::class.java)*/
 
 
     navigation(
@@ -59,11 +56,11 @@ fun NavGraphBuilder.authNavGraph(
         }
 
         composable(route = Screens.DeviceList.route){
-            DeviceList(viewModel = mRegisterViewModel)
+            DeviceList()
         }
 
         composable(route = Screens.DeviceRegister.route){
-            DeviceRegistration(viewModel = mRegisterViewModel)
+            DeviceRegistration()
         }
     }
 }

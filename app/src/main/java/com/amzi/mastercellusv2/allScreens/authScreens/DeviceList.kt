@@ -17,6 +17,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -33,7 +34,6 @@ import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.amzi.mastercellusv2.R
-import com.amzi.mastercellusv2.allViewModels.RegisterViewModel
 import com.amzi.mastercellusv2.components.CustomButton
 import com.amzi.mastercellusv2.components.Header
 import com.amzi.mastercellusv2.navgraphs.Screens
@@ -46,20 +46,18 @@ import com.amzi.mastercellusv2.utility.showLogs
 import com.example.demo.ui.theme.darkestGrey
 
 @Composable
-fun DeviceList(
-    viewModel: RegisterViewModel
-){
+fun DeviceList(){
 
     var username by remember { mutableStateOf(myComponents.registerViewModel.username.value) }
     var mobNum by remember { mutableStateOf(myComponents.registerViewModel.mobNum.value) }
     var password by remember { mutableStateOf("") }
     var confirmPassword by remember { mutableStateOf("") }
     var otp by remember { mutableStateOf("") }
-    var myDeviceList = mutableListOf<DeviceListResponse>()
-
-    myDeviceList.add(DeviceListResponse("Greenhouse","G3:FC:4M:E3:L5:2P:PR:E9"))
-    myDeviceList.add(DeviceListResponse("Greenhouse","H2:3M:H2:M5:OP:L5:2P:PR:E9"))
-    myDeviceList.add(DeviceListResponse("Mushroom","PR:FD:3M:H2:M5:OP:TX:9F"))
+    val deviceList by myComponents.registerViewModel.deviceList.collectAsState()
+//
+//    myDeviceList.add(DeviceListResponse("Greenhouse","G3:FC:4M:E3:L5:2P:PR:E9"))
+//    myDeviceList.add(DeviceListResponse("Greenhouse","H2:3M:H2:M5:OP:L5:2P:PR:E9"))
+//    myDeviceList.add(DeviceListResponse("Mushroom","PR:FD:3M:H2:M5:OP:TX:9F"))
 
 
     Column(
@@ -67,7 +65,7 @@ fun DeviceList(
             .fillMaxWidth()
             .fillMaxSize()
             .background(color = Color.White)
-            .padding(start = 12.dp, top = 16.dp, end =  12.dp)
+            .padding(start = 12.dp, top = 16.dp, end = 12.dp)
     ) {
 
         Header(text1 = "My Devices",
@@ -76,24 +74,40 @@ fun DeviceList(
         Spacer(modifier = Modifier.height(36.dp))
 
         //UI if no device is registered
-        Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-            Image( modifier = Modifier.width(200.dp).height(200.dp),
-                painter = painterResource(R.drawable.signeddevice), contentDescription = "", contentScale = ContentScale.Inside
-            )
+        if (deviceList.isEmpty()){
+            Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+                Image( modifier = Modifier
+                    .width(200.dp)
+                    .height(200.dp),
+                    painter = painterResource(R.drawable.signeddevice),
+                    contentDescription = "",
+                    contentScale = ContentScale.Inside
+                )
+            }
+
+            showLogs("Device List", "Empty devices")
         }
 
         //UI If registered
-        LazyColumn(
-            modifier = Modifier.fillMaxWidth().fillMaxHeight(0.5f)
-        ) {
-            itemsIndexed(myDeviceList){
-                index,item ->
+        else{
+
+            showLogs("Device List", "Contains devices")
+
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .fillMaxHeight(0.5f)
+            ) {
+                itemsIndexed(deviceList){
+                        index,item ->
                     DeviceItem(index,item)
+                }
             }
         }
 
+
         Spacer(modifier = Modifier.height(28.dp))
-        CustomButton("Register New Device"){
+        CustomButton("Register New User"){
             mNavigator.navigateTo(Screens.DeviceRegister.route)
 //      myComponents.registerViewModel.verify(mobNum, password, confirmPassword, otp)
         showLogs("REGISTRATION", "Go to actual registration")
@@ -117,7 +131,9 @@ fun DeviceList(
 
 @Composable
 fun DeviceItem(index: Int, item: DeviceListResponse) {
-        Column(modifier = Modifier.fillMaxWidth().height(70.dp)) {
+        Column(modifier = Modifier
+            .fillMaxWidth()
+            .height(70.dp)) {
             Row {
 
             Image(
@@ -125,7 +141,7 @@ fun DeviceItem(index: Int, item: DeviceListResponse) {
                 contentScale = ContentScale.Inside,
                 contentDescription = "",
                 painter = if (
-                    item.name == "Greenhouse"
+                    item.deviceName == "GreenHouse"
                 ) {
                     painterResource(R.drawable.ic_homeautomation)
 
@@ -137,7 +153,7 @@ fun DeviceItem(index: Int, item: DeviceListResponse) {
                 Spacer(modifier = Modifier.width(8.dp))
 
                 Column{
-                    Text(item.mac.toString(), style = TextStyle(
+                    Text(item.deviceMac, style = TextStyle(
                         fontSize = 13.sp,
                         fontFamily = mFont.outfitBold2,
                         fontWeight = FontWeight.SemiBold,
@@ -145,7 +161,7 @@ fun DeviceItem(index: Int, item: DeviceListResponse) {
                         letterSpacing = TextUnit(1f, TextUnitType.Sp)
                     )
                     )
-                    Text(item.name.toString(), style = TextStyle(
+                    Text(item.deviceName, style = TextStyle(
                         fontSize = 12.sp,
                         fontFamily = mFont.outfitRegular,
                         fontWeight = FontWeight.SemiBold,
@@ -156,8 +172,7 @@ fun DeviceItem(index: Int, item: DeviceListResponse) {
         }
 }
 
-data class DeviceListResponse
-    (
-        val name:String? = "",
-        val mac:String? = ""
-    )
+data class DeviceListResponse(
+    val deviceName: String,
+    val deviceMac: String
+)

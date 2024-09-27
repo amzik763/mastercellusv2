@@ -3,11 +3,15 @@ package com.amzi.mastercellusv2.allViewModels
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.amzi.mastercellusv2.allScreens.authScreens.DeviceListResponse
 import com.amzi.mastercellusv2.repository.AuthRepo
+import com.amzi.mastercellusv2.repository.HomeAutoRepo
 import com.amzi.mastercellusv2.utility.showLogs
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class RegisterViewModel(authRepo: AuthRepo) : ViewModel() {
+class RegisterViewModel(authRepo: AuthRepo, homeAutoRepo: HomeAutoRepo) : ViewModel() {
 
 
     // Use mutableStateOf to track UI-related state changes
@@ -19,6 +23,7 @@ class RegisterViewModel(authRepo: AuthRepo) : ViewModel() {
     }
 
     var authRepo: AuthRepo = authRepo
+    var hmeAutoRepo: HomeAutoRepo = homeAutoRepo
 
     fun login(email: String, password: String) {
         showLogs("LOGIN: ", mobNum.value)
@@ -51,5 +56,13 @@ class RegisterViewModel(authRepo: AuthRepo) : ViewModel() {
         }
     }
 
+    private val _deviceList = MutableStateFlow<List<DeviceListResponse>>(emptyList())
+    val deviceList: StateFlow<List<DeviceListResponse>> = _deviceList
+
+    //Update device List
+    fun updateDeviceList(newDevices: List<DeviceListResponse>) {
+        _deviceList.value = newDevices
+
+    }
 }
 

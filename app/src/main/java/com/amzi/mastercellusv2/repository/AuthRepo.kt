@@ -2,10 +2,12 @@ package com.amzi.mastercellusv2.repository
 
 import android.content.Context
 import android.util.Log
+import com.amzi.mastercellusv2.allScreens.authScreens.DeviceListResponse
 import com.amzi.mastercellusv2.navgraphs.Screens
 import com.amzi.mastercellusv2.navgraphs.mNavigator
 import com.amzi.mastercellusv2.networks.AuthAPIs
 import com.amzi.mastercellusv2.utility.TokenStorage
+import com.amzi.mastercellusv2.utility.myComponents
 import com.amzi.mastercellusv2.utility.myComponents.navController
 import com.amzi.mastercellusv2.utility.showLogs
 import kotlinx.coroutines.Dispatchers
@@ -16,7 +18,6 @@ class AuthRepo(authAPIs: AuthAPIs,private val context: Context) {
     init {
         showLogs("Repo:","Created")
     }
-
 
     val authAPI = authAPIs
 
@@ -62,7 +63,7 @@ class AuthRepo(authAPIs: AuthAPIs,private val context: Context) {
     }
 
 
-    suspend fun login(email: String, password: String): Result<String> {
+/*    suspend fun login(email: String, password: String): Result<String> {
         return withContext(Dispatchers.IO) {
             try {
                 val loginResponse = authAPI.login(email, password)
@@ -77,13 +78,60 @@ class AuthRepo(authAPIs: AuthAPIs,private val context: Context) {
                         Result.success("Login Successful")
                     } ?: run {
                         Log.e("AuthRepo", "Login failed: Empty response body")
-
                         // Switch to Main thread to handle UI-related actions like navigation
+
+
+                        val deviceList = loginResponse.body()?.devices?.map{
+                            DeviceListResponse(it.device_name, it.device_mac)
+                        }
+
                         withContext(Dispatchers.Main) {
                             // Navigate to the DeviceList screen on the main thread
                             mNavigator.navigateTo(Screens.DeviceList.route)
                         }
+                        Result.failure(Exception("Empty response body"))
+                    }
 
+                } else {
+                    val errorMsg = loginResponse.errorBody()?.string() ?: "Login Failed"
+                    Log.e("AuthRepo", "Login Unsuccessful: $errorMsg")
+                    Result.failure(Exception(errorMsg))
+                }
+            } catch (e: Exception) {
+                Log.e("AuthRepo", "Error during login: ${e.message}")
+                Result.failure(e)
+            }
+        }
+    }*/
+
+    suspend fun login(email: String, password: String): Result<String> {
+        return withContext(Dispatchers.IO) {
+            try {
+                val loginResponse = authAPI.login(email, password)
+
+                if (loginResponse.isSuccessful) {
+
+                    loginResponse.body()?.let { loginRes ->
+                        // Save tokens securely
+                        TokenStorage.saveToken(context, loginRes.access, loginRes.refresh)
+                        Log.d("AuthRepo", "Login Successful")
+                        Log.d("AuthRepo", loginResponse.body().toString())
+
+                        // Extract the device list
+                        val deviceList = loginRes.devices.map {
+                            DeviceListResponse(it.device_name, it.device_mac)
+                        }
+
+                        // Switch to Main thread to handle UI-related actions like navigation
+                        withContext(Dispatchers.Main) {
+
+                            myComponents.registerViewModel.updateDeviceList(deviceList)
+                            mNavigator.navigateTo(Screens.DeviceList.route)
+                        }
+
+                        Result.success("Login Successful")
+                    } ?: run {
+                        Log.e("AuthRepo", "Login failed: Empty response body")
                         Result.failure(Exception("Empty response body"))
                     }
 
