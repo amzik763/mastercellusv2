@@ -17,6 +17,7 @@ interface HomeAutoApi {
     @FormUrlEncoded
     @POST("/homeautomation/api/registeruserdevice")
     suspend fun registerUserDevice(
+        @Header("Authorization") authorizationHeader: String,
         @Field("mobile_number") mobile_number: String,
         @Field("device_mac") device_mac: String
     ): Response<RegisterUserDeviceRes>

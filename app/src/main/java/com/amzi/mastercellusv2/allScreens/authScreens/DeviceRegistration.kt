@@ -32,20 +32,14 @@ import com.amzi.mastercellusv2.navgraphs.Screens
 import com.amzi.mastercellusv2.navgraphs.mNavigator
 import com.amzi.mastercellusv2.ui.theme.orange
 import com.amzi.mastercellusv2.utility.mFont
-import com.amzi.mastercellusv2.utility.myComponents
+import com.amzi.mastercellusv2.utility.myComponents.registerViewModel
 
 @Preview
 @Composable
 fun DeviceRegistration(){
 
-    var username by remember { mutableStateOf(myComponents.registerViewModel.username.value) }
-    var password by remember { mutableStateOf("") }
-    var confirmPassword by remember { mutableStateOf("") }
-    var otp by remember { mutableStateOf("") }
     var mobNum by remember { mutableStateOf("") }
     var macID by remember { mutableStateOf("") }
-    var deviceName by remember { mutableStateOf("None") }
-
 
     Column(
         modifier = Modifier
@@ -53,7 +47,7 @@ fun DeviceRegistration(){
             .fillMaxSize()
             .background(color = Color.White)
             .padding(start = 12.dp, top = 16.dp, end =  12.dp)
-    ) {
+    )  {
 
         Header(text1 = "Register User",
             text2 = "If you have purchased any device, make sure to register it here"
@@ -93,9 +87,7 @@ fun DeviceRegistration(){
 
         Spacer(modifier = Modifier.height(20.dp))
         CustomButton("Register"){
-
-            TODO() //RUN REGISTER API
-
+            registerViewModel.registerUserDevice(mobNum, macID)
         }
 
         Spacer(modifier = Modifier.height(36.dp))
@@ -111,6 +103,5 @@ fun DeviceRegistration(){
             ),
             color = orange
         )
-
     }
 }

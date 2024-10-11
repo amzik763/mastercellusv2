@@ -258,7 +258,7 @@ fun LoginScreen(){
                 .padding(top = 9.dp, bottom = 8.dp),
             text = username_mobNum,
             color = Color.Black,
-            label = "Username",
+            label = "Username or Mobile",
             maxLine = 1,
             iconResId = R.drawable.person,
             keyboardOptions = KeyboardOptions(

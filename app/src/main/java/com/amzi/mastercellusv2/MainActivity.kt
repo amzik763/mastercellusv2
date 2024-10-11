@@ -1,54 +1,39 @@
 package com.amzi.mastercellusv2
 
-import android.Manifest
-import android.content.Context
-import android.content.pm.PackageManager
-import android.location.LocationManager
 import android.net.ConnectivityManager
 import android.net.Network
-import android.net.wifi.WifiManager
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.ManagedActivityResultLauncher
 import androidx.activity.compose.setContent
-import androidx.activity.result.ActivityResultLauncher
 import androidx.annotation.RequiresApi
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.core.app.ActivityCompat
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.amzi.mastercellusv2.allViewModels.factories.RegisterViewModelFactory
 import com.amzi.mastercellusv2.allViewModels.RegisterViewModel
+import com.amzi.mastercellusv2.allViewModels.factories.RegisterViewModelFactory
 import com.amzi.mastercellusv2.navgraphs.setUpNavGraph
 import com.amzi.mastercellusv2.networks.AuthAPIs
 import com.amzi.mastercellusv2.networks.HomeAutoApi
 import com.amzi.mastercellusv2.networks.RetrofitBuilder
 import com.amzi.mastercellusv2.repository.AuthRepo
+import com.amzi.mastercellusv2.repository.HomeAutoRepo
 import com.amzi.mastercellusv2.ui.theme.Mastercellusv2Theme
 import com.amzi.mastercellusv2.utility.NetworkMonitor
 import com.amzi.mastercellusv2.utility.myComponents.authAPI
 import com.amzi.mastercellusv2.utility.myComponents.authRepo
 import com.amzi.mastercellusv2.utility.myComponents.homeAutoApi
+import com.amzi.mastercellusv2.utility.myComponents.homeAutoRepo
 import com.amzi.mastercellusv2.utility.myComponents.navController
 import com.amzi.mastercellusv2.utility.myComponents.registerViewModel
 import com.amzi.mastercellusv2.utility.myComponents.registerViewModelFactory
 import com.amzi.mastercellusv2.utility.showLogs
 import com.amzi.mastercellusv2.utility.showSnackBarNow
 import com.amzi.mastercellusv2.utility.snacks
-import com.example.demo.dialogBox.CustomDialog
-import com.example.demo.dialogBox.networkDialog
-import com.example.demo.ui.mushroom.Energy
-import com.example.demo.ui.mushroom.Title
-import com.example.demo.ui.mushroom.Title2
-import com.example.demo.viewmodels.SecondViewModel
-import com.example.demo.wifi.StringList
 
 class MainActivity : ComponentActivity() {
 
@@ -79,7 +64,8 @@ class MainActivity : ComponentActivity() {
         authAPI = RetrofitBuilder.create(this).create(AuthAPIs::class.java)
         homeAutoApi = RetrofitBuilder.create(this).create(HomeAutoApi::class.java)
         authRepo = AuthRepo(authAPI, context = applicationContext)
-        registerViewModelFactory = RegisterViewModelFactory(authRepo)
+        homeAutoRepo = HomeAutoRepo(homeAutoApi, context = applicationContext)
+        registerViewModelFactory = RegisterViewModelFactory(authRepo, homeAutoRepo)
         registerViewModel = registerViewModelFactory.create(RegisterViewModel::class.java)
         setContent {
             Mastercellusv2Theme {
@@ -95,7 +81,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-@RequiresApi(Build.VERSION_CODES.Q)
+/*@RequiresApi(Build.VERSION_CODES.Q)
 @Composable
 fun App(context: Context, secondViewModel: SecondViewModel) {
 
@@ -119,8 +105,11 @@ fun App(context: Context, secondViewModel: SecondViewModel) {
             Energy(navController, secondViewModel)
         }
     }
-}
+}*/
 
+
+
+/*
 @RequiresApi(Build.VERSION_CODES.Q)
 @Composable
 fun mDialog(secondViewModel: SecondViewModel, wifiManager: WifiManager, thisActivity: com.android.mushroomapplication.MainActivity) {
@@ -149,8 +138,11 @@ fun mDialog(secondViewModel: SecondViewModel, wifiManager: WifiManager, thisActi
         )
     }
 }
+*/
 
-fun checkAndRequestPermissions(context: Context, launcher: ActivityResultLauncher<String>) {
+
+
+/*fun checkAndRequestPermissions(context: Context, launcher: ActivityResultLauncher<String>) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
         // On Android 10 (Q) and higher, both ACCESS_FINE_LOCATION and ACCESS_BACKGROUND_LOCATION are required
         val fineLocationPermission =
@@ -186,8 +178,11 @@ fun checkAndRequestPermissions(context: Context, launcher: ActivityResultLaunche
             launcher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
         }
     }
-}
+}*/
 
+
+
+/*
 // Function to fetch Wi-Fi list when permissions are granted
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
 fun fetchWifiList(
@@ -257,6 +252,7 @@ fun fetchWifiList(
     }
 
 }
+*/
 
 @Composable
 fun DisplayContent(){

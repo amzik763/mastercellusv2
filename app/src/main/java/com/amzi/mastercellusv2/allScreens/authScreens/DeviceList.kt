@@ -29,6 +29,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
@@ -44,7 +45,9 @@ import com.amzi.mastercellusv2.utility.mFont
 import com.amzi.mastercellusv2.utility.myComponents
 import com.amzi.mastercellusv2.utility.showLogs
 import com.example.demo.ui.theme.darkestGrey
+import com.example.homeapplication.ui.theme.Grey
 
+@Preview
 @Composable
 fun DeviceList(){
 
@@ -54,11 +57,6 @@ fun DeviceList(){
     var confirmPassword by remember { mutableStateOf("") }
     var otp by remember { mutableStateOf("") }
     val deviceList by myComponents.registerViewModel.deviceList.collectAsState()
-//
-//    myDeviceList.add(DeviceListResponse("Greenhouse","G3:FC:4M:E3:L5:2P:PR:E9"))
-//    myDeviceList.add(DeviceListResponse("Greenhouse","H2:3M:H2:M5:OP:L5:2P:PR:E9"))
-//    myDeviceList.add(DeviceListResponse("Mushroom","PR:FD:3M:H2:M5:OP:TX:9F"))
-
 
     Column(
         modifier = Modifier
@@ -88,11 +86,30 @@ fun DeviceList(){
             showLogs("Device List", "Empty devices")
         }
 
+
+
+
+
         //UI If registered
         else{
 
             showLogs("Device List", "Contains devices")
 
+            Row (modifier = Modifier.fillMaxWidth()){
+                Text(text = "Home Automation",
+                    style = TextStyle(
+                        fontSize = 18.sp,
+                        fontFamily = mFont.outfitRegular,
+                        fontWeight = FontWeight.Bold,
+                        color = Grey,
+                        letterSpacing = TextUnit(1f, TextUnitType.Sp)
+                    )
+                )
+
+                CustomButton(text = "Open") {
+
+                }
+            }
             LazyColumn(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -168,7 +185,7 @@ fun DeviceItem(index: Int, item: DeviceListResponse) {
                         color = darkestGrey
                     ))
                 }
-        }
+            }
         }
 }
 

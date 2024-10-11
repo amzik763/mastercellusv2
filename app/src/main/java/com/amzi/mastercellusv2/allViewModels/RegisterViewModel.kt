@@ -27,7 +27,6 @@ class RegisterViewModel(authRepo: AuthRepo, homeAutoRepo: HomeAutoRepo) : ViewMo
 
     fun login(email: String, password: String) {
         showLogs("LOGIN: ", mobNum.value)
-
         viewModelScope.launch {
             authRepo.login(email, password)
         }
@@ -37,10 +36,8 @@ class RegisterViewModel(authRepo: AuthRepo, homeAutoRepo: HomeAutoRepo) : ViewMo
     fun register(username: String, fName: String, lName: String, email: String, mobile_number: String) {
         mobNum.value = mobile_number
         showLogs("ViewModel: register", mobNum.value)
-
         viewModelScope.launch {
             authRepo.register(username =  username, fName =  fName,lName= lName, email =  email, mobile_number = mobile_number)
-
             // Store username and mobile number for verification
             this@RegisterViewModel.username.value = username
             this@RegisterViewModel.mobNum.value = mobile_number
@@ -50,7 +47,6 @@ class RegisterViewModel(authRepo: AuthRepo, homeAutoRepo: HomeAutoRepo) : ViewMo
     fun verify(mobileNum: String, password: String, password_confirm: String, otp: String) {
         mobNum.value = mobileNum
         showLogs("LOGIN: ", mobNum.value)
-
         viewModelScope.launch {
             authRepo.verify(mobileNum, password, password_confirm, otp)
         }
@@ -58,11 +54,16 @@ class RegisterViewModel(authRepo: AuthRepo, homeAutoRepo: HomeAutoRepo) : ViewMo
 
     private val _deviceList = MutableStateFlow<List<DeviceListResponse>>(emptyList())
     val deviceList: StateFlow<List<DeviceListResponse>> = _deviceList
-
     //Update device List
     fun updateDeviceList(newDevices: List<DeviceListResponse>) {
         _deviceList.value = newDevices
+    }
 
+    fun registerUserDevice( mobile_number: String, device_mac: String){
+        viewModelScope.launch {
+            hmeAutoRepo.registerUserDevice(mobile_number, device_mac)
+            showLogs("ViewModel: ","registerUserDevice")
+        }
     }
 }
 
