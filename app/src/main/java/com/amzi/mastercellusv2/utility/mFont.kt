@@ -8,7 +8,6 @@ object mFont {
 
     val outfitBold2 = FontFamily(
         Font(R.font.outfitbold)
-
     )
 
     val outfitBoldMixed = FontFamily(
@@ -18,8 +17,5 @@ object mFont {
 
     val outfitRegular = FontFamily(
         Font(R.font.outfitregular)
-
     )
-
-
 }

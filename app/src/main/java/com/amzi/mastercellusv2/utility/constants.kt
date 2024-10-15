@@ -38,3 +38,5 @@ const val LOGIN = "Login Screen"
 val PREFERNCES_NAME = "com.amzi.mastercellusv2"
 val KEY_HOMEAUTO_MACID = "homeMacId"
 val KEY_MUSHROOM_MACID = "mushroomMacId"
+
+
