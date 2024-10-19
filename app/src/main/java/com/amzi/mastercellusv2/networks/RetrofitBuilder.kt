@@ -48,16 +48,14 @@ class MyCookieJar(private val context: Context) : CookieJar {
     }
 }
 
-
 object RetrofitBuilder {
-    private const val BASE_URL = "http://192.168.1.15:8000" // Replace with your actual base URL
+    private const val BASE_URL = "http://192.168.1.5:8000" // Replace with your actual base URL
 
     fun create(context: Context): Retrofit {
         // Logging interceptor for debugging
         val loggingInterceptor = HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
         }
-
         // Build the OkHttpClient with interceptors and authenticator
         val okHttpClient = OkHttpClient.Builder()
             .addInterceptor(loggingInterceptor)
@@ -65,7 +63,6 @@ object RetrofitBuilder {
             .authenticator(TokenAuthenticator(context)) // Handles token refresh
             .cookieJar(MyCookieJar(context)) // Optional: Manage cookies if needed
             .build()
-
         // Build and return the Retrofit instance
         return Retrofit.Builder()
             .baseUrl(BASE_URL)

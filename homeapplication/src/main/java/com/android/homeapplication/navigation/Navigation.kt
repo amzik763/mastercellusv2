@@ -25,7 +25,7 @@ import androidx.navigation.compose.rememberNavController
 import com.android.homeapplication.screen.HomeScreen
 import com.android.homeapplication.screen.LedBulbScreen
 import com.example.homeapplication.navigation.NavigationItem
-import com.example.homeapplication.screen.FanAcScreen
+import com.android.homeapplication.screen.FanAcScreen
 import com.android.homeapplication.viewModel.HomeAppViewModel
 
 @Composable
@@ -51,7 +51,7 @@ fun NavigationController (navController: NavHostController, context: Context){
             LedBulbScreen(context, viewModel)
         }
         composable(NavigationItem.FanAcScreen.route){
-            FanAcScreen(context, viewModel)
+            FanAcScreen(/*context, viewModel*/)
         }
 
     }

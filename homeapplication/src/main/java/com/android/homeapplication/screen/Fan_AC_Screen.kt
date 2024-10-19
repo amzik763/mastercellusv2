@@ -1,7 +1,6 @@
-package com.example.homeapplication.screen
+package com.android.homeapplication.screen
 
 import android.app.Activity
-import android.content.Context
 import android.content.pm.ActivityInfo
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -42,29 +41,31 @@ import com.android.homeapplication.viewModel.HomeAppViewModel
 
 
 @Composable
-fun FanAcScreen(context : Context,viewModel: HomeAppViewModel){
+fun FanAcScreen(
+//    viewModel: HomeAppViewModel
+){
 
-
-    // Lock the screen orientation to portrait mode
-    val activity = LocalContext.current as Activity
-    activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
-
-    LazyColumn(modifier = Modifier
-        .fillMaxWidth()
-        .fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.SpaceBetween
-
-        //.padding(20.dp)
-             ){
-        item {
-            FanAcText()
-            Spacer(modifier = Modifier.height(40.dp))
-            FanACRow(viewModel = viewModel)
-//            Spacer(modifier = Modifier.height(80.dp))
-//            FanStatus1(viewModel)
-        }
-    }
+//
+//    // Lock the screen orientation to portrait mode
+//    val activity = LocalContext.current as Activity
+//    activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+//
+//    LazyColumn(modifier = Modifier
+//        .fillMaxWidth()
+//        .fillMaxSize(),
+//        horizontalAlignment = Alignment.CenterHorizontally,
+//        verticalArrangement = Arrangement.SpaceBetween
+//
+//        //.padding(20.dp)
+//             ){
+//        item {
+//            FanAcText()
+//            Spacer(modifier = Modifier.height(40.dp))
+//            FanACRow(viewModel = viewModel)
+////            Spacer(modifier = Modifier.height(80.dp))
+////            FanStatus1(viewModel)
+//        }
+//    }
 }
 
 @Composable

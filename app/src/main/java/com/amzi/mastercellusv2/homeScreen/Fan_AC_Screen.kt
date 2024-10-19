@@ -1,4 +1,4 @@
-package com.example.homeapplication.screen
+package com.amzi.mastercellusv2.homeScreen
 
 import android.app.Activity
 import android.content.Context
@@ -42,7 +42,7 @@ import com.android.homeapplication.viewModel.HomeAppViewModel
 
 
 @Composable
-fun FanAcScreen(context : Context,viewModel: HomeAppViewModel){
+fun FanAcScreen(viewModel: HomeAppViewModel){
 
 
     // Lock the screen orientation to portrait mode

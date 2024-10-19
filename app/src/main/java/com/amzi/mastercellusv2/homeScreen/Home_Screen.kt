@@ -33,7 +33,7 @@ import com.example.homeapplication.ui.theme.lightOrange
 
 //@Preview
 @Composable
-fun HomeScreen(/*navController: NavHostController*/){
+fun HomeDashboard(/*navController: NavHostController*/){
   Column (
       Modifier
           .fillMaxSize()

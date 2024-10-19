@@ -1,7 +1,6 @@
-package com.android.homeapplication.screen
+package com.amzi.mastercellusv2.homeScreen
 
 import android.app.Activity
-import android.content.Context
 import android.content.pm.ActivityInfo
 import android.util.Log
 import androidx.compose.foundation.Image
@@ -46,7 +45,7 @@ import com.example.homeapplication.ui.theme.lightOrange
 
 
 @Composable
-fun LedBulbScreen(context :Context,viewModel: HomeAppViewModel){
+fun LedBulbScreen(viewModel: HomeAppViewModel){
 
     // Lock the screen orientation to portrait mode
     val activity = LocalContext.current as Activity
@@ -54,8 +53,6 @@ fun LedBulbScreen(context :Context,viewModel: HomeAppViewModel){
 Column {
 
     LedText()
-
-
     LazyColumn(
         modifier = Modifier
             .fillMaxWidth()

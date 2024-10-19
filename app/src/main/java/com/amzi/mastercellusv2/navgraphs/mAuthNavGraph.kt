@@ -14,12 +14,17 @@ import com.amzi.mastercellusv2.allScreens.authScreens.RegisterScreen
 import com.amzi.mastercellusv2.allScreens.authScreens.SplashScreen
 import com.amzi.mastercellusv2.allScreens.authScreens.Verification
 import com.amzi.mastercellusv2.utility.mGraph
+import com.android.homeapplication.screen.HomeDashboard
+import com.amzi.mastercellusv2.homeScreen.LedBulbScreen
+import com.android.homeapplication.viewModel.HomeAppViewModel
+import com.android.homeapplication.screen.FanAcScreen
 
 fun NavGraphBuilder.authNavGraph(
     navController: NavHostController,
     context: Context
 ){
 
+    val viewModel = HomeAppViewModel(context)
 
 //    val authAPI: AuthAPIs by lazy {
 //        RetrofitBuilder.instance.create(AuthAPIs::class.java)
@@ -61,6 +66,15 @@ fun NavGraphBuilder.authNavGraph(
 
         composable(route = Screens.DeviceRegister.route){
             DeviceRegistration()
+        }
+        composable(route = Screens.HomeAuto.route){
+            HomeDashboard()
+        }
+        composable(route = Screens.LedScreen.route){
+            LedBulbScreen( viewModel = viewModel )
+        }
+        composable(route = Screens.FanScreen.route){
+            FanAcScreen()
         }
     }
 }
