@@ -8,18 +8,17 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.material.Card
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -32,42 +31,52 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.amzi.mastercellusv2.R
-import com.amzi.mastercellusv2.components.CustomButton
+import com.amzi.mastercellusv2.allViewModels.RegisterViewModel
 import com.amzi.mastercellusv2.components.InputText
 import com.amzi.mastercellusv2.components.SmallButton
+import com.amzi.mastercellusv2.homeScreen.Properties
+import com.amzi.mastercellusv2.utility.myComponents
+import com.amzi.mastercellusv2.utility.myComponents.registerViewModel
 import com.amzi.mastercellusv2.utility.showLogs
 import com.example.homeapplication.ui.theme.Grey
 import com.example.homeapplication.ui.theme.pureWhite
 
 @OptIn(ExperimentalMaterialApi::class)
-@Preview
+//@Preview
 @Composable
-fun Add_DeviceDialog(){
+fun Add_DeviceDialog(
+    onDismiss: () -> Unit,
+    parentId: String? = null // Leave null if this is a top-level folder
+){
 
-//    Dialog(
-//        onDismissRequest = {},
-//        properties = DialogProperties(
-//            usePlatformDefaultWidth = false
-//        )
-//    ) {
+    var folderName by remember { mutableStateOf("") }
+
+    Dialog(
+        onDismissRequest = {
+            onDismiss()
+        },
+        properties = DialogProperties(
+            usePlatformDefaultWidth = false
+        )
+    ) {
         Card(
             onClick = {},
             modifier = Modifier
                 .padding(8.dp)
-                .border(width = 1.dp, color = Color.LightGray, shape = RoundedCornerShape(8.dp))
+                .border(width = 1.dp, color = pureWhite)
         )
         {
             Column(modifier = Modifier
+                .background(pureWhite)
                 .padding(start = 16.dp, top = 16.dp, end = 16.dp, bottom = 16.dp)
                 .fillMaxWidth()
                 .height(170.dp)
-                /*.background(pureWhite)*/)  {
+                )  {
                 Text(text = "Enter place name",
                     style = TextStyle(
                         fontSize = 16.sp,
@@ -77,12 +86,12 @@ fun Add_DeviceDialog(){
                 )
 
                 Spacer(modifier = Modifier.height(8.dp))
-                var home by remember { mutableStateOf("")}
+//                var home by remember { mutableStateOf("")}
 
                 InputText(
-                    text = home,
+                    text = folderName,
                     label = "Home",
-                    onTextChange = {home = it},
+                    onTextChange = {folderName = it},
                     color = Color.Black,
                     iconResId = R.drawable.home_home,
                     maxLength = 30,
@@ -113,7 +122,6 @@ fun Add_DeviceDialog(){
                         contentDescription = "Place2",
                         modifier = Modifier.size(36.dp)
                     )
-
                 }
 
                 Spacer(modifier = Modifier.height(8.dp))
@@ -122,10 +130,32 @@ fun Add_DeviceDialog(){
                     horizontalAlignment = Alignment.End)
                 {
                     SmallButton(onClick = {
-                    }, text = "Add")
+                            myComponents.registerViewModel.createFolder(folderName, parentId, myComponents.registerViewModel.user.value)
 
+                        showLogs("KITCHEN", "Kitchen Folder Created")
+                    }, text = "Add")
                 }
             }
         }
-//    }
+    }
+}
+
+@Composable
+fun PropertiesScreen() {
+
+    val isFolderCreatedSuccessfully by registerViewModel.isFolderCreatedSuccessfully.collectAsState()
+
+    Properties()
+
+    if (registerViewModel.isEnterPlaceDialogShown) {
+        Add_DeviceDialog(
+            onDismiss = { registerViewModel.hideEnterPlaceDialog() }
+        )
+    }
+
+    LaunchedEffect(isFolderCreatedSuccessfully) {
+        if (isFolderCreatedSuccessfully) {
+            registerViewModel.hideEnterPlaceDialog() // Hide dialog on success
+        }
+    }
 }

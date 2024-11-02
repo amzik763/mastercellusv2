@@ -26,8 +26,7 @@ class UiViewmodel(context: Context) : ViewModel() {
         showMushMacId = !showMushMacId
     }
 
-
-  //SHARED PREFERENCES
+    //SHARED PREFERENCES
 
     private val sharedPreferences: SharedPreferences
         get() = mContext.getSharedPreferences(PREFERNCES_NAME, Context.MODE_PRIVATE)

@@ -14,8 +14,10 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.navigation.compose.rememberNavController
+import com.amzi.mastercellusv2.allViewModels.HomeAppViewModel
 import com.amzi.mastercellusv2.allViewModels.RegisterViewModel
 import com.amzi.mastercellusv2.allViewModels.factories.RegisterViewModelFactory
+import com.amzi.mastercellusv2.dialog.Add_DeviceDialog
 import com.amzi.mastercellusv2.navgraphs.setUpNavGraph
 import com.amzi.mastercellusv2.networks.AuthAPIs
 import com.amzi.mastercellusv2.networks.HomeAutoApi
@@ -24,8 +26,10 @@ import com.amzi.mastercellusv2.repository.AuthRepo
 import com.amzi.mastercellusv2.repository.HomeAutoRepo
 import com.amzi.mastercellusv2.ui.theme.Mastercellusv2Theme
 import com.amzi.mastercellusv2.utility.NetworkMonitor
+import com.amzi.mastercellusv2.utility.myComponents
 import com.amzi.mastercellusv2.utility.myComponents.authAPI
 import com.amzi.mastercellusv2.utility.myComponents.authRepo
+import com.amzi.mastercellusv2.utility.myComponents.homeAppViewModel
 import com.amzi.mastercellusv2.utility.myComponents.homeAutoApi
 import com.amzi.mastercellusv2.utility.myComponents.homeAutoRepo
 import com.amzi.mastercellusv2.utility.myComponents.navController
@@ -72,6 +76,8 @@ class MainActivity : ComponentActivity() {
                 showLogs("MAIN: ","Initialized")
                 DisplayContent()
 
+                EnterPlaceDialog()
+
                 val networkMonitor = NetworkMonitor(applicationContext)
                 showLogs("temp",networkMonitor.checkNowForInternet().toString())
                 networkMonitor.registerNetworkCallback(networkCallback)
@@ -80,6 +86,8 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+
+
 
 /*@RequiresApi(Build.VERSION_CODES.Q)
 @Composable
@@ -269,4 +277,14 @@ fun DisplayContent(){
         )
 //        Navigation(LocalContext.current)
     }
+}
+
+
+@Composable
+fun EnterPlaceDialog(){
+ if (registerViewModel.isEnterPlaceDialogShown) {
+     Add_DeviceDialog(
+         onDismiss = { registerViewModel.hideEnterPlaceDialog() }
+     )
+ }
 }

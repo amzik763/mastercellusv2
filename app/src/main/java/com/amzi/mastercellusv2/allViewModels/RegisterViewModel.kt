@@ -1,6 +1,9 @@
 package com.amzi.mastercellusv2.allViewModels
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.amzi.mastercellusv2.allScreens.authScreens.DeviceListResponse
@@ -17,6 +20,13 @@ class RegisterViewModel(authRepo: AuthRepo, homeAutoRepo: HomeAutoRepo) : ViewMo
     // Use mutableStateOf to track UI-related state changes
     var username = mutableStateOf("")
     var mobNum = mutableStateOf("")
+    var user = mutableStateOf("")
+    var folderName = mutableStateOf("")
+
+
+    // Folder names list
+//    val folders = mutableStateListOf<String>()
+
 
     init {
         showLogs("ViewModel:", "Created")
@@ -65,5 +75,44 @@ class RegisterViewModel(authRepo: AuthRepo, homeAutoRepo: HomeAutoRepo) : ViewMo
             showLogs("ViewModel: ","registerUserDevice")
         }
     }
+
+/*    fun createFolder(name: String, parent_id: String? = null, user: String) {
+        viewModelScope.launch {
+            hmeAutoRepo.createFolder(name, parent_id, user)
+            this@RegisterViewModel.folderName.value = name
+        }
+    }*/
+
+    private val _folders = MutableStateFlow<List<String>>(emptyList())
+    val folders: StateFlow<List<String>> = _folders
+
+
+    private val _isFolderCreatedSuccessfully = MutableStateFlow(false)
+    val isFolderCreatedSuccessfully: StateFlow<Boolean> = _isFolderCreatedSuccessfully
+
+    fun createFolder(name: String, parent_id: String? = null, user: String) {
+        viewModelScope.launch {
+            val isFolderCreated = hmeAutoRepo.createFolder(name, parent_id, user)
+            if (isFolderCreated) {
+                _isFolderCreatedSuccessfully.value = true
+                _folders.value += name
+            } else {
+                showLogs("ViewModel", "Folder creation failed")
+            }
+        }
+    }
+
+    var isEnterPlaceDialogShown by mutableStateOf(false)
+        private set
+
+    fun showEnterPlaceDialog() {
+        isEnterPlaceDialogShown = true
+    }
+
+    fun hideEnterPlaceDialog(){
+        isEnterPlaceDialogShown = false
+        _isFolderCreatedSuccessfully.value = false // Reset on hide
+    }
+
 }
 

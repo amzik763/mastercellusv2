@@ -1,6 +1,7 @@
 package com.amzi.mastercellusv2.utility
 
 import androidx.navigation.NavHostController
+import com.amzi.mastercellusv2.allViewModels.HomeAppViewModel
 import com.amzi.mastercellusv2.allViewModels.RegisterViewModel
 import com.amzi.mastercellusv2.allViewModels.factories.RegisterViewModelFactory
 import com.amzi.mastercellusv2.networks.AuthAPIs
@@ -24,6 +25,7 @@ object myComponents {
 //    lateinit var mUiViewModel: UiViewmodel
     lateinit var registerViewModelFactory: RegisterViewModelFactory
     lateinit var registerViewModel: RegisterViewModel
+    lateinit var homeAppViewModel: HomeAppViewModel
 //  lateinit var networkMonitor: NetworkMonitor
     lateinit var navController:NavHostController
 }

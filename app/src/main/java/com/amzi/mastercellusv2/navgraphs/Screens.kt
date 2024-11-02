@@ -28,6 +28,7 @@ sealed class Screens(val route:String) {
     object DeviceList : Screens("devicelist")
     object DeviceRegister : Screens("deviceRegister")
     object Login: Screens("login")
+    object PropertiesScreen: Screens("propertiesscreen")
     object HomeAuto: Screens("HomeAuto")
     object LedScreen: Screens("LedScreen")
     object FanScreen: Screens("FanScreen")

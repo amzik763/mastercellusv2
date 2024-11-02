@@ -1,4 +1,4 @@
-package com.android.homeapplication.screen
+package com.amzi.mastercellusv2.homeScreen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

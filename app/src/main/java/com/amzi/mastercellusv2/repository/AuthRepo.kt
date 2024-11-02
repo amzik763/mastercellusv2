@@ -122,11 +122,14 @@ class AuthRepo(authAPIs: AuthAPIs,private val context: Context) {
                             DeviceListResponse(it.device_name, it.device_mac)
                         }
 
+                        myComponents.registerViewModel.user.value = loginRes.user_id.toString()
+                        showLogs("USER_ID", myComponents.registerViewModel.user.value)
+
                         // Switch to Main thread to handle UI-related actions like navigation
                         withContext(Dispatchers.Main) {
 
                             myComponents.registerViewModel.updateDeviceList(deviceList)
-                            mNavigator.navigateTo(Screens.DeviceList.route)
+                            mNavigator.navigateTo(Screens.PropertiesScreen.route)
                         }
 
                         Result.success("Login Successful")
