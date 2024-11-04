@@ -62,48 +62,6 @@ class AuthRepo(authAPIs: AuthAPIs,private val context: Context) {
         }
     }
 
-
-/*    suspend fun login(email: String, password: String): Result<String> {
-        return withContext(Dispatchers.IO) {
-            try {
-                val loginResponse = authAPI.login(email, password)
-
-                if (loginResponse.isSuccessful) {
-
-                    loginResponse.body()?.let { loginRes ->
-                        // Save tokens securely
-                        TokenStorage.saveToken(context, loginRes.access, loginRes.refresh)
-                        Log.d("AuthRepo", "Login Successful")
-                        Log.d("AuthRepo", loginResponse.body().toString())
-                        Result.success("Login Successful")
-                    } ?: run {
-                        Log.e("AuthRepo", "Login failed: Empty response body")
-                        // Switch to Main thread to handle UI-related actions like navigation
-
-
-                        val deviceList = loginResponse.body()?.devices?.map{
-                            DeviceListResponse(it.device_name, it.device_mac)
-                        }
-
-                        withContext(Dispatchers.Main) {
-                            // Navigate to the DeviceList screen on the main thread
-                            mNavigator.navigateTo(Screens.DeviceList.route)
-                        }
-                        Result.failure(Exception("Empty response body"))
-                    }
-
-                } else {
-                    val errorMsg = loginResponse.errorBody()?.string() ?: "Login Failed"
-                    Log.e("AuthRepo", "Login Unsuccessful: $errorMsg")
-                    Result.failure(Exception(errorMsg))
-                }
-            } catch (e: Exception) {
-                Log.e("AuthRepo", "Error during login: ${e.message}")
-                Result.failure(e)
-            }
-        }
-    }*/
-
     suspend fun login(email: String, password: String): Result<String> {
         return withContext(Dispatchers.IO) {
             try {
@@ -117,13 +75,18 @@ class AuthRepo(authAPIs: AuthAPIs,private val context: Context) {
                         Log.d("AuthRepo", "Login Successful")
                         Log.d("AuthRepo", loginResponse.body().toString())
 
+                        // Update the folders in the ViewModel
+                        myComponents.registerViewModel.updateFolders(
+                            loginRes.root_folders.map { it.name }
+                        )
+
                         // Extract the device list
                         val deviceList = loginRes.devices.map {
                             DeviceListResponse(it.device_name, it.device_mac)
                         }
 
-                        myComponents.registerViewModel.user.value = loginRes.user_id.toString()
-                        showLogs("USER_ID", myComponents.registerViewModel.user.value)
+                        myComponents.registerViewModel.user_id.value = loginRes.user_id.toString()
+                        showLogs("USER_ID", myComponents.registerViewModel.user_id.value)
 
                         // Switch to Main thread to handle UI-related actions like navigation
                         withContext(Dispatchers.Main) {

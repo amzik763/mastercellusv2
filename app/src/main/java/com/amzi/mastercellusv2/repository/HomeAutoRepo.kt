@@ -2,8 +2,10 @@ package com.amzi.mastercellusv2.repository
 
 import android.content.Context
 import android.util.Log
+import com.amzi.mastercellusv2.models.GetFolderRes
 import com.amzi.mastercellusv2.networks.HomeAutoApi
 import com.amzi.mastercellusv2.utility.TokenStorage
+import com.amzi.mastercellusv2.utility.myComponents
 import com.amzi.mastercellusv2.utility.showLogs
 
 class HomeAutoRepo(val homeAutoApi: HomeAutoApi, private val context: Context) {
@@ -51,83 +53,6 @@ class HomeAutoRepo(val homeAutoApi: HomeAutoApi, private val context: Context) {
         }
     }
 
-/*    suspend fun createFolder( name: String, parent_id: String, user_id: String){
-        try {
-
-            // Retrieve the access token
-            val accessToken = TokenStorage.getToken(context = context)
-
-            // Log the raw access token for debugging
-            showLogs("Home Repo:", "Raw Access Token: ${accessToken?.first ?: "No Token Found"}")
-
-            // Ensure the access token is not null, remove all whitespace, and trim
-            val token = accessToken?.first?.replace("\\s".toRegex(), "")?.trim()
-
-            if (token.isNullOrBlank()) {
-                showLogs("Home Repo Error:", "Access token is missing or empty.")
-                return
-            }
-
-            // Append "Bearer " before the token with only one space
-            val authorizationHeader = "Bearer $token"
-
-            // Log the complete Authorization header
-            showLogs("Home Repo:", "Authorization Header: '$authorizationHeader'")
-
-            // Make the API call with the Authorization header
-            val createFolder = homeAutoApi.createFolder(authorizationHeader, name, parent_id, user_id)
-            if(createFolder.isSuccessful){
-
-                showLogs("Home Repo:","Folder Create Successfully")
-
-            }else{
-                showLogs("Home Repo:","Folder not Created----Unsuccessful")
-            }
-
-        }catch (e: Exception){
-            showLogs("Home Error",e.toString())
-
-        }
-    }*/
-
-
-/*    suspend fun createFolder(name: String, parent_id: String?, user: String) {
-
-        if (name.isBlank() || user.isBlank()) {
-            Log.d("Home Repo", "Name or User ID cannot be empty.")
-            return
-        }
-        Log.d("Home Repo", "Name: $name, Parent ID: $parent_id, User ID: $user")
-
-        try {
-            // Retrieve the access token
-            val accessToken = TokenStorage.getToken(context)
-            val token = accessToken?.first?.replace("\\s".toRegex(), "")?.trim()
-
-            if (token.isNullOrBlank()) {
-                showLogs("Home Repo Error:", "Access token is missing or empty.")
-                return
-            }
-            val authorizationHeader = "Bearer $token"
-
-            // Call the API with authorization header
-            val response = homeAutoApi.createFolder(
-                authorizationHeader = authorizationHeader,
-                name = name,
-                parent_id = parent_id ?: "", // Pass empty string if parent_id is null
-                user = user
-            )
-
-            if (response.isSuccessful) {
-                showLogs("Home Repo:", "Folder Created Successfully")
-            } else {
-                showLogs("Home Repo:", "Folder creation failed.")
-            }
-        } catch (e: Exception) {
-            showLogs("Home Error", e.toString())
-        }
-    }*/
-
     suspend fun createFolder(name: String, parent_id: String?, user: String): Boolean {
 
         if (name.isBlank() || user.isBlank()) {
@@ -158,6 +83,7 @@ class HomeAutoRepo(val homeAutoApi: HomeAutoApi, private val context: Context) {
 
             if (response.isSuccessful) {
                 showLogs("Home Repo:", "Folder Created Successfully")
+
                 true // Return true if the response is successful
             } else {
                 showLogs("Home Repo:", "Folder creation failed.")
@@ -169,6 +95,37 @@ class HomeAutoRepo(val homeAutoApi: HomeAutoApi, private val context: Context) {
         }
     }
 
+    suspend fun getFolderAndFile(user_id: String, parent_id: String): GetFolderRes? {
+        return try {
+            // Retrieve and clean up the access token
+            val token = TokenStorage.getToken(context = context)
+                ?.first
+                ?.replace("\\s".toRegex(), "")
+                ?.trim()
+                ?: run {
+                    showLogs("Home Repo Error:", "Access token is missing or empty.")
+                    return null
+                }
+
+            // Prepare the authorization header
+            val authorizationHeader = "Bearer $token"
+            showLogs("Home Repo:", "Authorization Header: '$authorizationHeader'")
+
+            // Make the API call
+            val response = homeAutoApi.getFolderAndFile(authorizationHeader, user_id, parent_id)
+
+            if (response.isSuccessful) {
+                showLogs("Home Repo:", "Get Folder and files Successful")
+                response.body()  // Returns FolderResponse if successful
+            } else {
+                showLogs("Home Repo:", "Get Folder and files Unsuccessful: ${response.message()}")
+                null
+            }
+        } catch (e: Exception) {
+            showLogs("Home Error", e.toString())
+            null
+        }
+    }
 }
 
 

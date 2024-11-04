@@ -1,9 +1,8 @@
-package com.amzi.mastercellusv2.homeScreen
+package com.amzi.mastercellusv2.homeScreen.data
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -21,7 +20,6 @@ import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -33,8 +31,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.amzi.mastercellusv2.components.ImageButton
-import com.amzi.mastercellusv2.models.Folder
-import com.amzi.mastercellusv2.utility.myComponents
 import com.amzi.mastercellusv2.utility.myComponents.registerViewModel
 import com.android.homeapplication.R
 import com.android.homeapplication.utility.mFont
@@ -45,14 +41,9 @@ import com.example.homeapplication.ui.theme.pureBlack
 
 //@Preview
 @Composable
-fun Properties(){
+fun FoldersScreen(){
 
     val folders by registerViewModel.folders.collectAsState()
-
-    // When the screen is displayed, fetch folders
-    LaunchedEffect(Unit) {
-        registerViewModel.getFolderAndFile(registerViewModel.user_id.value, registerViewModel.parent_id.value)
-    }
 
     Row (modifier = Modifier
         .fillMaxSize()
@@ -82,7 +73,7 @@ fun Properties(){
 
             Spacer(modifier = Modifier.height(32.dp))
             Text(
-                text = "Properties",
+                text = "Home",
                 style = TextStyle(
                     fontSize = 20.sp,
                     fontWeight = FontWeight.ExtraBold,
@@ -92,7 +83,7 @@ fun Properties(){
             )
             Spacer(modifier = Modifier.height(4.dp))
             Text(
-                text = "Set-up your home, plant here to automate. Click add button",
+                text = "Add room, kitchen or anything according to your needs",
                 style = TextStyle(
                     fontSize = 12.sp,
                     fontWeight = FontWeight.Medium,
@@ -103,23 +94,19 @@ fun Properties(){
             )
             Spacer(modifier = Modifier.height(36.dp))
 
-            FolderRow(folders = folders){ folder ->
-                registerViewModel.getFolderAndFile(registerViewModel.user_id.value, registerViewModel.parent_id.value)
-            }
-
+            FolderRow(folders = folders)
         }
     }
 }
 
 //@Preview
 @Composable
-fun CreateFolder(folderName: String,onClick: (String) -> Unit) {
+fun CreateFolder(folderName: String) {
         Card (modifier = Modifier
             .width(150.dp)
             .height(120.dp)
             .background(color = paleWhite, shape = RoundedCornerShape(36.dp))
             .border(width = 2.dp, color = paleWhite)
-            .clickable { onClick(folderName) } // Add click event here
         )
         {
             Column(modifier = Modifier
@@ -144,8 +131,7 @@ fun CreateFolder(folderName: String,onClick: (String) -> Unit) {
 
 
 @Composable
-fun FolderRow(folders: List<String>,
-              onFolderClick: (String) -> Unit) { // Replace FolderType with your actual folder data type
+fun FolderRow(folders: List<String>) {
     LazyColumn {
         items(folders.chunked(2)) { folderPair ->
             Row(
@@ -153,11 +139,11 @@ fun FolderRow(folders: List<String>,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 // Create the first folder
-                CreateFolder(folderPair[0], onClick = onFolderClick)
+                CreateFolder(folderPair[0])
 
                 // Create the second folder if it exists
                 if (folderPair.size > 1) {
-                    CreateFolder(folderPair[1], onClick = onFolderClick)
+                    CreateFolder(folderPair[1])
                 }
             }
             Spacer(modifier = Modifier.height(12.dp)) // Spacer between rows

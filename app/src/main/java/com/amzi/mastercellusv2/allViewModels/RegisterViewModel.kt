@@ -1,12 +1,12 @@
 package com.amzi.mastercellusv2.allViewModels
 
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.amzi.mastercellusv2.allScreens.authScreens.DeviceListResponse
+import com.amzi.mastercellusv2.models.Folder
 import com.amzi.mastercellusv2.repository.AuthRepo
 import com.amzi.mastercellusv2.repository.HomeAutoRepo
 import com.amzi.mastercellusv2.utility.showLogs
@@ -15,14 +15,12 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class RegisterViewModel(authRepo: AuthRepo, homeAutoRepo: HomeAutoRepo) : ViewModel() {
-
-
     // Use mutableStateOf to track UI-related state changes
     var username = mutableStateOf("")
     var mobNum = mutableStateOf("")
-    var user = mutableStateOf("")
+    var user_id = mutableStateOf("")
     var folderName = mutableStateOf("")
-
+    var parent_id = mutableStateOf("")
 
     // Folder names list
 //    val folders = mutableStateListOf<String>()
@@ -64,6 +62,7 @@ class RegisterViewModel(authRepo: AuthRepo, homeAutoRepo: HomeAutoRepo) : ViewMo
 
     private val _deviceList = MutableStateFlow<List<DeviceListResponse>>(emptyList())
     val deviceList: StateFlow<List<DeviceListResponse>> = _deviceList
+
     //Update device List
     fun updateDeviceList(newDevices: List<DeviceListResponse>) {
         _deviceList.value = newDevices
@@ -86,6 +85,9 @@ class RegisterViewModel(authRepo: AuthRepo, homeAutoRepo: HomeAutoRepo) : ViewMo
     private val _folders = MutableStateFlow<List<String>>(emptyList())
     val folders: StateFlow<List<String>> = _folders
 
+    fun updateFolders(newFolders: List<String>) {
+        _folders.value = newFolders
+    }
 
     private val _isFolderCreatedSuccessfully = MutableStateFlow(false)
     val isFolderCreatedSuccessfully: StateFlow<Boolean> = _isFolderCreatedSuccessfully
@@ -99,6 +101,20 @@ class RegisterViewModel(authRepo: AuthRepo, homeAutoRepo: HomeAutoRepo) : ViewMo
             } else {
                 showLogs("ViewModel", "Folder creation failed")
             }
+        }
+    }
+
+
+    private val _getFolders = MutableStateFlow<List<Folder>>(emptyList())
+    val getFolders: StateFlow<List<Folder>> = _getFolders
+
+
+    fun getFolderAndFile( user_id: String, parent_id: String) {
+        viewModelScope.launch {
+            val foldersResponse = hmeAutoRepo.getFolderAndFile( user_id, parent_id)
+            foldersResponse?.let {
+                _getFolders.value = it.folders
+            } ?: showLogs("ViewModel", "Failed to fetch folders")
         }
     }
 

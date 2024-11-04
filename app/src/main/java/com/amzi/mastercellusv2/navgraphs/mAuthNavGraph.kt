@@ -17,7 +17,7 @@ import com.amzi.mastercellusv2.dialog.PropertiesScreen
 import com.amzi.mastercellusv2.utility.mGraph
 import com.amzi.mastercellusv2.homeScreen.HomeDashboard
 import com.amzi.mastercellusv2.homeScreen.LedBulbScreen
-import com.amzi.mastercellusv2.homeScreen.Properties
+import com.amzi.mastercellusv2.homeScreen.data.FoldersScreen
 import com.android.homeapplication.viewModel.HomeAppViewModel
 import com.android.homeapplication.screen.FanAcScreen
 
@@ -64,6 +64,10 @@ fun NavGraphBuilder.authNavGraph(
 
         composable(route = Screens.PropertiesScreen.route){
             PropertiesScreen()
+        }
+
+        composable(route = Screens.Folders.route){
+            FoldersScreen()
         }
 
         composable(route = Screens.DeviceList.route){

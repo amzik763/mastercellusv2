@@ -36,7 +36,6 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.amzi.mastercellusv2.R
-import com.amzi.mastercellusv2.allViewModels.RegisterViewModel
 import com.amzi.mastercellusv2.components.InputText
 import com.amzi.mastercellusv2.components.SmallButton
 import com.amzi.mastercellusv2.homeScreen.Properties
@@ -130,7 +129,7 @@ fun Add_DeviceDialog(
                     horizontalAlignment = Alignment.End)
                 {
                     SmallButton(onClick = {
-                            myComponents.registerViewModel.createFolder(folderName, parentId, myComponents.registerViewModel.user.value)
+                            myComponents.registerViewModel.createFolder(folderName, parentId, myComponents.registerViewModel.user_id.value)
 
                         showLogs("KITCHEN", "Kitchen Folder Created")
                     }, text = "Add")
