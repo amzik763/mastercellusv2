@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
@@ -48,6 +49,7 @@ import com.example.homeapplication.ui.theme.pureBlack
 fun Properties(){
 
     val folders by registerViewModel.folders.collectAsState()
+//    val folders2 by registerViewModel.root_folders.collectAsState()
 
     // When the screen is displayed, fetch folders
     LaunchedEffect(Unit) {
@@ -103,8 +105,42 @@ fun Properties(){
             )
             Spacer(modifier = Modifier.height(36.dp))
 
-            FolderRow(folders = folders){ folder ->
+            /*FolderRow(folders = folders){ folder ->
                 registerViewModel.getFolderAndFile(registerViewModel.user_id.value, registerViewModel.parent_id.value)
+//                registerViewModel.getFolderAndFile(registerViewModel.user_id.value, registerViewModel.parent_id.value)
+            }*/
+
+            LazyColumn {
+                itemsIndexed(registerViewModel.root_folders.chunked(2)) { chunkIndex, folderPair ->
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        // Calculate absolute indices
+                        val firstIndex = chunkIndex * 2
+                        val secondIndex = firstIndex + 1
+
+                        // Access the original list registerViewModel.root_folders using calculated indices
+                        if (firstIndex < registerViewModel.root_folders.size) {
+                            CreateFolder(registerViewModel.root_folders[firstIndex].name, onClick = {
+                                registerViewModel.getFolderAndFile(
+                                    registerViewModel.user_id.value,
+                                    registerViewModel.root_folders[firstIndex].id.toString()
+                                )
+                            })
+                        }
+
+                        if (secondIndex < registerViewModel.root_folders.size) {
+                            CreateFolder(registerViewModel.root_folders[secondIndex].name, onClick = {
+                                registerViewModel.getFolderAndFile(
+                                    registerViewModel.user_id.value,
+                                    registerViewModel.root_folders[secondIndex].id.toString()
+                                )
+                            })
+                        }
+                    }
+                    Spacer(modifier = Modifier.height(12.dp)) // Spacer between rows
+                }
             }
 
         }

@@ -1,14 +1,17 @@
 package com.amzi.mastercellusv2.allViewModels
 
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.amzi.mastercellusv2.allScreens.authScreens.DeviceListResponse
 import com.amzi.mastercellusv2.models.Folder
+import com.amzi.mastercellusv2.models.RootFolder
 import com.amzi.mastercellusv2.repository.AuthRepo
 import com.amzi.mastercellusv2.repository.HomeAutoRepo
+import com.amzi.mastercellusv2.utility.myComponents.authRepo
 import com.amzi.mastercellusv2.utility.showLogs
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -21,7 +24,8 @@ class RegisterViewModel(authRepo: AuthRepo, homeAutoRepo: HomeAutoRepo) : ViewMo
     var user_id = mutableStateOf("")
     var folderName = mutableStateOf("")
     var parent_id = mutableStateOf("")
-
+    var folder_id = mutableStateOf("")
+    var root_folders = mutableStateListOf<RootFolder>()
     // Folder names list
 //    val folders = mutableStateListOf<String>()
 

@@ -2,13 +2,16 @@ package com.amzi.mastercellusv2.repository
 
 import android.content.Context
 import android.util.Log
+import androidx.compose.runtime.mutableStateListOf
 import com.amzi.mastercellusv2.allScreens.authScreens.DeviceListResponse
+import com.amzi.mastercellusv2.models.RootFolder
 import com.amzi.mastercellusv2.navgraphs.Screens
 import com.amzi.mastercellusv2.navgraphs.mNavigator
 import com.amzi.mastercellusv2.networks.AuthAPIs
 import com.amzi.mastercellusv2.utility.TokenStorage
 import com.amzi.mastercellusv2.utility.myComponents
 import com.amzi.mastercellusv2.utility.myComponents.navController
+import com.amzi.mastercellusv2.utility.myComponents.registerViewModel
 import com.amzi.mastercellusv2.utility.showLogs
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -30,6 +33,7 @@ class AuthRepo(authAPIs: AuthAPIs,private val context: Context) {
                 showLogs("auth","Registration Successful")
 
                 Log.d("Register", "registerUser: Successful")
+
 
 //                navController.navigate(Screens.Verification.route)
                 navController.navigate(Screens.Verification.route + "?username=$username&mobile_number=$mobile_number")
@@ -75,6 +79,7 @@ class AuthRepo(authAPIs: AuthAPIs,private val context: Context) {
                         Log.d("AuthRepo", "Login Successful")
                         Log.d("AuthRepo", loginResponse.body().toString())
 
+
                         // Update the folders in the ViewModel
                         myComponents.registerViewModel.updateFolders(
                             loginRes.root_folders.map { it.name }
@@ -84,6 +89,9 @@ class AuthRepo(authAPIs: AuthAPIs,private val context: Context) {
                         val deviceList = loginRes.devices.map {
                             DeviceListResponse(it.device_name, it.device_mac)
                         }
+
+                        myComponents.registerViewModel.root_folders.clear() // Clear existing items
+                        loginResponse.body()?.root_folders?.let { myComponents.registerViewModel.root_folders.addAll(it) }
 
                         myComponents.registerViewModel.user_id.value = loginRes.user_id.toString()
                         showLogs("USER_ID", myComponents.registerViewModel.user_id.value)
