@@ -7,17 +7,24 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.amzi.mastercellusv2.allScreens.authScreens.DeviceListResponse
+import com.amzi.mastercellusv2.models.CreateFolderRes
 import com.amzi.mastercellusv2.models.Folder
 import com.amzi.mastercellusv2.models.RootFolder
+import com.amzi.mastercellusv2.navgraphs.Screens
 import com.amzi.mastercellusv2.repository.AuthRepo
 import com.amzi.mastercellusv2.repository.HomeAutoRepo
 import com.amzi.mastercellusv2.utility.myComponents.authRepo
+import com.amzi.mastercellusv2.utility.myComponents.navController
+import com.amzi.mastercellusv2.utility.myComponents.registerViewModel
 import com.amzi.mastercellusv2.utility.showLogs
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class RegisterViewModel(authRepo: AuthRepo, homeAutoRepo: HomeAutoRepo) : ViewModel() {
+    var mPassword = mutableStateOf("")
+    var mUsername = mutableStateOf("")
+
     // Use mutableStateOf to track UI-related state changes
     var username = mutableStateOf("")
     var mobNum = mutableStateOf("")
@@ -26,24 +33,21 @@ class RegisterViewModel(authRepo: AuthRepo, homeAutoRepo: HomeAutoRepo) : ViewMo
     var parent_id = mutableStateOf("")
     var folder_id = mutableStateOf("")
     var root_folders = mutableStateListOf<RootFolder>()
+
+    var mCreateFolderRes = mutableStateOf<CreateFolderRes?>(null)
     // Folder names list
 //    val folders = mutableStateListOf<String>()
-
-
     init {
         showLogs("ViewModel:", "Created")
     }
-
     var authRepo: AuthRepo = authRepo
     var hmeAutoRepo: HomeAutoRepo = homeAutoRepo
-
     fun login(email: String, password: String) {
         showLogs("LOGIN: ", mobNum.value)
         viewModelScope.launch {
             authRepo.login(email, password)
         }
     }
-
 
     fun register(username: String, fName: String, lName: String, email: String, mobile_number: String) {
         mobNum.value = mobile_number
@@ -66,7 +70,6 @@ class RegisterViewModel(authRepo: AuthRepo, homeAutoRepo: HomeAutoRepo) : ViewMo
 
     private val _deviceList = MutableStateFlow<List<DeviceListResponse>>(emptyList())
     val deviceList: StateFlow<List<DeviceListResponse>> = _deviceList
-
     //Update device List
     fun updateDeviceList(newDevices: List<DeviceListResponse>) {
         _deviceList.value = newDevices
@@ -102,6 +105,7 @@ class RegisterViewModel(authRepo: AuthRepo, homeAutoRepo: HomeAutoRepo) : ViewMo
             if (isFolderCreated) {
                 _isFolderCreatedSuccessfully.value = true
                 _folders.value += name
+                root_folders.add(RootFolder(mCreateFolderRes.value?.created_at?:"",mCreateFolderRes.value?.id?:0,mCreateFolderRes.value?.name?:"",mCreateFolderRes.value?.parent_id?:"",mCreateFolderRes.value?.user?:0))
             } else {
                 showLogs("ViewModel", "Folder creation failed")
             }
@@ -120,6 +124,8 @@ class RegisterViewModel(authRepo: AuthRepo, homeAutoRepo: HomeAutoRepo) : ViewMo
                 _getFolders.value = it.folders
             } ?: showLogs("ViewModel", "Failed to fetch folders")
         }
+        showLogs("NAV SUB","clicked and navigating")
+        navController.navigate(Screens.SubFolderScreen.route)
     }
 
     var isEnterPlaceDialogShown by mutableStateOf(false)

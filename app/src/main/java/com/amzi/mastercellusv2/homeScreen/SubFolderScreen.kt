@@ -37,6 +37,7 @@ import com.amzi.mastercellusv2.components.ImageButton
 import com.amzi.mastercellusv2.models.Folder
 import com.amzi.mastercellusv2.utility.myComponents
 import com.amzi.mastercellusv2.utility.myComponents.registerViewModel
+import com.amzi.mastercellusv2.utility.showLogs
 import com.android.homeapplication.R
 import com.android.homeapplication.utility.mFont
 import com.example.demo.ui.theme.pureWhite
@@ -46,13 +47,13 @@ import com.example.homeapplication.ui.theme.pureBlack
 
 //@Preview
 @Composable
-fun Properties(){
-
+fun SubFolderScreen(){
+    showLogs("NAV SUB","clicked and navigating 2")
     val folders by registerViewModel.folders.collectAsState()
 //  val folders2 by registerViewModel.root_folders.collectAsState()
 
     // When the screen is displayed, fetch folders
-    /*LaunchedEffect(Unit) {
+   /* LaunchedEffect(Unit) {
         registerViewModel.getFolderAndFile(registerViewModel.user_id.value, registerViewModel.parent_id.value)
     }*/
 
@@ -85,7 +86,7 @@ fun Properties(){
             Spacer(modifier = Modifier.height(32.dp))
 
             Text(
-                text = "Properties",
+                text = "Devices",
                 style = TextStyle(
                     fontSize = 20.sp,
                     fontWeight = FontWeight.ExtraBold,
@@ -95,7 +96,7 @@ fun Properties(){
             )
             Spacer(modifier = Modifier.height(4.dp))
             Text(
-                text = "Set-up your home, plant here to automate. Click add button",
+                text = "Set-up your devices and sub folders here. Click add button",
                 style = TextStyle(
                     fontSize = 12.sp,
                     fontWeight = FontWeight.Medium,
@@ -123,18 +124,100 @@ fun Properties(){
                         // Access the original list registerViewModel.root_folders using calculated indices
                         if (firstIndex < registerViewModel.root_folders.size) {
                             CreateFolder(registerViewModel.root_folders[firstIndex].name, onClick = {
-                                registerViewModel.getFolderAndFile(
-                                    registerViewModel.user_id.value,
-                                    registerViewModel.root_folders[firstIndex].id.toString()
-                                )
+                                /* registerViewModel.getFolderAndFile(
+                                     registerViewModel.user_id.value,
+                                     registerViewModel.root_folders[firstIndex].id.toString()
+                                 )*/
                             })
                         }
                         if (secondIndex < registerViewModel.root_folders.size) {
                             CreateFolder(registerViewModel.root_folders[secondIndex].name, onClick = {
-                                registerViewModel.getFolderAndFile(
+                                /*registerViewModel.getFolderAndFile(
                                     registerViewModel.user_id.value,
                                     registerViewModel.root_folders[secondIndex].id.toString()
-                                )
+                                )*/
+                            })
+                        }
+                    }
+                    Spacer(modifier = Modifier.height(12.dp)) // Spacer between rows
+                }
+            }
+
+        }
+        Column {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            )
+            {
+                Icon(
+                    painter = painterResource(id = R.drawable.skaio),
+                    contentDescription = "Skaio Icon",
+                    tint = Color.Unspecified,
+                    modifier = Modifier.size(width = 150.dp, height = 55.dp)
+                )
+                ImageButton(
+                    onClick = {
+                        registerViewModel.showEnterPlaceDialog()
+                    },
+                    text = "Device"
+                )
+            }
+
+            Spacer(modifier = Modifier.height(32.dp))
+
+            Text(
+                text = "Devices",
+                style = TextStyle(
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.ExtraBold,
+                    color = Grey,
+                    fontFamily = mFont.outfitRegular
+                )
+            )
+            Spacer(modifier = Modifier.height(4.dp))
+            Text(
+                text = "Set-up your devices and sub folders here. Click add button",
+                style = TextStyle(
+                    fontSize = 12.sp,
+                    fontWeight = FontWeight.Medium,
+                    color = Grey,
+                    fontFamily = mFont.outfitRegular
+                ),
+                modifier = Modifier.padding(end = 46.dp)
+            )
+            Spacer(modifier = Modifier.height(36.dp))
+
+            /*FolderRow(folders = folders){ folder ->
+                registerViewModel.getFolderAndFile(registerViewModel.user_id.value, registerViewModel.parent_id.value)
+//                registerViewModel.getFolderAndFile(registerViewModel.user_id.value, registerViewModel.parent_id.value)
+            }*/
+
+            LazyColumn {
+                itemsIndexed(registerViewModel.root_folders.chunked(2)) { chunkIndex, folderPair ->
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        // Calculate absolute indices
+                        val firstIndex = chunkIndex * 2
+                        val secondIndex = firstIndex + 1
+                        // Access the original list registerViewModel.root_folders using calculated indices
+                        if (firstIndex < registerViewModel.root_folders.size) {
+                            CreateFolder(registerViewModel.root_folders[firstIndex].name, onClick = {
+                                /* registerViewModel.getFolderAndFile(
+                                     registerViewModel.user_id.value,
+                                     registerViewModel.root_folders[firstIndex].id.toString()
+                                 )*/
+                            })
+                        }
+                        if (secondIndex < registerViewModel.root_folders.size) {
+                            CreateFolder(registerViewModel.root_folders[secondIndex].name, onClick = {
+                                /*registerViewModel.getFolderAndFile(
+                                    registerViewModel.user_id.value,
+                                    registerViewModel.root_folders[secondIndex].id.toString()
+                                )*/
                             })
                         }
                     }
@@ -147,8 +230,10 @@ fun Properties(){
 }
 
 //@Preview
+/*
 @Composable
-fun CreateFolder(folderName: String,onClick: (String) -> Unit) {
+fun
+        CreateFolder(folderName: String,onClick: (String) -> Unit) {
         Card (modifier = Modifier
             .width(150.dp)
             .height(120.dp)
@@ -176,6 +261,8 @@ fun CreateFolder(folderName: String,onClick: (String) -> Unit) {
             }
         }
 }
+*/
+/*
 
 @Composable
 fun FolderRow(folders: List<String>,
@@ -197,4 +284,4 @@ fun FolderRow(folders: List<String>,
             Spacer(modifier = Modifier.height(12.dp)) // Spacer between rows
         }
     }
-}
+}*/

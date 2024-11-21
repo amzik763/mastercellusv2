@@ -65,25 +65,21 @@ class HomeAutoRepo(val homeAutoApi: HomeAutoApi, private val context: Context) {
             // Retrieve the access token
             val accessToken = TokenStorage.getToken(context)
             val token = accessToken?.first?.replace("\\s".toRegex(), "")?.trim()
-
             if (token.isNullOrBlank()) {
                 showLogs("Home Repo Error:", "Access token is missing or empty.")
                 return false
             }
-
             val authorizationHeader = "Bearer $token"
-
             // Call the API with authorization header
             val response = homeAutoApi.createFolder(
                 authorizationHeader = authorizationHeader,
                 name = name,
-                parent_id = parent_id ?: "", // Pass empty string if parent_id is null
+                parent_id = parent_id ?: "", //Pass empty string if parent_id is null
                 user = user
             )
-
             if (response.isSuccessful) {
+                myComponents.registerViewModel.mCreateFolderRes.value = response.body()
                 showLogs("Home Repo:", "Folder Created Successfully")
-
                 true // Return true if the response is successful
             } else {
                 showLogs("Home Repo:", "Folder creation failed.")

@@ -26,7 +26,6 @@ import kotlinx.coroutines.delay
 fun SplashScreen(
 //    navHostController: NavHostController
 ) {
-
     val scale = remember {
         androidx.compose.animation.core.Animatable(0f)
     }

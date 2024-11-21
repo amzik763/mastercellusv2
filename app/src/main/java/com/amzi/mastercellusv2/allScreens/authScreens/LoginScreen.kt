@@ -296,16 +296,14 @@ fun LoginScreen(){
         )
 
         Spacer(modifier = Modifier.height(16.dp))
-
         CustomButton("Login"){
-
             registerViewModel.login(username_mobNum, password)
-
+            registerViewModel.mUsername.value = username_mobNum
+            registerViewModel.mPassword.value = password
         }
 
         Row  (modifier = Modifier.padding(top = 18.dp)){
             Text(
-
                 text = "Do not have an account?",
                 style = TextStyle(
                     fontSize = 13.sp,

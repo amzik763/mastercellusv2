@@ -101,9 +101,9 @@ fun Add_DeviceDialog(
                 )
 
                 Spacer(modifier = Modifier.height(12.dp))
-
                 Row(modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(8.dp)){
+
                     Image(painter = painterResource(id = R.drawable.home_place),
                         contentDescription = "Home Place",
                         modifier = Modifier.size(36.dp)
@@ -115,12 +115,13 @@ fun Add_DeviceDialog(
                     Image(painter = painterResource(id = R.drawable.place),
                         contentDescription = "Place",
                         modifier = Modifier.size(36.dp)
-
                     )
+
                     Image(painter = painterResource(id = R.drawable.place2),
                         contentDescription = "Place2",
                         modifier = Modifier.size(36.dp)
                     )
+
                 }
 
                 Spacer(modifier = Modifier.height(8.dp))
@@ -156,5 +157,6 @@ fun PropertiesScreen() {
         if (isFolderCreatedSuccessfully) {
             registerViewModel.hideEnterPlaceDialog() // Hide dialog on success
         }
+
     }
 }

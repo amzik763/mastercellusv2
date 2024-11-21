@@ -49,7 +49,7 @@ class MyCookieJar(private val context: Context) : CookieJar {
 }
 
 object RetrofitBuilder {
-    private const val BASE_URL = "http://192.168.1.5:8000" // Replace with your actual base URL
+    private const val BASE_URL = "http://192.168.1.45:8002" // Replace with your actual base URL
 
     fun create(context: Context): Retrofit {
         // Logging interceptor for debugging3
