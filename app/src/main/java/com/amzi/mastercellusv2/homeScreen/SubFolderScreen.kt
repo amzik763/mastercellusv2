@@ -34,6 +34,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.amzi.mastercellusv2.components.ImageButton
+import com.amzi.mastercellusv2.components.ImageButtonLarge
 import com.amzi.mastercellusv2.models.Folder
 import com.amzi.mastercellusv2.utility.myComponents
 import com.amzi.mastercellusv2.utility.myComponents.registerViewModel
@@ -50,7 +51,7 @@ import com.example.homeapplication.ui.theme.pureBlack
 fun SubFolderScreen(){
     showLogs("NAV SUB","clicked and navigating 2")
     val folders by registerViewModel.folders.collectAsState()
-//  val folders2 by registerViewModel.root_folders.collectAsState()
+//    val folders2 by registerViewModel.sub_folders.collectAsState()
 
     // When the screen is displayed, fetch folders
    /* LaunchedEffect(Unit) {
@@ -105,6 +106,21 @@ fun SubFolderScreen(){
                 ),
                 modifier = Modifier.padding(end = 46.dp)
             )
+            Spacer(modifier = Modifier.height(4.dp))
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            )
+            {
+                ImageButtonLarge(
+                    onClick = {
+                        registerViewModel.showEnterPlaceDialog()
+                    },
+                    text = "Add Device"
+                )
+            }
             Spacer(modifier = Modifier.height(36.dp))
 
             /*FolderRow(folders = folders){ folder ->
@@ -113,7 +129,7 @@ fun SubFolderScreen(){
             }*/
 
             LazyColumn {
-                itemsIndexed(registerViewModel.root_folders.chunked(2)) { chunkIndex, folderPair ->
+                itemsIndexed(registerViewModel.sub_folders.chunked(2)) { chunkIndex, folderPair ->
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween
@@ -144,7 +160,7 @@ fun SubFolderScreen(){
             }
 
         }
-        Column {
+       /* Column {
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
@@ -189,10 +205,10 @@ fun SubFolderScreen(){
             )
             Spacer(modifier = Modifier.height(36.dp))
 
-            /*FolderRow(folders = folders){ folder ->
+            *//*FolderRow(folders = folders){ folder ->
                 registerViewModel.getFolderAndFile(registerViewModel.user_id.value, registerViewModel.parent_id.value)
 //                registerViewModel.getFolderAndFile(registerViewModel.user_id.value, registerViewModel.parent_id.value)
-            }*/
+            }*//*
 
             LazyColumn {
                 itemsIndexed(registerViewModel.root_folders.chunked(2)) { chunkIndex, folderPair ->
@@ -206,18 +222,18 @@ fun SubFolderScreen(){
                         // Access the original list registerViewModel.root_folders using calculated indices
                         if (firstIndex < registerViewModel.root_folders.size) {
                             CreateFolder(registerViewModel.root_folders[firstIndex].name, onClick = {
-                                /* registerViewModel.getFolderAndFile(
+                                *//* registerViewModel.getFolderAndFile(
                                      registerViewModel.user_id.value,
                                      registerViewModel.root_folders[firstIndex].id.toString()
-                                 )*/
+                                 )*//*
                             })
                         }
                         if (secondIndex < registerViewModel.root_folders.size) {
                             CreateFolder(registerViewModel.root_folders[secondIndex].name, onClick = {
-                                /*registerViewModel.getFolderAndFile(
+                                *//*registerViewModel.getFolderAndFile(
                                     registerViewModel.user_id.value,
                                     registerViewModel.root_folders[secondIndex].id.toString()
-                                )*/
+                                )*//*
                             })
                         }
                     }
@@ -225,7 +241,7 @@ fun SubFolderScreen(){
                 }
             }
 
-        }
+        }*/
     }
 }
 

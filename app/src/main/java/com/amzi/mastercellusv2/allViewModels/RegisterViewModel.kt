@@ -1,5 +1,6 @@
 package com.amzi.mastercellusv2.allViewModels
 
+import android.icu.text.Normalizer.NO
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
@@ -9,11 +10,12 @@ import androidx.lifecycle.viewModelScope
 import com.amzi.mastercellusv2.allScreens.authScreens.DeviceListResponse
 import com.amzi.mastercellusv2.models.CreateFolderRes
 import com.amzi.mastercellusv2.models.Folder
+import com.amzi.mastercellusv2.models.GetFolderRes
+import com.amzi.mastercellusv2.models.GetFolderResV2
 import com.amzi.mastercellusv2.models.RootFolder
 import com.amzi.mastercellusv2.navgraphs.Screens
 import com.amzi.mastercellusv2.repository.AuthRepo
 import com.amzi.mastercellusv2.repository.HomeAutoRepo
-import com.amzi.mastercellusv2.utility.myComponents.authRepo
 import com.amzi.mastercellusv2.utility.myComponents.navController
 import com.amzi.mastercellusv2.utility.myComponents.registerViewModel
 import com.amzi.mastercellusv2.utility.showLogs
@@ -33,8 +35,11 @@ class RegisterViewModel(authRepo: AuthRepo, homeAutoRepo: HomeAutoRepo) : ViewMo
     var parent_id = mutableStateOf("")
     var folder_id = mutableStateOf("")
     var root_folders = mutableStateListOf<RootFolder>()
+    var sub_folders = mutableStateListOf<Folder>()
+    var current_parent_id = mutableStateOf("")
 
     var mCreateFolderRes = mutableStateOf<CreateFolderRes?>(null)
+    var mSubFolderRes = mutableStateOf<GetFolderResV2?>(null)
     // Folder names list
 //    val folders = mutableStateListOf<String>()
     init {
@@ -105,7 +110,20 @@ class RegisterViewModel(authRepo: AuthRepo, homeAutoRepo: HomeAutoRepo) : ViewMo
             if (isFolderCreated) {
                 _isFolderCreatedSuccessfully.value = true
                 _folders.value += name
-                root_folders.add(RootFolder(mCreateFolderRes.value?.created_at?:"",mCreateFolderRes.value?.id?:0,mCreateFolderRes.value?.name?:"",mCreateFolderRes.value?.parent_id?:"",mCreateFolderRes.value?.user?:0))
+                root_folders.add(RootFolder(mCreateFolderRes.value?.created_at?:"",mCreateFolderRes.value?.id?:0,mCreateFolderRes.value?.name?:"",mCreateFolderRes.value?.parent_id?:0,mCreateFolderRes.value?.user?:0))
+            } else {
+                showLogs("ViewModel", "Folder creation failed")
+            }
+        }
+    }
+
+    fun createSubFolder(name: String, parent_id: String? = null, user: String) {
+        viewModelScope.launch {
+            val isFolderCreated = hmeAutoRepo.createFolder(name, parent_id, user)
+            if (isFolderCreated) {
+                _isFolderCreatedSuccessfully.value = true
+                _folders.value += name
+                sub_folders.add(Folder(mCreateFolderRes.value?.created_at?:"",mCreateFolderRes.value?.id?:0,mCreateFolderRes.value?.name?:"",mCreateFolderRes.value?.parent_id?:0,mCreateFolderRes.value?.user?:0))
             } else {
                 showLogs("ViewModel", "Folder creation failed")
             }
@@ -117,14 +135,27 @@ class RegisterViewModel(authRepo: AuthRepo, homeAutoRepo: HomeAutoRepo) : ViewMo
     val getFolders: StateFlow<List<Folder>> = _getFolders
 
 
-    fun getFolderAndFile( user_id: String, parent_id: String) {
+    fun getFolderAndFile(user_id: String, id: String, parent_id: String) {
+        registerViewModel.current_parent_id.value = id
+        sub_folders.clear()
         viewModelScope.launch {
-            val foldersResponse = hmeAutoRepo.getFolderAndFile( user_id, parent_id)
+            val foldersResponse = hmeAutoRepo.getFolderAndFile( user_id, id)
             foldersResponse?.let {
+                showLogs("SUB FOLDERS ARE 2: ", foldersResponse.toString())
+                showLogs("SUB FOLDERS ARE 3: ", foldersResponse.folders.toString())
+                mSubFolderRes.value = foldersResponse
+                try{
+                    sub_folders.addAll(mSubFolderRes.value!!.folders)
+                }catch (e:Exception){
+                    showLogs("NO SUB FOLDERS: ", "NO SUB FOLDERS")
+
+                }
+                showLogs("SUB FOLDERS ARE: ", mSubFolderRes.value.toString())
+
                 _getFolders.value = it.folders
             } ?: showLogs("ViewModel", "Failed to fetch folders")
         }
-        showLogs("NAV SUB","clicked and navigating")
+        showLogs("NAV SUB","clicked and navigating " + user_id + " " + id + " " + parent_id)
         navController.navigate(Screens.SubFolderScreen.route)
     }
 

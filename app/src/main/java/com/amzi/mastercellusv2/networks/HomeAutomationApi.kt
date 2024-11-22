@@ -2,6 +2,7 @@ package com.amzi.mastercellusv2.networks
 
 import com.amzi.mastercellusv2.models.CreateFolderRes
 import com.amzi.mastercellusv2.models.GetFolderRes
+import com.amzi.mastercellusv2.models.GetFolderResV2
 import com.amzi.mastercellusv2.models.RegisterUserDeviceRes
 import retrofit2.Response
 import retrofit2.http.Field
@@ -37,7 +38,7 @@ interface HomeAutoApi {
     @POST("/master/api/getfolderandfile")
     suspend fun getFolderAndFile(
         @Header("Authorization") authorizationHeader: String,
-        @Field("parent_id") parent_id: String,
-        @Field("user_id") user: String
-    ) : Response<GetFolderRes>
+        @Field("user_id") user: String,
+        @Field("parent_id") parent_id: String
+    ) : Response<GetFolderResV2>
 }

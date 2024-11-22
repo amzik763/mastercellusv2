@@ -75,7 +75,7 @@ fun Add_DeviceDialog(
                 .padding(start = 16.dp, top = 16.dp, end = 16.dp, bottom = 16.dp)
                 .fillMaxWidth()
                 .height(170.dp)
-                )  {
+            )  {
                 Text(text = "Enter place name",
                     style = TextStyle(
                         fontSize = 16.sp,
@@ -130,7 +130,7 @@ fun Add_DeviceDialog(
                     horizontalAlignment = Alignment.End)
                 {
                     SmallButton(onClick = {
-                            myComponents.registerViewModel.createFolder(folderName, parentId, myComponents.registerViewModel.user_id.value)
+                        myComponents.registerViewModel.createFolder(folderName, registerViewModel.current_parent_id.value, myComponents.registerViewModel.user_id.value)
 
                         showLogs("KITCHEN", "Kitchen Folder Created")
                     }, text = "Add")
@@ -139,6 +139,102 @@ fun Add_DeviceDialog(
         }
     }
 }
+
+
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun Add_SubDeviceDialog(
+    onDismiss: () -> Unit,
+    parentId: String? = null // Leave null if this is a top-level folder
+){
+
+    var folderName by remember { mutableStateOf("") }
+
+    Dialog(
+        onDismissRequest = {
+            onDismiss()
+        },
+        properties = DialogProperties(
+            usePlatformDefaultWidth = false
+        )
+    ) {
+        Card(
+            onClick = {},
+            modifier = Modifier
+                .padding(8.dp)
+                .border(width = 1.dp, color = pureWhite)
+        )
+        {
+            Column(modifier = Modifier
+                .background(pureWhite)
+                .padding(start = 16.dp, top = 16.dp, end = 16.dp, bottom = 16.dp)
+                .fillMaxWidth()
+                .height(170.dp)
+            )  {
+                Text(text = "Enter place name",
+                    style = TextStyle(
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Grey
+                    )
+                )
+
+                Spacer(modifier = Modifier.height(8.dp))
+//                var home by remember { mutableStateOf("")}
+
+                InputText(
+                    text = folderName,
+                    label = "Home",
+                    onTextChange = {folderName = it},
+                    color = Color.Black,
+                    iconResId = R.drawable.home_home,
+                    maxLength = 30,
+                    keyboardOptions = KeyboardOptions(
+                        imeAction = ImeAction.Done,
+                        keyboardType = KeyboardType.Text
+                    )
+                )
+
+                Spacer(modifier = Modifier.height(12.dp))
+                Row(modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)){
+
+                    Image(painter = painterResource(id = R.drawable.home_place),
+                        contentDescription = "Home Place",
+                        modifier = Modifier.size(36.dp)
+                            .clickable {
+                                showLogs("Fardeen", "Hello")
+                            }
+                    )
+
+                    Image(painter = painterResource(id = R.drawable.place),
+                        contentDescription = "Place",
+                        modifier = Modifier.size(36.dp)
+                    )
+
+                    Image(painter = painterResource(id = R.drawable.place2),
+                        contentDescription = "Place2",
+                        modifier = Modifier.size(36.dp)
+                    )
+
+                }
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                Column(modifier = Modifier.fillMaxWidth(),
+                    horizontalAlignment = Alignment.End)
+                {
+                    SmallButton(onClick = {
+                        myComponents.registerViewModel.createSubFolder(folderName, registerViewModel.current_parent_id.value, myComponents.registerViewModel.user_id.value)
+
+                        showLogs("KITCHEN", "Sub Folder Created")
+                    }, text = "Add")
+                }
+            }
+        }
+    }
+}
+
 
 @Composable
 fun PropertiesScreen() {

@@ -22,7 +22,6 @@ import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -34,8 +33,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.amzi.mastercellusv2.components.ImageButton
-import com.amzi.mastercellusv2.models.Folder
-import com.amzi.mastercellusv2.utility.myComponents
 import com.amzi.mastercellusv2.utility.myComponents.registerViewModel
 import com.android.homeapplication.R
 import com.android.homeapplication.utility.mFont
@@ -125,7 +122,8 @@ fun Properties(){
                             CreateFolder(registerViewModel.root_folders[firstIndex].name, onClick = {
                                 registerViewModel.getFolderAndFile(
                                     registerViewModel.user_id.value,
-                                    registerViewModel.root_folders[firstIndex].id.toString()
+                                    registerViewModel.root_folders[firstIndex].id.toString(),
+                                            registerViewModel.root_folders[firstIndex].parent_id.toString()
                                 )
                             })
                         }
@@ -133,7 +131,8 @@ fun Properties(){
                             CreateFolder(registerViewModel.root_folders[secondIndex].name, onClick = {
                                 registerViewModel.getFolderAndFile(
                                     registerViewModel.user_id.value,
-                                    registerViewModel.root_folders[secondIndex].id.toString()
+                                    registerViewModel.root_folders[secondIndex].id.toString(),
+                                    registerViewModel.root_folders[secondIndex].parent_id.toString()
                                 )
                             })
                         }

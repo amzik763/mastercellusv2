@@ -3,6 +3,7 @@ package com.amzi.mastercellusv2.repository
 import android.content.Context
 import android.util.Log
 import com.amzi.mastercellusv2.models.GetFolderRes
+import com.amzi.mastercellusv2.models.GetFolderResV2
 import com.amzi.mastercellusv2.networks.HomeAutoApi
 import com.amzi.mastercellusv2.utility.TokenStorage
 import com.amzi.mastercellusv2.utility.myComponents
@@ -91,7 +92,7 @@ class HomeAutoRepo(val homeAutoApi: HomeAutoApi, private val context: Context) {
         }
     }
 
-    suspend fun getFolderAndFile(user_id: String, parent_id: String): GetFolderRes? {
+    suspend fun getFolderAndFile(user_id: String, parent_id: String): GetFolderResV2? {
         return try {
             // Retrieve and clean up the access token
             val token = TokenStorage.getToken(context = context)
@@ -112,7 +113,9 @@ class HomeAutoRepo(val homeAutoApi: HomeAutoApi, private val context: Context) {
 
             if (response.isSuccessful) {
                 showLogs("Home Repo:", "Get Folder and files Successful")
-                response.body()  // Returns FolderResponse if successful
+                showLogs("Home Repo:", response.body().toString())
+                myComponents.registerViewModel.mSubFolderRes.value = response.body()// Returns FolderResponse if successful
+                response.body()
             } else {
                 showLogs("Home Repo:", "Get Folder and files Unsuccessful: ${response.message()}")
                 null

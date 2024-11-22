@@ -64,3 +64,45 @@ fun ImageButton(
     }
 }
 
+
+
+
+//@Preview
+@Composable
+fun ImageButtonLarge(
+    onClick: () -> Unit,
+    text: String,
+    modifier: Modifier = Modifier,
+    cornerRadius: Dp = 50.dp,
+) {
+    Button(
+        onClick = onClick,
+        shape = RoundedCornerShape(cornerRadius),
+        colors = ButtonDefaults.buttonColors(
+            backgroundColor = blue,
+            contentColor = paleWhite
+        ),
+        contentPadding = PaddingValues(0.dp),
+
+        modifier = modifier
+            .size(width = 180.dp, height = 32.dp)
+//            .padding(top = 8.dp)
+    ) {
+
+        Image(painter = painterResource(id = R.drawable.add_home),
+            contentDescription = "Home",
+            modifier = Modifier
+                .size(12.dp)
+                .padding(start = 1.dp)
+        )
+        Text(text = text,
+            fontSize = 12.sp,
+            fontWeight = FontWeight.Bold,
+            fontFamily = mFont.outfitRegular,
+            color = paleWhite,
+            modifier = Modifier
+                .padding(start = 2.dp)
+        )
+    }
+}
+
