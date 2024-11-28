@@ -4,6 +4,7 @@ import com.amzi.mastercellusv2.models.CreateFolderRes
 import com.amzi.mastercellusv2.models.GetFolderRes
 import com.amzi.mastercellusv2.models.GetFolderResV2
 import com.amzi.mastercellusv2.models.RegisterUserDeviceRes
+import com.amzi.mastercellusv2.models.fileCreatedRes
 import retrofit2.Response
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -41,4 +42,18 @@ interface HomeAutoApi {
         @Field("user_id") user: String,
         @Field("parent_id") parent_id: String
     ) : Response<GetFolderResV2>
+
+
+    @FormUrlEncoded
+    @POST("/master/api/createfile")
+    suspend fun createFile(
+        @Header("Authorization") authorizationHeader: String,
+        @Field("name") name: String,
+        @Field("device_mac") device_mac: String,
+        @Field("channel_name") channel_name: String,
+        @Field("folder") folder: String,
+        @Field("user") user: String
+    ) : Response<fileCreatedRes>
+
+
 }

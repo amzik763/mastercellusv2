@@ -8,8 +8,10 @@ package com.example.homeapplication.mqtt
 //const val SOLACE_CLIENT_USER_NAME = ""
 //const val SOLACE_CLIENT_PASSWORD = ""
 //const val SOLACE_MQTT_HOST = "mqtt://3.110.187.253:1883"
-
-const val MQTT_HOST = "3.110.187.253"
+//
+//const val MQTT_HOST = "3.110.187.253"
+//const val MQTT_PORT = "1883"
+const val MQTT_HOST = "192.168.1.4"
 const val MQTT_PORT = "1883"
 const val MQTT_USERNAME = ""
 const val MAC_HA = "70:04:1D:55:92:BC"

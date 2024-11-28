@@ -10,6 +10,7 @@ import com.amzi.mastercellusv2.navgraphs.mNavigator
 import com.amzi.mastercellusv2.networks.AuthAPIs
 import com.amzi.mastercellusv2.utility.TokenStorage
 import com.amzi.mastercellusv2.utility.myComponents
+import com.amzi.mastercellusv2.utility.myComponents.homeAutoApi
 import com.amzi.mastercellusv2.utility.myComponents.navController
 import com.amzi.mastercellusv2.utility.myComponents.registerViewModel
 import com.amzi.mastercellusv2.utility.showLogs
@@ -73,6 +74,12 @@ class AuthRepo(authAPIs: AuthAPIs,private val context: Context) {
                         val deviceList = loginRes.devices.map {
                             DeviceListResponse(it.device_name, it.device_mac)
                         }
+                        try {
+                            registerViewModel.mDeviceListRes.addAll(loginResponse.body()!!.devices)
+                        }catch (e:Exception){
+                            Log.d("AuthRepo", "Login Successful: but no device linked")
+
+                        }
                         myComponents.registerViewModel.root_folders.clear() // Clear existing items
                         loginResponse.body()?.root_folders?.let { myComponents.registerViewModel.root_folders.addAll(it) }
                         myComponents.registerViewModel.user_id.value = loginRes.user_id.toString()
@@ -102,4 +109,6 @@ class AuthRepo(authAPIs: AuthAPIs,private val context: Context) {
     fun logout() {
         TokenStorage.clearToken(context)
     }
+
+
 }

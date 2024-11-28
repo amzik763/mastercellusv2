@@ -13,11 +13,12 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.rememberNavController
-import com.amzi.mastercellusv2.allViewModels.HomeAppViewModel
 import com.amzi.mastercellusv2.allViewModels.RegisterViewModel
 import com.amzi.mastercellusv2.allViewModels.factories.RegisterViewModelFactory
 import com.amzi.mastercellusv2.dialog.Add_DeviceDialog
+import com.amzi.mastercellusv2.dialog.Add_FileDialog
 import com.amzi.mastercellusv2.navgraphs.setUpNavGraph
 import com.amzi.mastercellusv2.networks.AuthAPIs
 import com.amzi.mastercellusv2.networks.HomeAutoApi
@@ -26,10 +27,8 @@ import com.amzi.mastercellusv2.repository.AuthRepo
 import com.amzi.mastercellusv2.repository.HomeAutoRepo
 import com.amzi.mastercellusv2.ui.theme.Mastercellusv2Theme
 import com.amzi.mastercellusv2.utility.NetworkMonitor
-import com.amzi.mastercellusv2.utility.myComponents
 import com.amzi.mastercellusv2.utility.myComponents.authAPI
 import com.amzi.mastercellusv2.utility.myComponents.authRepo
-import com.amzi.mastercellusv2.utility.myComponents.homeAppViewModel
 import com.amzi.mastercellusv2.utility.myComponents.homeAutoApi
 import com.amzi.mastercellusv2.utility.myComponents.homeAutoRepo
 import com.amzi.mastercellusv2.utility.myComponents.navController
@@ -69,7 +68,7 @@ class MainActivity : ComponentActivity() {
         homeAutoApi = RetrofitBuilder.create(this).create(HomeAutoApi::class.java)
         authRepo = AuthRepo(authAPI, context = applicationContext)
         homeAutoRepo = HomeAutoRepo(homeAutoApi, context = applicationContext)
-        registerViewModelFactory = RegisterViewModelFactory(authRepo, homeAutoRepo)
+        registerViewModelFactory = RegisterViewModelFactory(applicationContext,authRepo, homeAutoRepo)
         registerViewModel = registerViewModelFactory.create(RegisterViewModel::class.java)
         setContent {
             Mastercellusv2Theme {
@@ -287,4 +286,13 @@ fun EnterPlaceDialog(){
          onDismiss = { registerViewModel.hideEnterPlaceDialog() }
      )
  }
+
+    if(registerViewModel.showMacDialog){
+        Add_FileDialog(
+            onDismiss = {
+                registerViewModel.hideEnterPlaceDialog()
+                registerViewModel.hideMacDialog()
+            }
+        )
+    }
 }

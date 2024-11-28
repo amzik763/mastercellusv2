@@ -2,8 +2,9 @@ package com.amzi.mastercellusv2.repository
 
 import android.content.Context
 import android.util.Log
-import com.amzi.mastercellusv2.models.GetFolderRes
+import androidx.compose.runtime.MutableState
 import com.amzi.mastercellusv2.models.GetFolderResV2
+import com.amzi.mastercellusv2.navgraphs.Screens
 import com.amzi.mastercellusv2.networks.HomeAutoApi
 import com.amzi.mastercellusv2.utility.TokenStorage
 import com.amzi.mastercellusv2.utility.myComponents
@@ -124,6 +125,64 @@ class HomeAutoRepo(val homeAutoApi: HomeAutoApi, private val context: Context) {
             showLogs("Home Error", e.toString())
             null
         }
+    }
+
+    suspend fun createFile(
+        applianceName: String,
+        MacId: String,
+        channelName: String,
+        currentParentId: MutableState<String>,
+        userId: MutableState<String>
+    ) {
+
+        try {
+            // Retrieve and clean up the access token
+            val token = TokenStorage.getToken(context = context)
+                ?.first
+                ?.replace("\\s".toRegex(), "")
+                ?.trim()
+                ?: run {
+                    showLogs("Home Repo Error:", "Access token is missing or empty.")
+//                    return null
+                }
+
+            // Prepare the authorization header
+            val authorizationHeader = "Bearer $token"
+            showLogs("Home Repo:", "Authorization Header: '$authorizationHeader'")
+            showLogs("Create file response:", applianceName + " " + MacId + " " + channelName + " " + currentParentId.toString() + " " + userId.toString())
+
+            // Make the API call
+            val response = homeAutoApi.createFile(authorizationHeader, applianceName, MacId, channelName,
+                currentParentId.value.toString(),
+                userId.value.toString()
+            )
+
+            if (response.isSuccessful) {
+                showLogs("Home Repo:", "Create files Successful")
+                showLogs("Home Repo:", response.body().toString())
+                myComponents.registerViewModel.mCreateFileRes.value = response.body()
+                myComponents.registerViewModel.sub_files.clear()
+                myComponents.registerViewModel.mSubFolderRes.value = null
+                myComponents.registerViewModel.hideMacDialog()
+                myComponents.registerViewModel.hideEnterPlaceDialog()
+                myComponents.navController.popBackStack()
+//                myComponents.registerViewModel.mSubFolderRes.value = response.body()// Returns FolderResponse if successful
+//                response.body()
+            } else {
+                showLogs("Home Repo:", "Create files Unsuccessful: ${response.message()}")
+                myComponents.registerViewModel.hideMacDialog()
+                myComponents.registerViewModel.hideEnterPlaceDialog()
+
+
+            }
+        } catch (e: Exception) {
+            showLogs("Home Error", e.toString())
+            myComponents.registerViewModel.hideEnterPlaceDialog()
+            myComponents.registerViewModel.hideMacDialog()
+
+
+        }
+
     }
 }
 

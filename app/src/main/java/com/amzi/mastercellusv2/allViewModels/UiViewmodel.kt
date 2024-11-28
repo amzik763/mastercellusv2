@@ -18,12 +18,22 @@ class UiViewmodel(context: Context) : ViewModel() {
     var showMushMacId by mutableStateOf(false)
         private set
 
+    var showMacDialog by mutableStateOf(false)
+
     fun toggleHomeMacIdVisibility() {
         showHomeMacId = !showHomeMacId
     }
 
     fun toggleMushMacIdVisibility() {
         showMushMacId = !showMushMacId
+    }
+
+    fun showMacDialog(){
+        showMacDialog = true
+    }
+
+    fun hideMacDialog(){
+        showMacDialog = false
     }
 
     //SHARED PREFERENCES

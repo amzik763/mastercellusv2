@@ -9,7 +9,9 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -18,9 +20,12 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Divider
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -28,12 +33,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.amzi.mastercellusv2.R
 import com.android.homeapplication.screen.data.Category
 import com.android.homeapplication.screen.data.categoryList3
 import com.android.homeapplication.screen.data.categoryList4
@@ -189,6 +197,50 @@ fun BulbRow1(
                 .padding(start = 7.dp, top = 65.dp)
         )
         Image(painter = painterResource(id = category.image), contentDescription = "",
+            modifier = Modifier
+                .size(60.dp)
+                .padding(end = 9.dp)
+                .align(Alignment.BottomEnd)
+        )
+    }
+}
+
+@Preview
+@Composable
+fun temp(
+){
+    val clr = remember {
+        false
+    }
+    Box(modifier = Modifier
+        .padding(end = 24.dp, start = 24.dp)
+        .clickable {
+        }
+        .background(
+            if (clr) Color(255, 255, 153) else Color.White,
+            RoundedCornerShape(8.dp)
+        )
+        .width(130.dp)
+        .height(110.dp)
+    ){
+        Text(text = "Bulb", style = TextStyle(
+            fontSize = 15.sp,
+            fontWeight = FontWeight.W400,
+            color = Color.Black
+        ),
+            modifier = Modifier
+                .padding(start = 5.dp)
+                .align(Alignment.CenterStart)
+        )
+        Text(text = "category.subTitle", style = TextStyle(
+            fontSize = 12.sp,
+            fontWeight = FontWeight.W400,
+            color = Color(0xFF625b71)
+        ),
+            modifier = Modifier
+                .padding(start = 7.dp, top = 65.dp)
+        )
+        Image(painter = painterResource(id = com.android.homeapplication.R.drawable.bulb), contentDescription = "",
             modifier = Modifier
                 .size(60.dp)
                 .padding(end = 9.dp)
