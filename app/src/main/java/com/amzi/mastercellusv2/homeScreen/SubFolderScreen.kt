@@ -82,12 +82,7 @@ fun SubFolderScreen() {
                     tint = Color.Unspecified,
                     modifier = Modifier.size(width = 150.dp, height = 55.dp)
                 )
-                ImageButton(
-                    onClick = {
-                        registerViewModel.showEnterPlaceDialog()
-                    },
-                    text = "Add"
-                )
+
             }
             Spacer(modifier = Modifier.height(32.dp))
             Text(

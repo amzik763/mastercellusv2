@@ -21,6 +21,7 @@ class AuthRepo(authAPIs: AuthAPIs,private val context: Context) {
     init {
         showLogs("Repo:","Created")
     }
+
     val authAPI = authAPIs
     suspend fun register(username: String, fName: String, lName: String, email: String, mobile_number: String){
         try{
@@ -41,7 +42,6 @@ class AuthRepo(authAPIs: AuthAPIs,private val context: Context) {
     }
 
     suspend fun verify( mobile_number: String, password: String, password_confirm: String, otp: String){
-
         try{
             val verifyRes = authAPI.verify(mobile_number, password, password_confirm, otp)
             if(verifyRes.isSuccessful){
@@ -88,6 +88,7 @@ class AuthRepo(authAPIs: AuthAPIs,private val context: Context) {
                         withContext(Dispatchers.Main) {
                             myComponents.registerViewModel.updateDeviceList(deviceList)
                             mNavigator.navigateTo(Screens.PropertiesScreen.route)
+//                            mNavigator.navigateTo(Screens.DeviceList.route)
                         }
                         Result.success("Login Successful")
                     } ?: run {
